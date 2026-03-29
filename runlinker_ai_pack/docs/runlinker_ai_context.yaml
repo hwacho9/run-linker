@@ -1,0 +1,62 @@
+project:
+  name: RunLinker
+  tagline: 멀리 있어도 같이 달린다
+  product_tab_names:
+  - Home
+  - Activity
+  - Friends
+  - My
+  legacy_name_mapping:
+    Records: Activity
+core_flows:
+- Home -> Match Setup -> Matching -> Ready Room -> Live Run -> Results
+- Activity -> Session Detail -> Run Again -> Match Setup
+- Friends -> Select Friend -> Match Setup
+modes:
+  friend:
+    location_sharing_default: respect user setting, exact allowed
+    pair_view: true
+    sync_score: true
+  random:
+    location_sharing_default: approx only
+    blur_start_end: true
+    pair_view: true
+    sync_score: true
+  solo:
+    location_sharing_default: not shared
+    pair_view: false
+    sync_score: false
+screens:
+- Onboarding 1
+- Onboarding 2
+- Onboarding 3
+- Home
+- Activity
+- Session History
+- My Stats
+- Session Detail
+- Friends
+- My
+- Match Setup
+- Matching
+- Ready Room
+- Live Run
+- Results
+visual_system:
+  me_color: '#2F6BFF'
+  partner_color: '#B8FF2C'
+  neutral_dark: '#0F172A'
+  neutral_light: '#EAF0F7'
+tech_defaults:
+  mobile: Expo + React Native + TypeScript
+  navigation: Expo Router
+  state_local: Zustand
+  state_server: TanStack Query
+  backend: Firebase Auth + Firestore + Cloud Functions + Storage + Analytics
+must_have_logic:
+- friend and random matching
+- privacy-aware location sharing
+- split live maps
+- pair view
+- sync score
+- activity history and cumulative stats

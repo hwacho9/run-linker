@@ -1,0 +1,42 @@
+{
+  "name": "run-linker",
+  "version": "0.1.0",
+  "description": "Local Codex plugin that exposes a Run Linker sub-agent for this workspace.",
+  "author": {
+    "name": "Local Workspace",
+    "email": "local@example.invalid",
+    "url": "https://example.invalid/run-linker"
+  },
+  "homepage": "https://example.invalid/run-linker",
+  "repository": "https://example.invalid/run-linker",
+  "license": "UNLICENSED",
+  "keywords": [
+    "run-linker",
+    "codex-plugin",
+    "agent"
+  ],
+  "interface": {
+    "displayName": "Run Linker",
+    "shortDescription": "Local sub-agent configuration for the run-linker workspace",
+    "longDescription": "Provides a local Codex plugin surface and sub-agent metadata for the run-linker workspace.",
+    "developerName": "Local Workspace",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "websiteURL": "https://example.invalid/run-linker",
+    "privacyPolicyURL": "https://example.invalid/privacy",
+    "termsOfServiceURL": "https://example.invalid/terms",
+    "defaultPrompt": [
+      "Inspect the run-linker workspace and explain its structure.",
+      "Implement a change in run-linker and verify it locally.",
+      "Review the current diff in run-linker for risks and regressions."
+    ],
+    "brandColor": "#0F766E",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/logo.svg",
+    "screenshots": []
+  }
+}

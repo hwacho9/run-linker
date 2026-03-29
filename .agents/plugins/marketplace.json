@@ -1,0 +1,20 @@
+{
+  "name": "local-workspace",
+  "interface": {
+    "displayName": "Local Workspace Plugins"
+  },
+  "plugins": [
+    {
+      "name": "run-linker",
+      "source": {
+        "source": "local",
+        "path": "./plugins/run-linker"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Coding"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Run Linker logo">
+  <rect width="256" height="256" rx="40" fill="#042F2E"/>
+  <rect x="28" y="28" width="200" height="200" rx="28" fill="#0F766E"/>
+  <path d="M54 128h46l24-38 26 76 22-38h30" fill="none" stroke="#F0FDFA" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+</svg>

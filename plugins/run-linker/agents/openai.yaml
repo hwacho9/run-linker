@@ -1,0 +1,6 @@
+interface:
+  display_name: "Run Linker"
+  short_description: "Workspace sub-agent for the run-linker repository"
+  icon_small: "./assets/icon.svg"
+  icon_large: "./assets/logo.svg"
+  default_prompt: "Use Run Linker to inspect this workspace, implement code changes, and validate the result."
