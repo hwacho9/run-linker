@@ -1,44 +1,28 @@
 # RunLinker MVP 로드맵
 
-## Phase 0. Foundations
-- Expo + TypeScript + Expo Router 세팅
-- design tokens
-- Firebase bootstrap
-- auth skeleton
-- mock data mode
+## Phase 0 — 설계 고정
+- 제품 용어 고정 (Activity, Pair View, Sync Score)
+- Stitch 결과 정리
+- 도메인 모델 / 계약 정리
 
-## Phase 1. Core UI Skeleton
-- Onboarding
-- Home
-- Activity
-- Friends
-- My
-- Match Setup
-- Matching
-- Ready Room
-- Live Run
-- Results
-- Session Detail
+## Phase 1 — iOS SwiftUI MVP
+- 앱 skeleton
+- Home / Activity / Friends / My
+- Match Setup / Matching / Ready Room / Live Run / Results
+- mock mode
+- Firebase 기본 연동
 
-## Phase 2. Core Logic
-- friend list
-- match request
-- random matching
-- run session state
-- location/stat sampling
-- end session summary
-- Activity aggregation
+## Phase 2 — iOS 안정화
+- 실시간 listener 안정화
+- privacy redaction 보강
+- 세션 상세 / 통계 polish
+- QA / analytics / crash reporting
 
-## Phase 3. Safety + Quality
-- privacy enforcement
-- block/report
-- tests
-- analytics events
-- CI/CD
+## Phase 3 — Android 준비
+- shared contracts 고정
+- Android 구현 프롬프트 정리
+- 리소스/카피/토큰 이관
 
-## Phase 4. Polish
-- better charts
-- richer pair view
-- push notifications
-- retry/offline handling
-- real map rendering improvements
+## Phase 4 — Android Kotlin 구현
+- iOS 기능 parity 목표
+- Activity / Live Run / Results 우선

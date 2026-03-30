@@ -1,4 +1,4 @@
-# AI 프롬프트 01 — 프로젝트 셋업 + 기본 문서화
+# AI 프롬프트 01 — 프로젝트 셋업 + 기본 문서화 (SwiftUI First)
 
 아래 문서들을 모두 읽고, 그 내용을 기준으로 RunLinker 저장소를 세팅해줘.
 
@@ -12,18 +12,21 @@
 - docs/06_API_REALTIME_CONTRACTS.md
 - docs/07_PRIVACY_AND_SAFETY.md
 - docs/08_MVP_ROADMAP.md
+- docs/09_OPEN_QUESTIONS.md
 - docs/10_TECH_STACK_AND_REPO_STRUCTURE.md
+- docs/11_IOS_SWIFTUI_ARCHITECTURE.md
+- docs/12_ANDROID_PHASE2_PLAN.md
 - docs/runlinker_ai_context.yaml
 
 작업 목표:
-1. Expo + React Native + TypeScript 기반 모바일 앱 저장소 초기화
-2. Expo Router 적용
-3. pnpm workspace 구조 생성
-4. Firebase 연동을 위한 기본 골격 생성
-5. mock data mode로 앱이 바로 실행되게 만들기
-6. 문서와 코드의 용어를 일치시키기
-7. 제품 탭 이름은 반드시 Activity를 사용하기
-8. Records라는 이름은 최종 제품 표면에서 사용하지 않기
+1. SwiftUI 기반 iOS 앱 저장소 초기화
+2. XcodeGen + Swift Package Manager 기반 프로젝트 생성
+3. Firebase 연동을 위한 기본 골격 생성
+4. mock data mode로 앱이 바로 실행되게 만들기
+5. 문서와 코드의 용어를 일치시키기
+6. 제품 탭 이름은 반드시 Activity를 사용하기
+7. Records라는 이름은 최종 제품 표면에서 사용하지 않기
+8. Android 2차 개발을 위한 contracts / docs / placeholder 구조만 마련하기
 
 필수 탭:
 - Home
@@ -35,25 +38,42 @@
 Home -> Match Setup -> Matching -> Ready Room -> Live Run -> Results
 
 기술 기본값:
-- Expo
-- React Native
-- TypeScript
-- Expo Router
-- Zustand
-- TanStack Query
+- Swift
+- SwiftUI
+- XcodeGen
+- Swift Package Manager
+- NavigationStack + TabView
+- async/await
 - Firebase Auth / Firestore / Functions / Storage / Analytics
-- ESLint / Prettier / Husky / lint-staged / GitHub Actions
+- MapKit / CoreLocation
+- SwiftLint / SwiftFormat / XCTest / GitHub Actions
+
+권장 저장소 구조:
+```text
+runlinker/
+  apps/
+    ios/
+    android/
+  services/
+    functions/
+  shared/
+    contracts/
+  docs/
+  .github/
+```
 
 산출물:
 - 루트 README
-- 앱 실행 스크립트
+- iOS 프로젝트 생성 파일 (XcodeGen spec 포함)
+- 앱 실행 스크립트 또는 실행 가이드
 - 기본 폴더 구조
 - 탭 네비게이션
 - 화면 placeholder
 - mock repositories / mock data
-- 기본 theme/token
+- 기본 design tokens
 - 환경변수 예시 파일
 - CI 파일
+- Android phase 2 placeholder README
 
 주의사항:
 - 문서 내용을 우선 기준으로 삼아라
@@ -61,6 +81,7 @@ Home -> Match Setup -> Matching -> Ready Room -> Live Run -> Results
 - compile 되지 않는 stub를 남기지 마라
 - mock data만으로 첫 실행이 가능해야 한다
 - 코드 내 명칭도 Activity로 통일하라
+- iOS first 이므로 Android 실제 앱 구현은 시작하지 마라
 
 마지막에 다음 내용을 보고해줘:
 - 생성한 폴더 구조

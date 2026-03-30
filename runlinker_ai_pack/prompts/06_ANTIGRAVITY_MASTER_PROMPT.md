@@ -1,6 +1,6 @@
-# AI 프롬프트 06 — Antigravity용 통합 마스터 프롬프트
+# AI 프롬프트 06 — Antigravity용 통합 마스터 프롬프트 (SwiftUI First)
 
-아래 문서들을 모두 읽고, 그 내용을 기준으로 RunLinker 프로젝트의 초기 셋업과 MVP skeleton 개발을 진행해줘.
+아래 문서들을 모두 읽고, 그 내용을 기준으로 RunLinker 프로젝트의 초기 셋업과 iOS MVP skeleton 개발을 진행해줘.
 
 문서:
 - docs/00_APP_OVERVIEW.md
@@ -14,6 +14,8 @@
 - docs/08_MVP_ROADMAP.md
 - docs/09_OPEN_QUESTIONS.md
 - docs/10_TECH_STACK_AND_REPO_STRUCTURE.md
+- docs/11_IOS_SWIFTUI_ARCHITECTURE.md
+- docs/12_ANDROID_PHASE2_PLAN.md
 - docs/runlinker_ai_context.yaml
 
 작업 방식:
@@ -27,14 +29,15 @@
 - Records 표기는 최종 앱 표면에서 사용 금지
 
 목표:
-1. Expo + React Native + TypeScript 저장소 생성
-2. Expo Router 기반 탭/플로우 네비게이션 생성
+1. SwiftUI 기반 iOS 저장소 생성
+2. XcodeGen + SPM 기반 프로젝트 구성
 3. Home / Activity / Friends / My 탭 구현
 4. Match Setup / Matching / Ready Room / Live Run / Results 구현
 5. Session Detail 구현
 6. mock data와 typed domain model 구축
 7. Firebase 연동 가능한 구조 마련
 8. README / 환경변수 예시 / CI / lint / test 골격 구성
+9. Android 2차 개발을 위한 contracts / docs / placeholder 정리
 
 꼭 지켜야 할 UX 원칙:
 - Home은 즉시 시작
@@ -43,6 +46,22 @@
 - My는 설정/프라이버시 중심
 - Live Run은 Pair View + Split Live Maps
 - random mode는 exact location 기본 비공개
+
+기술 기본값:
+- Swift
+- SwiftUI
+- NavigationStack + TabView
+- XcodeGen
+- Swift Package Manager
+- MapKit / CoreLocation
+- Firebase Auth / Firestore / Functions / Storage / Analytics
+- SwiftLint / SwiftFormat / XCTest / GitHub Actions
+
+주의사항:
+- Android 실제 앱은 지금 만들지 말고, phase 2용 placeholder와 문서만 정리하라
+- Firebase 없는 mock mode로도 iOS 앱 데모가 가능해야 한다
+- View에 backend 로직을 직접 넣지 말 것
+- Activity 용어를 코드/카피에서 일관되게 유지할 것
 
 마지막에 보고할 것:
 - 생성한 파일 구조

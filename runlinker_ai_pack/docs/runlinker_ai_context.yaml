@@ -2,16 +2,16 @@ project:
   name: RunLinker
   tagline: 멀리 있어도 같이 달린다
   product_tab_names:
-  - Home
-  - Activity
-  - Friends
-  - My
+    - Home
+    - Activity
+    - Friends
+    - My
   legacy_name_mapping:
     Records: Activity
 core_flows:
-- Home -> Match Setup -> Matching -> Ready Room -> Live Run -> Results
-- Activity -> Session Detail -> Run Again -> Match Setup
-- Friends -> Select Friend -> Match Setup
+  - Home -> Match Setup -> Matching -> Ready Room -> Live Run -> Results
+  - Activity -> Session Detail -> Run Again -> Match Setup
+  - Friends -> Select Friend -> Match Setup
 modes:
   friend:
     location_sharing_default: respect user setting, exact allowed
@@ -27,36 +27,38 @@ modes:
     pair_view: false
     sync_score: false
 screens:
-- Onboarding 1
-- Onboarding 2
-- Onboarding 3
-- Home
-- Activity
-- Session History
-- My Stats
-- Session Detail
-- Friends
-- My
-- Match Setup
-- Matching
-- Ready Room
-- Live Run
-- Results
+  - Onboarding 1
+  - Onboarding 2
+  - Onboarding 3
+  - Home
+  - Activity
+  - Session History
+  - My Stats
+  - Session Detail
+  - Friends
+  - My
+  - Match Setup
+  - Matching
+  - Ready Room
+  - Live Run
+  - Results
 visual_system:
   me_color: '#2F6BFF'
   partner_color: '#B8FF2C'
   neutral_dark: '#0F172A'
   neutral_light: '#EAF0F7'
 tech_defaults:
-  mobile: Expo + React Native + TypeScript
-  navigation: Expo Router
-  state_local: Zustand
-  state_server: TanStack Query
+  ios_app: SwiftUI + Swift + XcodeGen + Swift Package Manager
+  ios_navigation: TabView + NavigationStack
+  ios_architecture: MVVM-like + async/await + repository pattern
+  ios_maps: MapKit + CoreLocation
   backend: Firebase Auth + Firestore + Cloud Functions + Storage + Analytics
+  tooling: SwiftLint + SwiftFormat + XCTest + GitHub Actions
+  android_phase2: Kotlin + Jetpack Compose
 must_have_logic:
-- friend and random matching
-- privacy-aware location sharing
-- split live maps
-- pair view
-- sync score
-- activity history and cumulative stats
+  - friend and random matching
+  - privacy-aware location sharing
+  - split live maps
+  - pair view
+  - sync score
+  - activity history and cumulative stats

@@ -7,12 +7,14 @@
 - docs/05_DATA_MODEL.md
 - docs/06_API_REALTIME_CONTRACTS.md
 - docs/07_PRIVACY_AND_SAFETY.md
+- docs/11_IOS_SWIFTUI_ARCHITECTURE.md
 
 목표:
 - Firestore 컬렉션 설계 반영
 - Cloud Functions skeleton 생성
-- client repository/service interface 생성
+- iOS repository/service interface 생성
 - mock 구현과 firebase 구현이 교체 가능하도록 추상화
+- shared/contracts 에 payload 예시와 enum 사전을 정리
 
 우선 구현할 기능:
 1. auth bootstrap
@@ -38,7 +40,7 @@
 
 원하는 결과:
 - 타입 안정성 있는 도메인 계약
-- Firestore converter 또는 동등한 직렬화 레이어
+- Swift DTO / domain mapper
 - functions 디렉토리 구조
 - repository interface
 - mock repository와 firebase repository 둘 다 준비

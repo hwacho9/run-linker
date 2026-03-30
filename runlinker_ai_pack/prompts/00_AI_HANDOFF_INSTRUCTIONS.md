@@ -5,8 +5,9 @@
 2. 그 다음 `prompts/01_PROJECT_SETUP_PROMPT.md`를 실행한다.
 3. 저장소가 만들어지면 `prompts/02_MOBILE_APP_IMPLEMENTATION_PROMPT.md`를 실행한다.
 4. 이후 `prompts/03_FIREBASE_BACKEND_PROMPT.md`를 실행한다.
-5. 마지막으로 `prompts/04_QA_REFACTOR_PROMPT.md`로 정합성을 맞춘다.
-6. Stitch 산출물이 있으면 `prompts/05_STITCH_INTEGRATION_PROMPT.md`를 사용한다.
+5. Stitch 산출물이 있으면 `prompts/05_STITCH_INTEGRATION_PROMPT.md`를 사용한다.
+6. 마지막으로 `prompts/04_QA_REFACTOR_PROMPT.md`로 정합성을 맞춘다.
+7. Android 착수 시점이 오면 `prompts/07_ANDROID_KOTLIN_PHASE2_PROMPT.md`를 사용한다.
 
 ## 전달 포맷 권장
 - 문서는 markdown 그대로 첨부
@@ -16,6 +17,7 @@
 
 ## 꼭 강조할 것
 - Records가 아니라 Activity
+- SwiftUI first, Android later
 - Home은 시작 우선
 - Friends는 피드가 아님
 - My는 설정/목표 중심
