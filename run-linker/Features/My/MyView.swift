@@ -14,7 +14,30 @@ class MyViewModel: ObservableObject {
 }
 
 struct MyView: View {
+    @EnvironmentObject private var authVM: AuthViewModel
     @StateObject private var viewModel = MyViewModel()
+    @State private var showsLogoutConfirmation = false
+    
+    private var profileName: String {
+        authVM.displayName.isEmpty ? "RunLinker Runner" : authVM.displayName
+    }
+    
+    private var profileSubtitle: String {
+        authVM.email.isEmpty ? "함께 달리는 즐거움, RunLinker!" : authVM.email
+    }
+    
+    private var profileInitials: String {
+        let words = profileName
+            .split(separator: " ")
+            .map(String.init)
+        let initials = words
+            .prefix(2)
+            .compactMap { $0.first }
+            .map(String.init)
+            .joined()
+        
+        return initials.isEmpty ? "R" : initials.uppercased()
+    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -37,17 +60,17 @@ struct MyView: View {
                             .fill(AppTheme.primaryGradient)
                             .frame(width: 72, height: 72)
                             .overlay(
-                                Text("JP")
+                                Text(profileInitials)
                                     .font(.system(size: 24, weight: .bold))
                                     .foregroundColor(.white)
                             )
                         
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                            Text("Jayden Park")
+                            Text(profileName)
                                 .font(AppTheme.Fonts.titleLarge)
                                 .fontWeight(.bold)
                                 .foregroundColor(AppTheme.text)
-                            Text("함께 달리는 즐거움, RunLinker!")
+                            Text(profileSubtitle)
                                 .font(AppTheme.Fonts.bodySmall)
                                 .foregroundColor(AppTheme.textSecondary)
                         }
@@ -144,7 +167,13 @@ struct MyView: View {
                         SettingsRow(icon: "nosign", title: "차단한 사용자")
                         SettingsRow(icon: "exclamationmark.shield.fill", title: "신고 내역")
                         SettingsRow(icon: "person.crop.circle", title: "계정 관리")
-                        SettingsRow(icon: "rectangle.portrait.and.arrow.right", title: "로그아웃", showChevron: false)
+                        SettingsRow(
+                            icon: "rectangle.portrait.and.arrow.right",
+                            title: "로그아웃",
+                            showChevron: false
+                        ) {
+                            showsLogoutConfirmation = true
+                        }
                     }
                     
                     // ─── Support ───
@@ -160,6 +189,14 @@ struct MyView: View {
             }
         }
         .background(AppTheme.background.ignoresSafeArea())
+        .alert("로그아웃", isPresented: $showsLogoutConfirmation) {
+            Button("취소", role: .cancel) {}
+            Button("로그아웃", role: .destructive) {
+                authVM.logout()
+            }
+        } message: {
+            Text("현재 계정에서 로그아웃하시겠습니까?")
+        }
     }
 }
 

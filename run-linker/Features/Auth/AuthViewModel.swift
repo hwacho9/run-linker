@@ -19,8 +19,15 @@ class AuthViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
     @Published var showSignUp: Bool = false
+    @Published var displayName: String = Auth.auth().currentUser?.displayName ?? ""
+    @Published var email: String = Auth.auth().currentUser?.email ?? ""
     
     private var currentNonce: String?
+    private let userRepository: UserRepositoryProtocol
+
+    init(userRepository: UserRepositoryProtocol? = nil) {
+        self.userRepository = userRepository ?? FirebaseUserRepository()
+    }
     
     func completeOnboarding() {
         withAnimation(.easeInOut(duration: 0.4)) {
@@ -42,10 +49,7 @@ class AuthViewModel: ObservableObject {
         
         do {
             let _ = try await Auth.auth().signIn(withEmail: trimmedEmail, password: password)
-            withAnimation(.easeInOut(duration: 0.4)) {
-                isAuthenticated = true
-                isLoading = false
-            }
+            completeAuthentication()
         } catch {
             errorMessage = userFacingMessage(for: error)
             isLoading = false
@@ -85,14 +89,16 @@ class AuthViewModel: ObservableObject {
             let changeRequest = result.user.createProfileChangeRequest()
             changeRequest.displayName = trimmedName
             try await changeRequest.commitChanges()
+            let profile = makeAuthenticatedUserProfile(
+                from: result.user,
+                authProvider: .email,
+                displayNameOverride: trimmedName
+            )
+            try await userRepository.upsertAuthenticatedUser(profile)
             
-            withAnimation(.easeInOut(duration: 0.4)) {
-                isAuthenticated = true
-                isLoading = false
-            }
+            completeAuthentication()
         } catch {
-            errorMessage = userFacingMessage(for: error)
-            isLoading = false
+            failAuthenticationFlow(with: error)
         }
     }
     
@@ -128,15 +134,17 @@ class AuthViewModel: ObservableObject {
                 accessToken: result.user.accessToken.tokenString
             )
             
-            let _ = try await Auth.auth().signIn(with: credential)
+            let authResult = try await Auth.auth().signIn(with: credential)
+            let profile = makeAuthenticatedUserProfile(
+                from: authResult.user,
+                authProvider: .google,
+                displayNameOverride: result.user.profile?.name
+            )
+            try await userRepository.upsertAuthenticatedUser(profile)
             
-            withAnimation(.easeInOut(duration: 0.4)) {
-                isAuthenticated = true
-                isLoading = false
-            }
+            completeAuthentication()
         } catch {
-            errorMessage = userFacingMessage(for: error)
-            isLoading = false
+            failAuthenticationFlow(with: error)
         }
     }
     
@@ -187,15 +195,21 @@ class AuthViewModel: ObservableObject {
                     fullName: appleIDCredential.fullName
                 )
                 
-                let _ = try await Auth.auth().signIn(with: credential)
+                let authResult = try await Auth.auth().signIn(with: credential)
+                let fullName = appleIDCredential.fullName
+                let appleDisplayName = [fullName?.givenName, fullName?.familyName]
+                    .compactMap { $0 }
+                    .joined(separator: " ")
+                let profile = makeAuthenticatedUserProfile(
+                    from: authResult.user,
+                    authProvider: .apple,
+                    displayNameOverride: appleDisplayName.isEmpty ? nil : appleDisplayName
+                )
+                try await userRepository.upsertAuthenticatedUser(profile)
                 
-                withAnimation(.easeInOut(duration: 0.4)) {
-                    isAuthenticated = true
-                    isLoading = false
-                }
+                completeAuthentication()
             } catch {
-                errorMessage = userFacingMessage(for: error)
-                isLoading = false
+                failAuthenticationFlow(with: error)
             }
             
         case .failure(let error):
@@ -220,12 +234,55 @@ class AuthViewModel: ObservableObject {
         
         withAnimation(.easeInOut(duration: 0.4)) {
             isAuthenticated = false
+            showSignUp = false
+            displayName = ""
+            email = ""
         }
     }
     
     // MARK: - Restore Previous Sign-In
     func restorePreviousSignIn() {
+        syncCurrentUser()
         isAuthenticated = Auth.auth().currentUser != nil
+    }
+    
+    private func completeAuthentication() {
+        syncCurrentUser()
+        withAnimation(.easeInOut(duration: 0.4)) {
+            isAuthenticated = true
+            showSignUp = false
+            isLoading = false
+        }
+    }
+    
+    private func syncCurrentUser() {
+        let user = Auth.auth().currentUser
+        displayName = user?.displayName ?? ""
+        email = user?.email ?? ""
+    }
+    
+    private func failAuthenticationFlow(with error: Error) {
+        try? Auth.auth().signOut()
+        GIDSignIn.sharedInstance.signOut()
+        syncCurrentUser()
+        errorMessage = userFacingMessage(for: error)
+        isLoading = false
+        isAuthenticated = false
+    }
+    
+    private func makeAuthenticatedUserProfile(
+        from user: FirebaseAuth.User,
+        authProvider: AuthenticationProvider,
+        displayNameOverride: String? = nil
+    ) -> AuthenticatedUserProfile {
+        let resolvedDisplayName = displayNameOverride ?? user.displayName ?? user.email?.components(separatedBy: "@").first ?? "Runner"
+        return AuthenticatedUserProfile(
+            id: user.uid,
+            authProvider: authProvider,
+            email: user.email ?? "",
+            displayName: resolvedDisplayName,
+            photoURL: user.photoURL
+        )
     }
     
     private var googleClientID: String? {
