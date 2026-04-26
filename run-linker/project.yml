@@ -16,14 +16,19 @@ targets:
   RunLinker:
     type: application
     platform: iOS
+    bundleId: com.valetudo.run-linker
     sources:
       - App
       - Core
       - Features
+    resources:
+      - Assets.xcassets
+      - GoogleService-Info.plist
     info:
       path: App/Info.plist
     settings:
       CODE_SIGN_STYLE: Automatic
+      CODE_SIGN_ENTITLEMENTS: run-linker.entitlements
     dependencies:
       - package: Firebase
         product: FirebaseAuth

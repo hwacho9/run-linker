@@ -1,5 +1,6 @@
 import SwiftUI
 import FirebaseCore
+import GoogleSignIn
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(_ application: UIApplication,
@@ -18,7 +19,12 @@ struct RunLinkerApp: App {
         WindowGroup {
             RootTabView()
                 .environmentObject(authVM)
+                .task {
+                    authVM.restorePreviousSignIn()
+                }
+                .onOpenURL { url in
+                    GIDSignIn.sharedInstance.handle(url)
+                }
         }
     }
 }
-

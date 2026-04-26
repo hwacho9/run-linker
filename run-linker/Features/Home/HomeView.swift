@@ -72,14 +72,14 @@ struct HomeView: View {
                                 Image(systemName: "hand.raised.fill")
                                     .font(.system(size: 14))
                                     .foregroundColor(AppTheme.secondary)
-                                Text("파트너 ")
+                                Text("파트너")
                                     .font(AppTheme.Fonts.bodyMedium)
-                                +
+                                
                                 Text("김지수")
                                     .font(AppTheme.Fonts.bodyMedium)
                                     .fontWeight(.bold)
                                     .foregroundColor(AppTheme.primary)
-                                +
+                                
                                 Text("님과 함께 완료!")
                                     .font(AppTheme.Fonts.bodyMedium)
                             }

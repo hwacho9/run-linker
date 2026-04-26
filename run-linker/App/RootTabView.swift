@@ -8,7 +8,14 @@ struct RootTabView: View {
             if !authVM.hasSeenOnboarding {
                 OnboardingView()
             } else if !authVM.isAuthenticated {
-                LoginView()
+                Group {
+                    if authVM.showSignUp {
+                        SignUpView()
+                    } else {
+                        LoginView()
+                    }
+                }
+                .transition(.opacity)
             } else {
                 TabView {
                     HomeView()

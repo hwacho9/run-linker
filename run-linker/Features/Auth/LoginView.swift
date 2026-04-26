@@ -49,9 +49,10 @@ struct LoginView: View {
                             Task { await authVM.signInWithGoogle() }
                         }
                         
-                        AppleSignInButton {
-                            authVM.signInWithApple()
-                        }
+                        AppleSignInButton(
+                            onRequest: authVM.configureAppleSignIn,
+                            onCompletion: authVM.handleAppleSignInResult
+                        )
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxxl)
                     
@@ -105,6 +106,7 @@ struct LoginView: View {
                     
                     // ─── Sign Up Link ───
                     Button {
+                        authVM.errorMessage = nil
                         withAnimation(.easeInOut(duration: 0.3)) {
                             authVM.showSignUp = true
                         }

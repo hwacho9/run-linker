@@ -6,6 +6,7 @@ struct SignUpView: View {
     @State private var name = ""
     @State private var email = ""
     @State private var password = ""
+    @State private var confirmPassword = ""
     
     var body: some View {
         ZStack {
@@ -47,9 +48,10 @@ struct SignUpView: View {
                             Task { await authVM.signInWithGoogle() }
                         }
                         
-                        AppleSignInButton {
-                            authVM.signInWithApple()
-                        }
+                        AppleSignInButton(
+                            onRequest: authVM.configureAppleSignIn,
+                            onCompletion: authVM.handleAppleSignInResult
+                        )
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxxl)
                     
@@ -77,6 +79,12 @@ struct SignUpView: View {
                             text: $password,
                             isSecure: true
                         )
+                        
+                        ThemedTextField(
+                            placeholder: "비밀번호 확인",
+                            text: $confirmPassword,
+                            isSecure: true
+                        )
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxxl)
                     
@@ -97,12 +105,20 @@ struct SignUpView: View {
                         title: "회원가입",
                         isLoading: authVM.isLoading
                     ) {
-                        Task { await authVM.signUp(name: name, email: email, password: password) }
+                        Task {
+                            await authVM.signUp(
+                                name: name,
+                                email: email,
+                                password: password,
+                                confirmPassword: confirmPassword
+                            )
+                        }
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxxl)
                     
                     // ─── Login Link ───
                     Button {
+                        authVM.errorMessage = nil
                         withAnimation(.easeInOut(duration: 0.3)) {
                             authVM.showSignUp = false
                         }

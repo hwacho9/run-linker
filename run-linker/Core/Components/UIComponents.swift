@@ -1,4 +1,5 @@
 import SwiftUI
+import AuthenticationServices
 
 // MARK: - Screen Container
 public struct ScreenContainer<Content: View>: View {
@@ -445,32 +446,22 @@ public struct GoogleSignInButton: View {
 
 // MARK: - Apple Sign-In Button
 public struct AppleSignInButton: View {
-    let action: () -> Void
+    let onRequest: (ASAuthorizationAppleIDRequest) -> Void
+    let onCompletion: (Result<ASAuthorization, Error>) -> Void
     
-    public init(action: @escaping () -> Void) {
-        self.action = action
+    public init(
+        onRequest: @escaping (ASAuthorizationAppleIDRequest) -> Void,
+        onCompletion: @escaping (Result<ASAuthorization, Error>) -> Void
+    ) {
+        self.onRequest = onRequest
+        self.onCompletion = onCompletion
     }
     
     public var body: some View {
-        Button(action: action) {
-            HStack(spacing: AppTheme.Spacing.md) {
-                Image(systemName: "apple.logo")
-                    .font(.system(size: 20))
-                    .foregroundColor(AppTheme.text)
-                
-                Text("Apple로 계속하기")
-                    .font(AppTheme.Fonts.subheadline)
-                    .foregroundColor(AppTheme.text)
-            }
-            .frame(maxWidth: .infinity)
+        SignInWithAppleButton(.signIn, onRequest: onRequest, onCompletion: onCompletion)
+            .signInWithAppleButtonStyle(.black)
             .frame(height: 56)
-            .background(AppTheme.surfaceContainerLowest)
             .clipShape(Capsule())
-            .overlay(
-                Capsule()
-                    .stroke(AppTheme.text.opacity(0.2), lineWidth: 1)
-            )
-        }
     }
 }
 

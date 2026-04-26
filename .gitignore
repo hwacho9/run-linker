@@ -36,3 +36,4 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 
 *.plist
+!run-linker/App/Info.plist
