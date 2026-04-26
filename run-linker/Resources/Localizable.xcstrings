@@ -4,7 +4,7 @@
     "" : {
 
     },
-    "%.1f km" : {
+    "%lld" : {
 
     },
     "%lld%%" : {
@@ -14,6 +14,7 @@
 
     },
     "activity.chart_placeholder" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -78,6 +79,7 @@
       }
     },
     "activity.picker" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1690,6 +1692,12 @@
     "J" : {
 
     },
+    "Jane" : {
+
+    },
+    "km" : {
+
+    },
     "M" : {
 
     },
@@ -2369,6 +2377,9 @@
         }
       }
     },
+    "Pair View snapshot" : {
+
+    },
     "profile_sync.retry" : {
       "localizations" : {
         "en" : {
@@ -2384,6 +2395,9 @@
           }
         }
       }
+    },
+    "Records" : {
+
     },
     "run.metric.distance" : {
       "extractionState" : "stale",
@@ -2679,7 +2693,13 @@
         }
       }
     },
+    "Solo Run" : {
+
+    },
     "SYNC SCORE" : {
+
+    },
+    "Sync Score %lld%%" : {
 
     },
     "sync.score" : {
@@ -2762,16 +2782,43 @@
         }
       }
     },
+    "가장 많이 함께 달린 친구" : {
+
+    },
+    "개인 기록" : {
+
+    },
     "김지수" : {
+
+    },
+    "나의 러닝 성장" : {
 
     },
     "무시" : {
 
     },
+    "아직 기록이 없어요" : {
+
+    },
+    "이번 주 거리 흐름" : {
+
+    },
     "재시도" : {
 
     },
+    "지금까지 연결한 총 누적 거리" : {
+
+    },
+    "첫 러닝을 시작하면 세션 히스토리와 내 통계가 자동으로 채워집니다." : {
+
+    },
+    "최근 러닝을 빠르게 확인하고 다시 이어 달릴 수 있어요." : {
+
+    },
     "프로필 저장 실패" : {
+
+    },
+    "함께 달린 비율" : {
 
     }
   },
