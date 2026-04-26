@@ -1,5 +1,6 @@
 import Foundation
 import SwiftUI
+import Combine
 
 @MainActor
 class ActivityViewModel: ObservableObject {
@@ -8,8 +9,8 @@ class ActivityViewModel: ObservableObject {
     @Published var history: [RunSession] = []
     @Published var stats: (totalDistance: Double, averagePace: Int, sessionsCount: Int)? = nil
     
-    init(repository: SessionRepositoryProtocol = MockSessionService()) {
-        self.repository = repository
+    init(repository: SessionRepositoryProtocol? = nil) {
+        self.repository = repository ?? MockSessionService()
     }
     
     func loadActivityData() async {

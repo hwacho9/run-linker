@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Lexend:wght@400;600&amp;family=Noto+Sans+KR:wght@400;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#f6faff",
+              "on-secondary": "#ffffff",
+              "tertiary-fixed": "#dae2fd",
+              "primary-container": "#2f6bff",
+              "background": "#f6faff",
+              "secondary-fixed": "#b1f722",
+              "surface-container-high": "#e3e9f0",
+              "on-background": "#161c21",
+              "inverse-on-surface": "#ebf1f8",
+              "on-primary-container": "#000318",
+              "on-surface-variant": "#434655",
+              "on-surface": "#161c21",
+              "on-error-container": "#93000a",
+              "primary-fixed-dim": "#b5c4ff",
+              "surface": "#f6faff",
+              "on-primary": "#ffffff",
+              "on-error": "#ffffff",
+              "outline": "#737687",
+              "surface-container-highest": "#dde3ea",
+              "on-secondary-fixed": "#131f00",
+              "outline-variant": "#c3c5d8",
+              "on-secondary-container": "#4a6d00",
+              "on-primary-fixed-variant": "#003cac",
+              "surface-dim": "#d5dbe2",
+              "surface-container-lowest": "#ffffff",
+              "secondary-container": "#aef51d",
+              "secondary-fixed-dim": "#99da00",
+              "on-primary-fixed": "#00174d",
+              "inverse-surface": "#2b3136",
+              "secondary": "#476800",
+              "tertiary": "#565e74",
+              "on-tertiary-fixed-variant": "#3f465c",
+              "inverse-primary": "#b5c4ff",
+              "on-tertiary-container": "#ffffff",
+              "primary-fixed": "#dbe1ff",
+              "surface-variant": "#dde3ea",
+              "surface-container": "#e8eef5",
+              "on-secondary-fixed-variant": "#354e00",
+              "error-container": "#ffdad6",
+              "tertiary-fixed-dim": "#bec6e0",
+              "tertiary-container": "#6f768d",
+              "surface-tint": "#0051e0",
+              "surface-container-low": "#eef4fb",
+              "error": "#ba1a1a",
+              "on-tertiary": "#ffffff",
+              "primary": "#0051df",
+              "on-tertiary-fixed": "#131b2e"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans", "Noto Sans KR"],
+              "body": ["Be Vietnam Pro", "Noto Sans KR"],
+              "label": ["Lexend", "Noto Sans KR"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Be Vietnam Pro', 'Noto Sans KR', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen pb-32">
+<!-- TopAppBar (Mapped from Shared Component JSON) -->
+<header class="fixed top-0 w-full z-50 bg-[#f6faff] dark:bg-slate-950">
+<div class="flex items-center justify-between px-6 h-20 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[#0051df] dark:text-blue-400" data-icon="group">group</span>
+<h1 class="font-['Plus_Jakarta_Sans'] font-bold text-2xl tracking-tight text-on-surface">Friends</h1>
+</div>
+<button class="bg-primary text-on-primary px-5 py-2.5 rounded-full font-bold text-sm hover:opacity-80 transition-opacity active:scale-95 duration-200">
+                Add Friend
+            </button>
+</div>
+</header>
+<main class="pt-24 px-6 max-w-screen-xl mx-auto space-y-8">
+<!-- Search & Filters -->
+<section class="space-y-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full bg-surface-container border-none rounded-xl py-4 pl-12 pr-4 focus:ring-2 focus:ring-primary focus:bg-surface-container-highest transition-all font-body" placeholder="친구 이름 검색" type="text"/>
+</div>
+<div class="flex gap-2 overflow-x-auto hide-scrollbar py-1">
+<button class="px-5 py-2 rounded-full bg-primary text-on-primary font-bold whitespace-nowrap text-sm">전체</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant font-medium whitespace-nowrap text-sm hover:bg-surface-container-high transition-colors">지금 가능</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant font-medium whitespace-nowrap text-sm hover:bg-surface-container-high transition-colors">즐겨찾기</button>
+<button class="px-5 py-2 rounded-full bg-surface-container-low text-on-surface-variant font-medium whitespace-nowrap text-sm hover:bg-surface-container-high transition-colors">최근 함께 달린</button>
+</div>
+</section>
+<!-- Available to Run Now (Horizontal Scroll) -->
+<section class="space-y-4">
+<div class="flex items-center justify-between">
+<h2 class="font-headline text-xl font-extrabold flex items-center gap-2">
+                    지금 달릴 수 있는 친구
+                    <span class="w-2 h-2 rounded-full bg-secondary-fixed animate-pulse"></span>
+</h2>
+<button class="text-primary font-bold text-sm">전체보기</button>
+</div>
+<div class="flex gap-4 overflow-x-auto hide-scrollbar -mx-6 px-6 py-2">
+<!-- Friend Card 1 -->
+<div class="min-w-[280px] bg-surface-container-lowest rounded-xl p-6 flex flex-col gap-6 shadow-sm border border-outline-variant/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full -mr-16 -mt-16"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Profile" class="w-16 h-16 rounded-full object-cover" data-alt="Portrait of a female runner smiling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbAJLTmGGM1OyhVY-US5EA4hUidf9VuUxPfu6Uy-0hcO0LQOiULy6uotPBPO3ujgjsJOccSolWQLIaWCRd6im4ZAym1eIIMY6Qf94QhuAZxoeQNrxff4Dc09wj3qpxqxOqQg_XDjcBeypXBBOexy2DTZ-soBdwEUsBPAWvRkzYlClTxghr_tGWrLhbTl_I30TqOeHMmLgPu_ht4YsbQ0lHglm1EbCp6QjSXI3UyZb4R-u_AN7YXx0v0i_x-ioYa0HbNvHcmxDhhD8B"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 bg-secondary-fixed border-2 border-surface-container-lowest rounded-full"></span>
+</div>
+<div>
+<p class="font-bold text-lg">지혜 (Ji-Hye)</p>
+<span class="text-xs font-label bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full">지금 가능</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-3 rounded-lg">
+<p class="text-[10px] font-label text-outline-variant uppercase tracking-wider">Avg Pace</p>
+<p class="font-label font-bold text-lg">4'45"</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg">
+<p class="text-[10px] font-label text-outline-variant uppercase tracking-wider">Today</p>
+<p class="font-label font-bold text-lg">8.2km</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-full font-bold text-sm active:scale-95 transition-transform">같이 달리기</button>
+<button class="p-3 bg-surface-container-high rounded-full hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant block" data-icon="person">person</span>
+</button>
+</div>
+</div>
+<!-- Friend Card 2 -->
+<div class="min-w-[280px] bg-surface-container-lowest rounded-xl p-6 flex flex-col gap-6 shadow-sm border border-outline-variant/10 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -mr-16 -mt-16"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="flex items-center gap-4">
+<div class="relative">
+<img alt="Profile" class="w-16 h-16 rounded-full object-cover" data-alt="Portrait of a male runner in athletic gear" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBYZ_H746J06b6v4S2-UKQUunB323LyaKjQO5HMHzAgGq7dz_uBBayUjsHFEZhTXSt6Xc_nY7q3L2Z6qcMbvhTc_Uf4YdG9cgrVi1Ybr25vM3VW6f_u3GGQok1H9LqfdJVnEBdIHpj9qvTVFOeOVbKNsYHYQ2JbTVd6016dE225qhJ61ev9k-biofIx7dtGnxglyT-gheQapf7flX4SHqKUQaAjs2ow-3JWEsjOshSEGQHT1PEBQWkd5NiDFbAlA19ySbz09sMvQpD4"/>
+<span class="absolute bottom-0 right-0 w-4 h-4 bg-secondary-fixed border-2 border-surface-container-lowest rounded-full"></span>
+</div>
+<div>
+<p class="font-bold text-lg">민호 (Min-Ho)</p>
+<span class="text-xs font-label bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full">지금 가능</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-low p-3 rounded-lg">
+<p class="text-[10px] font-label text-outline-variant uppercase tracking-wider">Avg Pace</p>
+<p class="font-label font-bold text-lg">5'12"</p>
+</div>
+<div class="bg-surface-container-low p-3 rounded-lg">
+<p class="text-[10px] font-label text-outline-variant uppercase tracking-wider">Today</p>
+<p class="font-label font-bold text-lg">준비 중</p>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="flex-1 bg-primary text-on-primary py-3 rounded-full font-bold text-sm active:scale-95 transition-transform">같이 달리기</button>
+<button class="p-3 bg-surface-container-high rounded-full hover:bg-surface-container-highest transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant block" data-icon="person">person</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Running Partners (Bento style) -->
+<section class="space-y-4">
+<h2 class="font-headline text-xl font-extrabold">최근 함께 달린 친구</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Partner 1 -->
+<div class="bg-surface-container-low rounded-xl p-5 flex items-center justify-between group hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<img alt="Partner" class="w-14 h-14 rounded-full object-cover" data-alt="Female runner profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAd6r-MJe7ywWoVrQoH_nQhS3PA9EDqXHuy75l6yzHvfHmLOtAvPo2pi5fMiCZgiHfSDzbX8_5Pd0MRCQ_sISmSQAocsnqCywZ_4IzCfDxbuVhCHdXEoQCB9s_CqKPZmkFsqG9fxHH5FY18zFC40tp1yCfEINIFOS7ghM0WTk5VQ1OXqP8OzDehqG_NE-LeZDUAsGDuwh1wv-qtKpIxpQYTwooBgvwecMal77UZRe80Q9lYQeYjp_vDuwGU0jUfBCFYfsHJAGwUXYfS"/>
+<div>
+<p class="font-bold">소연 (So-Yeon)</p>
+<p class="text-xs text-outline font-medium">어제 오후 6:30 • 5.0km</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<div class="text-right">
+<p class="text-[10px] font-label text-primary font-bold tracking-tight uppercase">Sync Score</p>
+<p class="text-lg font-label font-black text-primary">98%</p>
+</div>
+<button class="bg-primary-fixed-dim text-on-primary-fixed-variant px-4 py-1.5 rounded-full font-bold text-xs group-hover:bg-primary group-hover:text-on-primary transition-colors">다시 달리기</button>
+</div>
+</div>
+<!-- Partner 2 -->
+<div class="bg-surface-container-low rounded-xl p-5 flex items-center justify-between group hover:bg-surface-container-high transition-colors cursor-pointer">
+<div class="flex items-center gap-4">
+<img alt="Partner" class="w-14 h-14 rounded-full object-cover" data-alt="Male runner profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBK1I0Zoz2byN93IDjM4RprOFaG8ivBeYLQIubfGRl9me7Fns0wTb9gIL9ij4jC1Rbw-0eypatQBNkV2laP22VoWCp8sabhcR1CZRzddFjjYYpSl6fc3xx_AqzB9OYGxJu-6vq0mQBF7boq1yl01kzl-S2tn1VOohqyE4cGxDFDmMmp-tJSpMxNSD_JEZoscit4aPNjOWRhQuHKZrGeMbAXkwfEx5y7DVvDIPgULqCDwh_kgUhb6dI8tK0-iIV9Yq5MiA97eu63q5es"/>
+<div>
+<p class="font-bold">준수 (Jun-Su)</p>
+<p class="text-xs text-outline font-medium">3일 전 • 12.4km</p>
+</div>
+</div>
+<div class="flex flex-col items-end gap-2">
+<div class="text-right">
+<p class="text-[10px] font-label text-primary font-bold tracking-tight uppercase">Sync Score</p>
+<p class="text-lg font-label font-black text-primary">85%</p>
+</div>
+<button class="bg-primary-fixed-dim text-on-primary-fixed-variant px-4 py-1.5 rounded-full font-bold text-xs group-hover:bg-primary group-hover:text-on-primary transition-colors">다시 달리기</button>
+</div>
+</div>
+</div>
+</section>
+<!-- All Friends List -->
+<section class="space-y-4">
+<h2 class="font-headline text-xl font-extrabold">전체 친구</h2>
+<div class="space-y-3">
+<!-- Friend 1 -->
+<div class="flex items-center gap-4 p-2">
+<div class="relative">
+<img alt="Friend" class="w-12 h-12 rounded-full object-cover" data-alt="Female profile icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvvBpzTsND57vMOhjlTQXlL1wV-aQ6xC-9VPHvFORJY8Qe3OFC-9O6KJIbvWLSjwthmCJF1q-jjYl0NLHkSfDjjwjKewZS1zn2YtsukJ-vWGab3DKTMl2aK9VF6ooDBK6ljzLblrCpymFXslOyHc6mCRovnKnvMKOMpJuoxh9N2SeAMsSnEYeQ6fThJW8kFh9dDL_Z4K2yS7Z7PaZgE8jTJVPwS-sD8VBekxav5HdUtpSXZc6whKc6DRWDUOBe5gTsx-CLmeB-39wQ"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-outline-variant border-2 border-surface rounded-full"></span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-bold">유진 (Yu-Jin)</p>
+<span class="text-[10px] text-outline">오프라인</span>
+</div>
+<p class="text-xs text-outline-variant">이번 주 2회 러닝 • 4'55" 페이스</p>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container">
+<span class="material-symbols-outlined text-outline" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<!-- Friend 2 -->
+<div class="flex items-center gap-4 p-2">
+<div class="relative">
+<img alt="Friend" class="w-12 h-12 rounded-full object-cover" data-alt="Male profile icon" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJMZiS5QR_0WZQGiQ81sH7hpk6u3M8vFSdgmLAJJtAOiv2iIwi4wmyDefCmtckTOHo4s7uh-Bl_ymJCJMXmxXyT4aKXRSwTmcPpg4tC7gjUYjjIR6tYURTNOQAzGYktIEUJ2ErSY3aE5lwhTthC8MletA_tsu_S525VpibxCdqd9rF0Ds2s8op0RbkF2u6gtP93KWPTMmRyx7uD9gasMcDxLbZXXneOoaoZXnRm17xIn6JzfPcrjkyq-rKFEchob16t7BcT2MTccVW"/>
+<span class="absolute bottom-0 right-0 w-3 h-3 bg-secondary-fixed border-2 border-surface rounded-full"></span>
+</div>
+<div class="flex-1">
+<div class="flex items-center gap-2">
+<p class="font-bold">도윤 (Do-Yoon)</p>
+<span class="text-[10px] text-secondary font-bold">지금 러닝 중</span>
+</div>
+<p class="text-xs text-outline-variant">이번 주 5회 러닝 • 4'10" 페이스</p>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-full text-xs font-bold shadow-md shadow-primary/20">참가하기</button>
+</div>
+</div>
+</section>
+<!-- Invite Banner -->
+<section class="mt-8">
+<div class="bg-inverse-surface text-inverse-on-surface rounded-xl p-6 relative overflow-hidden">
+<div class="absolute right-0 top-0 bottom-0 w-1/3 bg-gradient-to-l from-primary/20 to-transparent"></div>
+<div class="relative z-10 flex flex-col gap-4">
+<div>
+<h3 class="font-headline text-lg font-bold">친구를 초대하고<br/>같이 달려보세요</h3>
+<p class="text-sm opacity-70 mt-1">함께 달리면 동기부여가 2배!</p>
+</div>
+<button class="bg-secondary-fixed text-on-secondary-fixed px-6 py-3 rounded-full font-bold text-sm w-fit active:scale-95 transition-transform flex items-center gap-2">
+<span class="material-symbols-outlined text-sm" data-icon="share">share</span>
+                        초대 링크 보내기
+                    </button>
+</div>
+<!-- Decorative element -->
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-8xl opacity-10 rotate-12" data-icon="link">link</span>
+</div>
+</section>
+</main>
+<!-- BottomNavBar (Mapped from Shared Component JSON) -->
+<nav class="fixed bottom-0 left-0 w-full h-24 flex justify-around items-center px-8 pb-safe bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-[0_-8px_30px_rgb(0,0,0,0.04)] rounded-t-[3rem] border-t border-white/20 z-50">
+<!-- Home -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 h-16 active:scale-90 transition-transform duration-300 ease-out hover:text-[#476800]" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Lexend'] text-[10px] font-semibold uppercase tracking-widest mt-1">Home</span>
+</a>
+<!-- Records -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 h-16 active:scale-90 transition-transform duration-300 ease-out hover:text-[#476800]" href="#">
+<span class="material-symbols-outlined" data-icon="exercise">exercise</span>
+<span class="font-['Lexend'] text-[10px] font-semibold uppercase tracking-widest mt-1">Records</span>
+</a>
+<!-- Friends (ACTIVE) -->
+<a class="flex flex-col items-center justify-center bg-[#0051df] text-white rounded-full w-16 h-16 -mt-8 shadow-lg shadow-blue-500/40 active:scale-90 transition-transform duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-['Lexend'] text-[10px] font-semibold uppercase tracking-widest mt-1">Friends</span>
+</a>
+<!-- My -->
+<a class="flex flex-col items-center justify-center text-slate-400 dark:text-slate-500 h-16 active:scale-90 transition-transform duration-300 ease-out hover:text-[#476800]" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Lexend'] text-[10px] font-semibold uppercase tracking-widest mt-1">My</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600;700&amp;family=Lexend:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-fixed-dim": "#b5c4ff",
+              "primary": "#0051df",
+              "on-primary-container": "#000318",
+              "secondary-fixed": "#b1f722",
+              "on-tertiary-container": "#ffffff",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed-variant": "#354e00",
+              "secondary-fixed-dim": "#99da00",
+              "primary-fixed": "#dbe1ff",
+              "surface-container-high": "#e3e9f0",
+              "surface-container-lowest": "#ffffff",
+              "on-primary": "#ffffff",
+              "tertiary": "#565e74",
+              "error-container": "#ffdad6",
+              "tertiary-fixed-dim": "#bec6e0",
+              "on-secondary-fixed": "#131f00",
+              "on-error": "#ffffff",
+              "on-surface-variant": "#434655",
+              "secondary-container": "#aef51d",
+              "on-tertiary-fixed": "#131b2e",
+              "tertiary-fixed": "#dae2fd",
+              "surface-container": "#e8eef5",
+              "surface-container-low": "#eef4fb",
+              "on-tertiary-fixed-variant": "#3f465c",
+              "surface": "#f6faff",
+              "surface-container-highest": "#dde3ea",
+              "inverse-primary": "#b5c4ff",
+              "outline-variant": "#c3c5d8",
+              "inverse-on-surface": "#ebf1f8",
+              "on-background": "#161c21",
+              "background": "#f6faff",
+              "surface-bright": "#f6faff",
+              "primary-container": "#2f6bff",
+              "inverse-surface": "#2b3136",
+              "tertiary-container": "#6f768d",
+              "on-secondary-container": "#4a6d00",
+              "secondary": "#476800",
+              "on-primary-fixed": "#00174d",
+              "on-secondary": "#ffffff",
+              "on-error-container": "#93000a",
+              "surface-tint": "#0051e0",
+              "surface-variant": "#dde3ea",
+              "outline": "#737687",
+              "on-surface": "#161c21",
+              "error": "#ba1a1a",
+              "surface-dim": "#d5dbe2",
+              "on-primary-fixed-variant": "#003cac"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Be Vietnam Pro"],
+              "label": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body {
+        -webkit-tap-highlight-color: transparent;
+      }
+      .kinetic-gradient {
+        background: linear-gradient(135deg, #0051df 0%, #2f6bff 100%);
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background font-body text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-[#f6faff] flex items-center justify-between w-full px-6 h-16 docked full-width top-0 z-50">
+<div class="flex items-center gap-3">
+<span class="font-['Plus_Jakarta_Sans'] font-black text-[#0051df] tracking-tighter text-2xl" style="">RunLinker</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e3e9f0] transition-colors active:scale-95 duration-200" style="">
+<span class="material-symbols-outlined text-slate-500" style="">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-[#e3e9f0] transition-colors active:scale-95 duration-200" style="">
+<span class="material-symbols-outlined text-slate-500" style="">settings</span>
+</button>
+</div>
+</header>
+<main class="px-6 space-y-8 mt-4">
+<!-- Hero Section: Kinetic CTA -->
+<section class="relative">
+<div class="bg-primary p-8 rounded-xl overflow-hidden relative kinetic-gradient">
+<div class="relative z-10">
+<h2 class="font-headline font-extrabold text-white text-3xl leading-tight mb-6" style="">
+                        함께 달릴 준비가<br/>되었나요?
+                    </h2>
+<button class="bg-secondary-container text-on-secondary-container font-headline font-bold py-4 px-8 rounded-full flex items-center justify-center gap-2 active:scale-95 transition-transform" style="">
+<span class="" style="">같이 달리기 시작</span>
+<span class="material-symbols-outlined" style="">bolt</span>
+</button>
+</div>
+<!-- Abstract Design Elements -->
+<div class="absolute -right-4 -bottom-4 opacity-20 transform rotate-12">
+<span class="material-symbols-outlined text-[180px] text-white" style='font-variation-settings: "FILL" 1;'>directions_run</span>
+</div>
+</div>
+</section>
+<!-- Secondary Quick Actions -->
+<section class="space-y-3">
+<div class="grid grid-cols-2 gap-3">
+<button class="bg-surface-container-low text-on-primary-fixed font-headline font-bold py-4 px-4 rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-primary">group</span>
+            친구와 달리기
+        </button>
+<button class="bg-surface-container-low text-on-primary-fixed font-headline font-bold py-4 px-4 rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-primary">shuffle</span>
+            랜덤 매칭
+        </button>
+</div>
+<button class="w-full bg-surface-container-low text-on-primary-fixed font-headline font-bold py-4 px-6 rounded-lg flex items-center justify-center gap-2 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-primary">person</span>
+        혼자 달리기
+    </button>
+</section>
+<!-- Recent Run Summary Card -->
+<section class="space-y-4">
+<h3 class="font-headline font-bold text-xl px-1" style="">최근 러닝 리포트</h3>
+<div class="bg-surface-container-low rounded-xl p-6 relative overflow-hidden">
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="text-sm font-label text-slate-500 mb-1" style="">2023. 11. 24 • 오전 7:30</p>
+<h4 class="font-headline font-bold text-2xl" style="">한강 시티 런</h4>
+</div>
+<div class="flex -space-x-3">
+<img class="w-10 h-10 rounded-full border-2 border-surface-container-low object-cover" data-alt="Runner profile picture 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUU9cKYP-iyMjH_-ZWQpgvMRowHzSu_6fEQV55OWMwVOEvQm6MgKrw6qVRRk51hY1gQgbdNUUhaBTGGp96WxXFdPpBd4GcsX0v93Xx69meyhrwb-9d09lTGy7R0zumAaZEZ_NJxWeCkVnqhwxS9y3IUPCkOXQyRuWq2t4gnSdVqHrRFEpYJa4OMuypNASHEQH3KAuYRVWZ8w9cmVlSVwT4XF3P408WR3DmSiQuOvtPCSb0Ge9aAp-IaaKDteKc2nEHSMesOR5gSdgf" style=""/>
+<img class="w-10 h-10 rounded-full border-2 border-surface-container-low object-cover" data-alt="Runner profile picture 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6a46DaNUbXg2szGsq2-3tbWfaxjxCnYCMfkGv62QaFvC6jTaHRhyDZrJlzgHxH1JrcduLUmYFo-OAfexUy3gy347zKQ06vVF0d-znAE3HeOI82_jSrPjYKUrdkyVa_OC2hCB3HKyXPwToIUC6_LoSi8jGhHM1xZ8IPyak5reP5khWIjZ_6H6t6PzvR9le8Yglg43I2lCYtV6NvqXSca_RwALnVOy3QL8MqHh8MAA2nVqDNCwmXBM5X_S0P_BALAjoh6QsD4PmeolR" style=""/>
+</div>
+</div>
+<div class="grid grid-cols-3 gap-4">
+<div class="space-y-1">
+<span class="text-xs font-label text-slate-500" style="">거리</span>
+<p class="font-label font-bold text-xl text-primary" style="">5.24 <span class="text-xs" style="">km</span></p>
+</div>
+<div class="space-y-1">
+<span class="text-xs font-label text-slate-500" style="">시간</span>
+<p class="font-label font-bold text-xl text-primary" style="">28:12</p>
+</div>
+<div class="space-y-1">
+<span class="text-xs font-label text-slate-500" style="">페이스</span>
+<p class="font-label font-bold text-xl text-primary" style="">5'22"</p>
+</div>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant/20 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-lg" style='font-variation-settings: "FILL" 1;'>handshake</span>
+<p class="text-sm font-medium" style="">파트너 <span class="text-primary font-bold" style="">김지수</span>님과 함께 완료!</p>
+</div>
+</div>
+</section>
+<!-- Weekly Stats Bento Grid -->
+<section class="space-y-4">
+<div class="flex justify-between items-center px-1">
+<h3 class="font-headline font-bold text-xl" style="">이번 주 통계</h3>
+<button class="text-primary font-bold text-sm" style="">상세보기</button>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="bg-surface-container-highest p-5 rounded-xl flex flex-col justify-between h-32">
+<span class="material-symbols-outlined text-primary" style="">route</span>
+<div>
+<p class="text-xs font-label text-slate-500 uppercase tracking-wider" style="">누적 거리</p>
+<p class="font-label font-bold text-2xl text-on-primary-fixed" style="">18.5 <span class="text-sm" style="">km</span></p>
+</div>
+</div>
+<div class="bg-secondary-fixed p-5 rounded-xl flex flex-col justify-between h-32">
+<span class="material-symbols-outlined text-on-secondary-fixed" style="">avg_pace</span>
+<div>
+<p class="text-xs font-label text-on-secondary-fixed-variant uppercase tracking-wider" style="">평균 페이스</p>
+<p class="font-label font-bold text-2xl text-on-secondary-fixed" style="">5'45"</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Running Partners Scroll -->
+<section class="space-y-4">
+<h3 class="font-headline font-bold text-xl px-1" style="">최근 함께한 러닝 크루</h3>
+<div class="flex gap-4 overflow-x-auto no-scrollbar pb-4 -mx-6 px-6">
+<!-- Partner Item -->
+<div class="flex-shrink-0 flex flex-col items-center gap-2">
+<div class="w-16 h-16 rounded-full p-1 border-2 border-primary">
+<img class="w-full h-full rounded-full object-cover" data-alt="Partner user avatar 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbjQWyt9YrUD3zXF5_RWx2KjY4577_G6t0vgH1HN_2mZ0m8pURVwKtFBrZgyY0i9P60C9_bZRDrnyrpzJqxeeqCJqZrZxGXwtJK1gdo2K1cUaGbhlHpCRKqGZM82Cmc6585cGkiUhCh0P7w5su9n5jhobIsdsNJfV5mytUH2FN0Yym7bDD0zXXxtTMGlD9URS7f5mmsLdM6cq4cZC5XYppv5mnmUUAIdNyWkSoFpvq1WTMrIwDVJIn5Gx1-snik10rGno7-HoV9K0S" style=""/>
+</div>
+<span class="text-xs font-medium" style="">이민호</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2 opacity-80">
+<div class="w-16 h-16 rounded-full p-1 border-2 border-transparent">
+<img class="w-full h-full rounded-full object-cover" data-alt="Partner user avatar 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6jfpC7_uHXS9kmOk2lzpROMkgXP7K20baBgp7a2OkRN4JiUAq-jDI6xPLOu3cQXb0ZVPBQ5GtNi4WtP_e-dRHbAMen30tZRYAAhAUtno_HIahyG21-jbPazqJFcil-04r8pPXFGEQgPQKFq93VrUCvCA86GUbPKPDD3BsC-OsT_gdraiTYCTvPMuHsJO7CKPyqewVOLPawETH21j7MhM_N_mvrTXPa3ukxB9Ojsnem8DhtqQPj2SgTnZAYu_wlfxgtOPx6C07RNSf" style=""/>
+</div>
+<span class="text-xs font-medium" style="">최서연</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2 opacity-80">
+<div class="w-16 h-16 rounded-full p-1 border-2 border-transparent">
+<img class="w-full h-full rounded-full object-cover" data-alt="Partner user avatar 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC4Cx8oTtEC_a_VXHWb3Hl9kUq6ulDWq6YQqyW5Flksd_1VBqXwc3n-5Op0fayinmdmlRuIJyUX9jsk5YiBZnc9gBOo-bOpRR5tNsHvj5HB3x_Nf6ih0FMSXuzOTO2M5VV3QCYNSFyzIM_wdfcROYRVoAva458TK6D7gZztIH-3Goo3GnnBYqdIKccSxW5XAZ2VdNXdxwrCJX88ABSor-GMfyw6OkZYuMbFvnj1M4TFFhl-XW3bYuJCxjbDAoxGDUxSJpqTjjH_asu2" style=""/>
+</div>
+<span class="text-xs font-medium" style="">박준영</span>
+</div>
+<div class="flex-shrink-0 flex flex-col items-center gap-2 opacity-80">
+<div class="w-16 h-16 rounded-full p-1 border-2 border-transparent">
+<img class="w-full h-full rounded-full object-cover" data-alt="Partner user avatar 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgedPpaUOeB5cSXo1WYyGIx-zeCzgyFWJUOi6vxVZqT1hSihKiS7ju-B2TvTjpIYesfsEC5TccFxjgi6Ee3VjB9cAJlzwLwMBOXGjxEafhWLhoqomjmAyC3UJ4NojK0qcE-ZILfwk7uNqlfPTbNY0S0dUVoVxWdKLHg0ZNs-9sBiXYQ9-bcE26EuICwUGJzVk_PawuzGIpVooUYPLmzDAZL9_sM2lUqL2MDhbr2p0AiNVMDYk8swua5VOlFWhcaLvyaRldcNO1fama" style=""/>
+</div>
+<span class="text-xs font-medium" style="">정다은</span>
+</div>
+<!-- Find More -->
+<button class="flex-shrink-0 flex flex-col items-center gap-2" style="">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="">add</span>
+</div>
+<span class="text-xs font-medium" style="">더보기</span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-end pb-6 px-4 bg-[#f6faff]/80 backdrop-blur-xl shadow-[0_-4px_24px_rgba(0,0,0,0.04)] rounded-t-xl">
+<button class="flex flex-col items-center justify-center bg-[#0051df] text-white rounded-full w-12 h-12 mb-1 active:scale-90 duration-200" style="">
+<span class="material-symbols-outlined" style='font-variation-settings: "FILL" 1;'>home</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium hidden" style="">홈</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#00174d] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200" style="">
+<span class="material-symbols-outlined" style="">directions_run</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium mt-1" style="">활동</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#00174d] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200" style="">
+<span class="material-symbols-outlined" style="">group</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium mt-1" style="">친구</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#00174d] opacity-60 hover:opacity-100 transition-opacity active:scale-90 duration-200" style="">
+<span class="material-symbols-outlined" style="">person</span>
+<span class="font-['Be_Vietnam_Pro'] text-[10px] font-medium mt-1" style="">프로필</span>
+</button>
+</nav>
+</body></html>

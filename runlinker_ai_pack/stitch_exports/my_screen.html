@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;family=Lexend:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2F6BFF",
+              "secondary": "#B8FF2C",
+              "on-error-container": "#93000a",
+              "tertiary-container": "#6f768d",
+              "primary-container": "#2f6bff",
+              "on-secondary-fixed-variant": "#354e00",
+              "surface-container-highest": "#dde3ea",
+              "on-error": "#ffffff",
+              "outline-variant": "#E2E8F0",
+              "on-secondary-container": "#131f00",
+              "surface-container-lowest": "#ffffff",
+              "surface-variant": "#f1f5f9",
+              "surface-container-high": "#f8fafc",
+              "on-tertiary-container": "#ffffff",
+              "inverse-surface": "#2b3136",
+              "on-tertiary": "#ffffff",
+              "on-surface": "#0F172A",
+              "error": "#ef4444",
+              "on-surface-variant": "#64748b",
+              "on-background": "#0F172A",
+              "outline": "#cbd5e1",
+              "surface": "#ffffff",
+              "surface-container": "#f8fafc",
+              "on-secondary": "#000000",
+              "background": "#ffffff",
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Be Vietnam Pro"],
+              "label": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "1.25rem", "lg": "1.5rem", "xl": "2rem", "full": "9999px"},
+            boxShadow: {
+              'premium': '0 10px 30px -10px rgba(0, 0, 0, 0.04)',
+              'elevated': '0 20px 40px -15px rgba(47, 107, 255, 0.15)',
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      body { font-family: 'Be Vietnam Pro', sans-serif; -webkit-font-smoothing: antialiased; }
+      h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+      .data-font { font-family: 'Lexend', sans-serif; }
+      .ios-blur { backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+    </style>
+</head>
+<body class="bg-white text-on-background min-h-screen pb-32">
+<!-- Top App Bar -->
+<header class="fixed top-0 w-full z-50 bg-white/80 ios-blur flex items-center justify-between px-6 h-16">
+<h1 class="text-2xl font-extrabold italic text-primary font-headline tracking-tighter">마이</h1>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-slate-600" data-icon="settings">settings</span>
+</button>
+<div class="w-9 h-9 rounded-full overflow-hidden border-2 border-slate-50">
+<img class="w-full h-full object-cover" data-alt="User profile photo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQj7-NvZ-XIbAJagjDlUcIVzmrAEsavovZ-st1faWtK_eRNyiHjbCdwo1IXw7My_tCNrKIK9MwlOEs8EWvyJ5Uhk2aBitfKuAkIwCQtu1PJ2cvGBMG-Z6zyiUIpt5c_XUPjqIMVJ6x5jRL4-zI4TvdijgtF9zUJ4hAH1cWnmptuqDK15Tuwm7Imduk0lqPJXwqKyNA2fW5i7Zq4pSJIv3YbGoAtyreq_61nwY1wtWFY1-2-9eeepZFEhWgCCoiul6UOCV6HmrSThjX"/>
+</div>
+</div>
+</header>
+<main class="pt-20 px-5 space-y-10">
+<!-- Profile Section -->
+<section class="flex flex-col items-center text-center space-y-4 pt-4">
+<div class="relative">
+<div class="w-24 h-24 rounded-[2rem] overflow-hidden shadow-premium border-4 border-white">
+<img class="w-full h-full object-cover" data-alt="Jayden Park profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAUXM8SdkprABFnoVHJvdOjj2xAoJHniu_vbOTilMauJEWQuUjgYNNtk317DvQRKhMEkcRjv22zUXElk2YFNeHlZRiwYzJP3-RNz-NNjFPHxWaU8M8gVdt9AMjW8-puU44mZnhX8vmDD_WNgmlvRCpt4WXtXjE13HNfKRuuNT98FSwPNDIEFSBCJ7AjwI6CiFE-9oOtIZ28jEOxGsWtquNDMbjAC_YOiEFwzU05ysmkYOy7KHFwuxOujDUW68E9azQ79EWez6S5WLhz"/>
+</div>
+<div class="absolute -bottom-1 -right-1 w-8 h-8 bg-secondary rounded-full border-4 border-white flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[16px] font-bold" style="font-variation-settings: 'wght' 700;">bolt</span>
+</div>
+</div>
+<div>
+<span class="inline-flex items-center px-3 py-1 bg-secondary text-on-secondary-container text-[11px] font-bold rounded-full mb-2">
+                    Level 5: Road Linker
+                </span>
+<h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">Jayden Park</h2>
+<p class="text-slate-500 text-sm mt-1">함께 달리는 즐거움, RunLinker!</p>
+</div>
+<button class="w-full py-4 bg-slate-100 text-slate-700 font-bold rounded-2xl hover:bg-slate-200 transition-all active:scale-[0.98]">
+                프로필 수정
+            </button>
+</section>
+<!-- Goal Card (Refined) -->
+<section class="bg-primary p-7 rounded-3xl shadow-elevated relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+<div class="relative z-10">
+<div class="flex justify-between items-start mb-6">
+<div>
+<p class="text-white/70 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">Weekly Goal</p>
+<h3 class="text-2xl font-extrabold text-white">이번 주 목표 20km</h3>
+</div>
+<div class="text-right">
+<p class="data-font text-3xl font-black text-white leading-none">12.4</p>
+<p class="text-white/60 text-xs font-medium uppercase mt-1">km total</p>
+</div>
+</div>
+<div class="space-y-3">
+<div class="w-full h-2 bg-white/20 rounded-full overflow-hidden">
+<div class="h-full bg-secondary rounded-full" style="width: 62%;"></div>
+</div>
+<div class="flex justify-between items-center pt-2">
+<p class="text-xs text-white/80 font-medium">목표까지 7.6km 남았어요!</p>
+<button class="text-[11px] font-bold text-white bg-white/10 px-4 py-2 rounded-xl hover:bg-white/20 active:scale-95 transition-all">목표 수정</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Grid -->
+<section class="grid grid-cols-2 gap-4">
+<div class="col-span-2 bg-white border border-slate-100 p-5 rounded-2xl shadow-premium flex items-center justify-between">
+<div>
+<h3 class="text-slate-400 text-[11px] font-bold uppercase tracking-wider mb-1">총 누적 거리</h3>
+<p class="data-font text-3xl font-black text-slate-900">524.8<span class="text-sm font-semibold ml-1 text-slate-400">km</span></p>
+</div>
+<button class="bg-primary/5 text-primary h-12 px-5 rounded-xl text-sm font-bold active:scale-95 transition-all">
+                    기록 보기
+                </button>
+</div>
+<div class="bg-white border border-slate-100 p-5 rounded-2xl shadow-premium">
+<h3 class="text-slate-400 text-[11px] font-bold uppercase tracking-wider mb-2">러닝 횟수</h3>
+<p class="data-font text-2xl font-bold text-slate-900">64<span class="text-xs font-semibold ml-1 text-slate-400">회</span></p>
+</div>
+<div class="bg-white border border-slate-100 p-5 rounded-2xl shadow-premium">
+<h3 class="text-slate-400 text-[11px] font-bold uppercase tracking-wider mb-2">평균 페이스</h3>
+<p class="data-font text-2xl font-bold text-slate-900">5'22"</p>
+</div>
+<div class="col-span-2 bg-secondary/10 border border-secondary/20 p-5 rounded-2xl flex items-center gap-5">
+<div class="w-12 h-12 rounded-2xl bg-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-slate-900" style="font-variation-settings: 'FILL' 1;">sync_alt</span>
+</div>
+<div>
+<h3 class="text-slate-500 text-[11px] font-bold uppercase tracking-wider">평균 싱크</h3>
+<p class="data-font text-2xl font-bold text-slate-900">92%</p>
+</div>
+</div>
+</section>
+<!-- Settings Groups (Clean List Style) -->
+<div class="space-y-12 pb-12">
+<!-- Privacy & Sharing -->
+<section>
+<div class="flex items-center justify-between px-1 mb-5">
+<h3 class="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Privacy &amp; Sharing</h3>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 active:bg-slate-100 transition-colors cursor-pointer group">
+<div class="flex-1">
+<p class="text-[15px] font-bold text-slate-800">위치 공유 설정</p>
+<p class="text-xs text-slate-500 mt-0.5">러닝 중 친구들에게 내 위치를 노출합니다</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-500 transition-colors">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 active:bg-slate-100 transition-colors cursor-pointer group">
+<div class="flex-1">
+<p class="text-[15px] font-bold text-slate-800">랜덤 매칭 공개 범위</p>
+<p class="text-xs text-slate-500 mt-0.5">함께 달릴 러너를 찾는 범위를 설정합니다</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-500 transition-colors">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 active:bg-slate-100 transition-colors cursor-pointer group">
+<div class="flex-1">
+<p class="text-[15px] font-bold text-slate-800">러닝 기록 공개 범위</p>
+<p class="text-xs text-slate-500 mt-0.5">나의 운동 일지를 볼 수 있는 사람을 선택합니다</p>
+</div>
+<span class="material-symbols-outlined text-slate-300 group-hover:text-slate-500 transition-colors">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl">
+<div class="flex-1">
+<p class="text-[15px] font-bold text-slate-800">시작/종료 지점 흐리기</p>
+<p class="text-xs text-slate-500 mt-0.5">집이나 직장 주소 노출 방지를 위해 가립니다</p>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</section>
+<!-- Notifications -->
+<section>
+<div class="flex items-center justify-between px-1 mb-5">
+<h3 class="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Notifications</h3>
+</div>
+<div class="bg-slate-50/50 border border-slate-100 rounded-3xl overflow-hidden">
+<div class="p-5 flex items-center justify-between border-b border-slate-100 bg-white">
+<p class="text-[15px] font-bold text-slate-800">알림 설정</p>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<div class="p-5 flex items-center justify-between border-b border-slate-100">
+<p class="text-[15px] font-bold text-slate-800">응원 알림</p>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="p-5 flex items-center justify-between border-b border-slate-100">
+<p class="text-[15px] font-bold text-slate-800">러닝 시작 알림</p>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-slate-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<div class="p-5 flex items-center justify-between bg-white">
+<p class="text-[15px] font-bold text-slate-800">음성 기능 설정</p>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- Safety & Account -->
+<section>
+<div class="flex items-center justify-between px-1 mb-5">
+<h3 class="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Safety &amp; Account</h3>
+</div>
+<div class="space-y-1">
+<div class="flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+<p class="text-[15px] font-bold text-slate-800">차단한 사용자</p>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+<p class="text-[15px] font-bold text-slate-800">신고 내역</p>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl hover:bg-slate-50 transition-colors">
+<p class="text-[15px] font-bold text-slate-800">계정 관리</p>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 rounded-2xl text-error active:opacity-60 transition-opacity">
+<p class="text-[15px] font-extrabold">로그아웃</p>
+<span class="material-symbols-outlined">logout</span>
+</div>
+</div>
+</section>
+<!-- Support -->
+<section>
+<div class="flex items-center justify-between px-1 mb-5">
+<h3 class="text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">Support</h3>
+</div>
+<div class="bg-slate-50 rounded-3xl p-2">
+<div class="bg-white rounded-2xl shadow-premium p-5 flex items-center justify-between mb-2">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">help_outline</span>
+<p class="text-[15px] font-bold text-slate-800">도움말</p>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<div class="bg-white rounded-2xl shadow-premium p-5 flex items-center justify-between mb-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-slate-400">chat_bubble_outline</span>
+<p class="text-[15px] font-bold text-slate-800">문의하기</p>
+</div>
+<span class="material-symbols-outlined text-slate-300">chevron_right</span>
+</div>
+<div class="px-5 pb-3 pt-1 space-y-3">
+<p class="text-[11px] font-medium text-slate-400 underline decoration-slate-200">서비스 이용약관</p>
+<p class="text-[11px] font-medium text-slate-400 underline decoration-slate-200">개인정보 처리방침</p>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Navigation Bar (Refined) -->
+<nav class="fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-10 pt-4 bg-white/90 ios-blur z-50 border-t border-slate-100">
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-primary active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold mt-1">홈</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-primary active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined">insights</span>
+<span class="text-[10px] font-bold mt-1">기록</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 px-5 py-2 hover:text-primary active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-bold mt-1">친구</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary bg-primary/5 rounded-2xl px-5 py-2 active:scale-90 transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="text-[10px] font-bold mt-1">마이</span>
+</a>
+</nav>
+</body></html>

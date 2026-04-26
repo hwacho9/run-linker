@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 @MainActor
 class HomeViewModel: ObservableObject {
@@ -9,8 +10,8 @@ class HomeViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var errorMessage: String? = nil
     
-    init(repository: SessionRepositoryProtocol = MockSessionService()) {
-        self.repository = repository
+    init(repository: SessionRepositoryProtocol? = nil) {
+        self.repository = repository ?? MockSessionService()
     }
     
     func loadData() async {

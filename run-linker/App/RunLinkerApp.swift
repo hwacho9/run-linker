@@ -12,10 +12,13 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct RunLinkerApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject private var authVM = AuthViewModel()
     
     var body: some Scene {
         WindowGroup {
             RootTabView()
+                .environmentObject(authVM)
         }
     }
 }
+
