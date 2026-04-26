@@ -20,26 +20,26 @@ struct HomeView: View {
                     // ─── Quick Actions (Stitch: 2-col grid + full-width) ───
                     VStack(spacing: AppTheme.Spacing.md) {
                         HStack(spacing: AppTheme.Spacing.md) {
-                            QuickActionButton(icon: "person.2.fill", title: "친구와 달리기") {}
-                            QuickActionButton(icon: "shuffle", title: "랜덤 매칭") {}
+                            QuickActionButton(icon: "person.2.fill", title: "home.quick.friend") {}
+                            QuickActionButton(icon: "shuffle", title: "home.quick.random") {}
                         }
-                        QuickActionButton(icon: "person.fill", title: "혼자 달리기") {}
+                        QuickActionButton(icon: "person.fill", title: "home.quick.solo") {}
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxl)
                     
                     // ─── Recent Run Report Card ───
                     VStack(spacing: AppTheme.Spacing.lg) {
-                        SectionHeader("최근 러닝 리포트")
+                        SectionHeader("home.section.recent_report")
                             .padding(.horizontal, AppTheme.Spacing.xxl)
                         
                         AppCard {
                             // Top: date + partner avatars
                             HStack(alignment: .top) {
                                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                                    Text("2023. 11. 24 • 오전 7:30")
+                                    Text("home.recent.date")
                                         .font(AppTheme.Fonts.labelSmall)
                                         .foregroundColor(AppTheme.textTertiary)
-                                    Text("한강 시티 런")
+                                    Text("home.recent.title")
                                         .font(AppTheme.Fonts.headingMedium)
                                         .foregroundColor(AppTheme.text)
                                 }
@@ -61,9 +61,9 @@ struct HomeView: View {
                             
                             // Stats grid (Stitch: grid-cols-3)
                             HStack(spacing: AppTheme.Spacing.lg) {
-                                StatCell(label: "거리", value: "5.24", unit: "km")
-                                StatCell(label: "시간", value: "28:12", unit: nil)
-                                StatCell(label: "페이스", value: "5'22\"", unit: nil)
+                                StatCell(label: "run.metric.distance", value: "5.24", unit: "km")
+                                StatCell(label: "run.metric.time", value: "28:12", unit: nil)
+                                StatCell(label: "run.metric.pace", value: "5'22\"", unit: nil)
                             }
                             .padding(.top, AppTheme.Spacing.sm)
                             
@@ -72,15 +72,14 @@ struct HomeView: View {
                                 Image(systemName: "hand.raised.fill")
                                     .font(.system(size: 14))
                                     .foregroundColor(AppTheme.secondary)
-                                Text("파트너")
+                                Text("home.recent.partner_label")
                                     .font(AppTheme.Fonts.bodyMedium)
                                 
                                 Text("김지수")
                                     .font(AppTheme.Fonts.bodyMedium)
-                                    .fontWeight(.bold)
                                     .foregroundColor(AppTheme.primary)
                                 
-                                Text("님과 함께 완료!")
+                                Text("home.recent.completed_suffix")
                                     .font(AppTheme.Fonts.bodyMedium)
                             }
                             .padding(.top, AppTheme.Spacing.lg)
@@ -90,18 +89,18 @@ struct HomeView: View {
                     
                     // ─── Weekly Stats Bento Grid ───
                     VStack(spacing: AppTheme.Spacing.lg) {
-                        SectionHeader("이번 주 통계", trailing: "상세보기") {}
+                        SectionHeader("home.section.weekly_stats", trailing: "common.detail") {}
                             .padding(.horizontal, AppTheme.Spacing.xxl)
                         
                         HStack(spacing: AppTheme.Spacing.lg) {
                             StatChip(
-                                title: "누적 거리",
+                                title: "home.stat.total_distance",
                                 value: String(format: "%.1f km", viewModel.totalDistance > 0 ? viewModel.totalDistance : 18.5),
                                 icon: "point.topleft.down.to.point.bottomright.curvepath",
                                 variant: .neutral
                             )
                             StatChip(
-                                title: "평균 페이스",
+                                title: "home.stat.average_pace",
                                 value: "5'45\"",
                                 icon: "timer",
                                 variant: .accent
@@ -112,7 +111,7 @@ struct HomeView: View {
                     
                     // ─── Recent Running Partners ───
                     VStack(spacing: AppTheme.Spacing.lg) {
-                        SectionHeader("최근 함께한 러닝 크루")
+                        SectionHeader("home.section.recent_crew")
                             .padding(.horizontal, AppTheme.Spacing.xxl)
                         
                         ScrollView(.horizontal, showsIndicators: false) {
@@ -132,9 +131,8 @@ struct HomeView: View {
                                                 .font(.system(size: 20))
                                                 .foregroundColor(AppTheme.primary)
                                         )
-                                    Text("더보기")
+                                    Text("common.more")
                                         .font(AppTheme.Fonts.captionSmall)
-                                        .fontWeight(.medium)
                                         .foregroundColor(AppTheme.text)
                                 }
                             }
@@ -161,13 +159,12 @@ private struct StatCell: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-            Text(label)
+                Text(LocalizedStringKey(label))
                 .font(AppTheme.Fonts.captionSmall)
                 .foregroundColor(AppTheme.textTertiary)
             HStack(alignment: .firstTextBaseline, spacing: 2) {
                 Text(value)
                     .font(AppTheme.Fonts.metricSmall)
-                    .fontWeight(.bold)
                     .foregroundColor(AppTheme.primary)
                 if let unit = unit {
                     Text(unit)

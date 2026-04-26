@@ -3,10 +3,10 @@ import AuthenticationServices
 
 // MARK: - Screen Container
 public struct ScreenContainer<Content: View>: View {
-    public var title: String?
+    public var title: LocalizedStringKey?
     public let content: Content
 
-    public init(title: String? = nil, @ViewBuilder content: () -> Content) {
+    public init(title: LocalizedStringKey? = nil, @ViewBuilder content: () -> Content) {
         self.title = title
         self.content = content()
     }
@@ -37,7 +37,6 @@ public struct TopAppBar: View {
         HStack {
             Text("RunLinker")
                 .font(AppTheme.Fonts.heading)
-                .fontWeight(.black)
                 .foregroundColor(AppTheme.primary)
                 .tracking(-1)
             Spacer()
@@ -71,13 +70,13 @@ public struct IconButton: View {
 
 // MARK: - Hero CTA Card (Stitch: kinetic-gradient bg, Lime button)
 public struct HeroCTACard: View {
-    public let title: String
-    public let buttonTitle: String
+    public let title: LocalizedStringKey
+    public let buttonTitle: LocalizedStringKey
     public let buttonIcon: String
     public let action: () -> Void
     
-    public init(title: String = "함께 달릴 준비가\n되었나요?",
-                buttonTitle: String = "같이 달리기 시작",
+    public init(title: LocalizedStringKey = "home.hero.title",
+                buttonTitle: LocalizedStringKey = "home.hero.button",
                 buttonIcon: String = "bolt.fill",
                 action: @escaping () -> Void) {
         self.title = title
@@ -91,7 +90,6 @@ public struct HeroCTACard: View {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.xxl) {
                 Text(title)
                     .font(AppTheme.Fonts.heading)
-                    .fontWeight(.heavy)
                     .foregroundColor(.white)
                     .lineSpacing(4)
                 
@@ -99,7 +97,6 @@ public struct HeroCTACard: View {
                     HStack(spacing: AppTheme.Spacing.sm) {
                         Text(buttonTitle)
                             .font(AppTheme.Fonts.subheadline)
-                            .fontWeight(.bold)
                         Image(systemName: buttonIcon)
                             .font(.system(size: 16, weight: .bold))
                     }
@@ -128,7 +125,7 @@ public struct HeroCTACard: View {
 // MARK: - Quick Action Button (Stitch: bg-surface-container-low, rounded-lg, py-4)
 public struct QuickActionButton: View {
     public let icon: String
-    public let title: String
+    public let title: LocalizedStringKey
     public let action: () -> Void
     
     public var body: some View {
@@ -139,7 +136,6 @@ public struct QuickActionButton: View {
                     .foregroundColor(AppTheme.primary)
                 Text(title)
                     .font(AppTheme.Fonts.subheadline)
-                    .fontWeight(.bold)
                     .foregroundColor(AppTheme.onPrimaryFixed)
             }
             .frame(maxWidth: .infinity)
@@ -152,12 +148,12 @@ public struct QuickActionButton: View {
 
 // MARK: - Primary Button (Stitch: gradient bg, rounded-full, h-56px, shadow)
 public struct PrimaryButton: View {
-    public let title: String
+    public let title: LocalizedStringKey
     public let icon: String?
     public let isLoading: Bool
     public let action: () -> Void
     
-    public init(title: String, icon: String? = nil, isLoading: Bool = false, action: @escaping () -> Void) {
+    public init(title: LocalizedStringKey, icon: String? = nil, isLoading: Bool = false, action: @escaping () -> Void) {
         self.title = title
         self.icon = icon
         self.isLoading = isLoading
@@ -173,7 +169,6 @@ public struct PrimaryButton: View {
                 } else {
                     Text(title)
                         .font(AppTheme.Fonts.subheadline)
-                        .fontWeight(.bold)
                     if let icon = icon {
                         Image(systemName: icon)
                             .font(.system(size: 16, weight: .bold))
@@ -193,14 +188,13 @@ public struct PrimaryButton: View {
 
 // MARK: - Secondary Button (Stitch: Lime bg, rounded-full)
 public struct SecondaryButton: View {
-    public let title: String
+    public let title: LocalizedStringKey
     public let action: () -> Void
     
     public var body: some View {
         Button(action: action) {
             Text(title)
                 .font(AppTheme.Fonts.subheadline)
-                .fontWeight(.bold)
                 .foregroundColor(AppTheme.onSecondaryContainer)
                 .frame(maxWidth: .infinity)
                 .frame(height: 56)
@@ -276,13 +270,13 @@ public struct StatChip: View {
             Spacer()
             
             VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text(title.uppercased())
+                Text(LocalizedStringKey(title))
                     .font(AppTheme.Fonts.captionSmall)
                     .foregroundColor(titleColor)
                     .tracking(0.8)
+                    .textCase(.uppercase)
                 Text(value)
                     .font(AppTheme.Fonts.metricMedium)
-                    .fontWeight(.bold)
                     .foregroundColor(valueColor)
             }
         }
@@ -296,11 +290,11 @@ public struct StatChip: View {
 
 // MARK: - Section Header (Stitch: font-headline font-bold text-xl, optional trailing button)
 public struct SectionHeader: View {
-    public let title: String
-    public let trailing: String?
+    public let title: LocalizedStringKey
+    public let trailing: LocalizedStringKey?
     public let action: (() -> Void)?
     
-    public init(_ title: String, trailing: String? = nil, action: (() -> Void)? = nil) {
+    public init(_ title: LocalizedStringKey, trailing: LocalizedStringKey? = nil, action: (() -> Void)? = nil) {
         self.title = title
         self.trailing = trailing
         self.action = action
@@ -310,14 +304,14 @@ public struct SectionHeader: View {
         HStack {
             Text(title)
                 .font(AppTheme.Fonts.headingSmall)
-                .fontWeight(.bold)
                 .foregroundColor(AppTheme.text)
             Spacer()
             if let trailing = trailing, let action = action {
-                Button(trailing, action: action)
-                    .font(AppTheme.Fonts.bodyMedium)
-                    .fontWeight(.bold)
-                    .foregroundColor(AppTheme.primary)
+                Button(action: action) {
+                    Text(trailing)
+                        .font(AppTheme.Fonts.bodyMedium)
+                        .foregroundColor(AppTheme.primary)
+                }
             }
         }
     }
@@ -326,12 +320,12 @@ public struct SectionHeader: View {
 // MARK: - Settings Row
 public struct SettingsRow: View {
     public let icon: String
-    public let title: String
-    public let subtitle: String?
+    public let title: LocalizedStringKey
+    public let subtitle: LocalizedStringKey?
     public let showChevron: Bool
     public let action: () -> Void
     
-    public init(icon: String, title: String, subtitle: String? = nil, showChevron: Bool = true, action: @escaping () -> Void = {}) {
+    public init(icon: String, title: LocalizedStringKey, subtitle: LocalizedStringKey? = nil, showChevron: Bool = true, action: @escaping () -> Void = {}) {
         self.icon = icon
         self.title = title
         self.subtitle = subtitle
@@ -374,11 +368,11 @@ public struct SettingsRow: View {
 // MARK: - Settings Toggle Row
 public struct SettingsToggleRow: View {
     public let icon: String
-    public let title: String
-    public let subtitle: String?
+    public let title: LocalizedStringKey
+    public let subtitle: LocalizedStringKey?
     @Binding public var isOn: Bool
     
-    public init(icon: String, title: String, subtitle: String? = nil, isOn: Binding<Bool>) {
+    public init(icon: String, title: LocalizedStringKey, subtitle: LocalizedStringKey? = nil, isOn: Binding<Bool>) {
         self.icon = icon
         self.title = title
         self.subtitle = subtitle
@@ -428,7 +422,7 @@ public struct GoogleSignInButton: View {
                     .font(.system(size: 20))
                     .foregroundColor(.red)
                 
-                Text("Google로 계속하기")
+                Text("auth.google.continue")
                     .font(AppTheme.Fonts.subheadline)
                     .foregroundColor(AppTheme.text)
             }
@@ -467,9 +461,9 @@ public struct AppleSignInButton: View {
 
 // MARK: - Divider with Text
 public struct DividerWithText: View {
-    let text: String
+    let text: LocalizedStringKey
     
-    public init(_ text: String) {
+    public init(_ text: LocalizedStringKey) {
         self.text = text
     }
     
@@ -491,7 +485,7 @@ public struct DividerWithText: View {
 
 // MARK: - Themed Text Field (Stitch: bg-surface-container, no border, on focus: primary bottom-bar)
 public struct ThemedTextField: View {
-    let placeholder: String
+    let placeholder: LocalizedStringKey
     @Binding var text: String
     var isSecure: Bool = false
     var keyboardType: UIKeyboardType = .default
@@ -516,10 +510,10 @@ public struct ThemedTextField: View {
 
 // MARK: - Fitness Chip (Stitch: pill-shaped, secondary-container bg, label-md font)
 public struct FitnessChip: View {
-    let label: String
+    let label: LocalizedStringKey
     let color: Color
     
-    public init(_ label: String, color: Color? = nil) {
+    public init(_ label: LocalizedStringKey, color: Color? = nil) {
         self.label = label
         self.color = color ?? AppTheme.secondaryContainer
     }
@@ -527,7 +521,6 @@ public struct FitnessChip: View {
     public var body: some View {
         Text(label)
             .font(AppTheme.Fonts.caption)
-            .fontWeight(.medium)
             .foregroundColor(AppTheme.onSecondaryContainer)
             .padding(.horizontal, AppTheme.Spacing.md)
             .padding(.vertical, AppTheme.Spacing.xs)
@@ -538,11 +531,11 @@ public struct FitnessChip: View {
 
 // MARK: - Filter Chip (Stitch: horizontal scrollable filter chips)
 public struct FilterChip: View {
-    let label: String
+    let label: LocalizedStringKey
     let isSelected: Bool
     let action: () -> Void
     
-    public init(_ label: String, isSelected: Bool = false, action: @escaping () -> Void) {
+    public init(_ label: LocalizedStringKey, isSelected: Bool = false, action: @escaping () -> Void) {
         self.label = label
         self.isSelected = isSelected
         self.action = action
@@ -552,7 +545,6 @@ public struct FilterChip: View {
         Button(action: action) {
             Text(label)
                 .font(AppTheme.Fonts.caption)
-                .fontWeight(.semibold)
                 .foregroundColor(isSelected ? .white : AppTheme.textSecondary)
                 .padding(.horizontal, AppTheme.Spacing.lg)
                 .padding(.vertical, AppTheme.Spacing.sm)
@@ -592,7 +584,6 @@ public struct PartnerAvatar: View {
             }
             Text(name)
                 .font(AppTheme.Fonts.captionSmall)
-                .fontWeight(.medium)
                 .foregroundColor(AppTheme.text)
         }
         .opacity(isActive ? 1.0 : 0.8)
@@ -672,7 +663,6 @@ public struct SyncBar: View {
                 Spacer()
                 Text("\(score)%")
                     .font(AppTheme.Fonts.label)
-                    .fontWeight(.bold)
                     .foregroundColor(score >= 80 ? AppTheme.secondary : AppTheme.primary)
             }
             

@@ -18,15 +18,21 @@ class AuthViewModel: ObservableObject {
     
     @Published var isLoading: Bool = false
     @Published var errorMessage: String? = nil
+    @Published var profileSyncWarningMessage: String? = nil
     @Published var showSignUp: Bool = false
-    @Published var displayName: String = Auth.auth().currentUser?.displayName ?? ""
-    @Published var email: String = Auth.auth().currentUser?.email ?? ""
+    @Published var displayName: String = ""
+    @Published var email: String = ""
     
     private var currentNonce: String?
+    private var pendingProfileSync: AuthenticatedUserProfile?
+    private let authService: AuthServiceProtocol
     private let userRepository: UserRepositoryProtocol
 
-    init(userRepository: UserRepositoryProtocol? = nil) {
+    init(authService: AuthServiceProtocol? = nil, userRepository: UserRepositoryProtocol? = nil) {
+        self.authService = authService ?? FirebaseAuthService()
         self.userRepository = userRepository ?? FirebaseUserRepository()
+        syncCurrentUser()
+        RunLinkerLogger.info("AuthViewModel initialized. hasSeenOnboarding=\(hasSeenOnboarding) isAuthenticated=\(isAuthenticated) currentUser=\(self.authService.currentUser?.id ?? "<nil>")")
     }
     
     func completeOnboarding() {
@@ -40,16 +46,21 @@ class AuthViewModel: ObservableObject {
         let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard !trimmedEmail.isEmpty, !password.isEmpty else {
-            errorMessage = "이메일과 비밀번호를 입력해주세요."
+            errorMessage = String(localized: "auth.error.email_password_required")
             return
         }
         
         isLoading = true
         errorMessage = nil
+        RunLinkerLogger.info("Login flow started. email=\(RunLinkerLogger.maskedEmail(trimmedEmail))")
         
         do {
-            let _ = try await Auth.auth().signIn(withEmail: trimmedEmail, password: password)
-            completeAuthentication()
+            let user = try await authService.signIn(email: trimmedEmail, password: password)
+            let profile = makeAuthenticatedUserProfile(
+                from: user,
+                authProvider: .email
+            )
+            await completeAuthenticationAfterProfileSyncAttempt(profile)
         } catch {
             errorMessage = userFacingMessage(for: error)
             isLoading = false
@@ -62,42 +73,43 @@ class AuthViewModel: ObservableObject {
         let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
         
         guard !trimmedName.isEmpty, !trimmedEmail.isEmpty, !password.isEmpty, !confirmPassword.isEmpty else {
-            errorMessage = "모든 필드를 입력해주세요."
+            errorMessage = String(localized: "auth.error.all_fields_required")
             return
         }
         
         guard isValidEmail(trimmedEmail) else {
-            errorMessage = "올바른 이메일 형식을 입력해주세요."
+            errorMessage = String(localized: "auth.error.invalid_email_format")
             return
         }
         
         guard password.count >= 6 else {
-            errorMessage = "비밀번호는 6자 이상이어야 합니다."
+            errorMessage = String(localized: "auth.error.password_min_length")
             return
         }
         
         guard password == confirmPassword else {
-            errorMessage = "비밀번호 확인이 일치하지 않습니다."
+            errorMessage = String(localized: "auth.error.password_mismatch")
             return
         }
         
         isLoading = true
         errorMessage = nil
+        RunLinkerLogger.info("Sign-up flow started. email=\(RunLinkerLogger.maskedEmail(trimmedEmail)) displayName=\(trimmedName)")
         
         do {
-            let result = try await Auth.auth().createUser(withEmail: trimmedEmail, password: password)
-            let changeRequest = result.user.createProfileChangeRequest()
-            changeRequest.displayName = trimmedName
-            try await changeRequest.commitChanges()
+            let user = try await authService.createUser(
+                email: trimmedEmail,
+                password: password,
+                displayName: trimmedName
+            )
             let profile = makeAuthenticatedUserProfile(
-                from: result.user,
+                from: user,
                 authProvider: .email,
                 displayNameOverride: trimmedName
             )
-            try await userRepository.upsertAuthenticatedUser(profile)
-            
-            completeAuthentication()
+            await completeAuthenticationAfterProfileSyncAttempt(profile)
         } catch {
+            RunLinkerLogger.error("Sign-up flow failed before app entry.", error: error)
             failAuthenticationFlow(with: error)
         }
     }
@@ -108,7 +120,7 @@ class AuthViewModel: ObservableObject {
         errorMessage = nil
         
         guard let clientID = googleClientID else {
-            errorMessage = "Google 로그인 설정이 누락되었습니다. GoogleService-Info.plist와 URL Scheme를 확인해주세요."
+            errorMessage = String(localized: "auth.error.google_config_missing")
             isLoading = false
             return
         }
@@ -116,7 +128,7 @@ class AuthViewModel: ObservableObject {
         GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
         
         guard let rootViewController = rootViewController else {
-            errorMessage = "Google 로그인 화면을 열 수 없습니다."
+            errorMessage = String(localized: "auth.error.google_present_failed")
             isLoading = false
             return
         }
@@ -124,25 +136,21 @@ class AuthViewModel: ObservableObject {
         do {
             let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: rootViewController)
             guard let idToken = result.user.idToken?.tokenString else {
-                errorMessage = "Google 인증 토큰을 가져올 수 없습니다."
+                errorMessage = String(localized: "auth.error.google_token_missing")
                 isLoading = false
                 return
             }
             
-            let credential = GoogleAuthProvider.credential(
-                withIDToken: idToken,
+            let user = try await authService.signInWithGoogle(
+                idToken: idToken,
                 accessToken: result.user.accessToken.tokenString
             )
-            
-            let authResult = try await Auth.auth().signIn(with: credential)
             let profile = makeAuthenticatedUserProfile(
-                from: authResult.user,
+                from: user,
                 authProvider: .google,
                 displayNameOverride: result.user.profile?.name
             )
-            try await userRepository.upsertAuthenticatedUser(profile)
-            
-            completeAuthentication()
+            await completeAuthenticationAfterProfileSyncAttempt(profile)
         } catch {
             failAuthenticationFlow(with: error)
         }
@@ -170,44 +178,40 @@ class AuthViewModel: ObservableObject {
         switch result {
         case .success(let authorization):
             guard let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential else {
-                errorMessage = "Apple 인증 정보를 읽지 못했습니다."
+                errorMessage = String(localized: "auth.error.apple_credential_unreadable")
                 isLoading = false
                 return
             }
             
             guard let nonce = currentNonce else {
-                errorMessage = "Apple 로그인 요청 상태가 유실되었습니다. 다시 시도해주세요."
+                errorMessage = String(localized: "auth.error.apple_nonce_missing")
                 isLoading = false
                 return
             }
             
             guard let appleIDToken = appleIDCredential.identityToken,
                   let idTokenString = String(data: appleIDToken, encoding: .utf8) else {
-                errorMessage = "Apple 인증 토큰을 가져오지 못했습니다."
+                errorMessage = String(localized: "auth.error.apple_token_missing")
                 isLoading = false
                 return
             }
             
             do {
-                let credential = OAuthProvider.appleCredential(
-                    withIDToken: idTokenString,
+                let user = try await authService.signInWithApple(
+                    idToken: idTokenString,
                     rawNonce: nonce,
                     fullName: appleIDCredential.fullName
                 )
-                
-                let authResult = try await Auth.auth().signIn(with: credential)
                 let fullName = appleIDCredential.fullName
                 let appleDisplayName = [fullName?.givenName, fullName?.familyName]
                     .compactMap { $0 }
                     .joined(separator: " ")
                 let profile = makeAuthenticatedUserProfile(
-                    from: authResult.user,
+                    from: user,
                     authProvider: .apple,
                     displayNameOverride: appleDisplayName.isEmpty ? nil : appleDisplayName
                 )
-                try await userRepository.upsertAuthenticatedUser(profile)
-                
-                completeAuthentication()
+                await completeAuthenticationAfterProfileSyncAttempt(profile)
             } catch {
                 failAuthenticationFlow(with: error)
             }
@@ -226,7 +230,7 @@ class AuthViewModel: ObservableObject {
     // MARK: - Logout
     func logout() {
         do {
-            try Auth.auth().signOut()
+            try authService.signOut()
             GIDSignIn.sharedInstance.signOut()
         } catch {
             print("Sign out error: \(error)")
@@ -237,13 +241,59 @@ class AuthViewModel: ObservableObject {
             showSignUp = false
             displayName = ""
             email = ""
+            profileSyncWarningMessage = nil
+            pendingProfileSync = nil
+        }
+    }
+
+    func retryProfileSync() async {
+        guard let profile = pendingProfileSync else {
+            RunLinkerLogger.info("Profile sync retry skipped. No pending profile.")
+            profileSyncWarningMessage = nil
+            return
+        }
+
+        do {
+            RunLinkerLogger.info("Profile sync retry started. uid=\(profile.id)")
+            try await userRepository.upsertAuthenticatedUser(profile)
+            pendingProfileSync = nil
+            profileSyncWarningMessage = nil
+            RunLinkerLogger.info("Profile sync retry succeeded. uid=\(profile.id)")
+        } catch {
+            RunLinkerLogger.error("Profile sync retry failed. uid=\(profile.id)", error: error)
+            profileSyncWarningMessage = userFacingRepositoryMessage(for: error)
+        }
+    }
+
+    func syncCurrentUserProfileToFirestore() async {
+        guard let user = authService.currentUser else {
+            RunLinkerLogger.error("Manual profile sync skipped. Firebase Auth currentUser is nil.")
+            profileSyncWarningMessage = String(localized: "auth.error.user_not_found")
+            return
+        }
+
+        let profile = makeAuthenticatedUserProfile(
+            from: user,
+            authProvider: .email
+        )
+
+        do {
+            RunLinkerLogger.info("Manual profile sync started. uid=\(profile.id)")
+            try await userRepository.upsertAuthenticatedUser(profile)
+            pendingProfileSync = nil
+            profileSyncWarningMessage = nil
+            RunLinkerLogger.info("Manual profile sync succeeded. uid=\(profile.id)")
+        } catch {
+            pendingProfileSync = profile
+            profileSyncWarningMessage = userFacingRepositoryMessage(for: error)
+            RunLinkerLogger.error("Manual profile sync failed. uid=\(profile.id)", error: error)
         }
     }
     
     // MARK: - Restore Previous Sign-In
     func restorePreviousSignIn() {
         syncCurrentUser()
-        isAuthenticated = Auth.auth().currentUser != nil
+        isAuthenticated = authService.currentUser != nil
     }
     
     private func completeAuthentication() {
@@ -254,15 +304,37 @@ class AuthViewModel: ObservableObject {
             isLoading = false
         }
     }
+
+    private func completeAuthenticationAfterProfileSyncAttempt(_ profile: AuthenticatedUserProfile) async {
+        do {
+            print("🔐 [Auth] Profile sync starting — uid=\(profile.id)")
+            RunLinkerLogger.info("Profile sync started after auth success. uid=\(profile.id)")
+            try await userRepository.upsertAuthenticatedUser(profile)
+            pendingProfileSync = nil
+            profileSyncWarningMessage = nil
+            print("✅ [Auth] Profile sync succeeded — uid=\(profile.id)")
+            RunLinkerLogger.info("Profile sync succeeded after auth success. uid=\(profile.id)")
+        } catch {
+            print("❌ [Auth] Profile sync FAILED — uid=\(profile.id) error=\(error)")
+            print("❌ [Auth] Error details: \(String(describing: error))")
+            RunLinkerLogger.error("Profile sync failed after auth success. App entry will continue. uid=\(profile.id)", error: error)
+            pendingProfileSync = profile
+            profileSyncWarningMessage = userFacingRepositoryMessage(for: error)
+        }
+
+        print("🔐 [Auth] Auth flow completed. Entering app. uid=\(profile.id) syncFailed=\(pendingProfileSync != nil)")
+        RunLinkerLogger.info("Auth flow completed. App entry allowed. uid=\(profile.id) profileSyncPending=\(pendingProfileSync != nil)")
+        completeAuthentication()
+    }
     
     private func syncCurrentUser() {
-        let user = Auth.auth().currentUser
+        let user = authService.currentUser
         displayName = user?.displayName ?? ""
         email = user?.email ?? ""
     }
     
     private func failAuthenticationFlow(with error: Error) {
-        try? Auth.auth().signOut()
+        try? authService.signOut()
         GIDSignIn.sharedInstance.signOut()
         syncCurrentUser()
         errorMessage = userFacingMessage(for: error)
@@ -271,17 +343,18 @@ class AuthViewModel: ObservableObject {
     }
     
     private func makeAuthenticatedUserProfile(
-        from user: FirebaseAuth.User,
+        from user: AuthServiceUser,
         authProvider: AuthenticationProvider,
         displayNameOverride: String? = nil
     ) -> AuthenticatedUserProfile {
-        let resolvedDisplayName = displayNameOverride ?? user.displayName ?? user.email?.components(separatedBy: "@").first ?? "Runner"
+        let resolvedDisplayName = displayNameOverride ?? user.displayName.ifNotEmpty ?? user.email.components(separatedBy: "@").first ?? "Runner"
         return AuthenticatedUserProfile(
-            id: user.uid,
+            id: user.id,
             authProvider: authProvider,
-            email: user.email ?? "",
+            email: user.email,
             displayName: resolvedDisplayName,
-            photoURL: user.photoURL
+            photoURL: user.photoURL,
+            createdAt: user.createdAt
         )
     }
     
@@ -309,57 +382,81 @@ class AuthViewModel: ObservableObject {
         if let authorizationError = error as? ASAuthorizationError {
             switch authorizationError.code {
             case .canceled:
-                return "로그인이 취소되었습니다."
+                return String(localized: "auth.error.login_cancelled")
             case .failed:
-                return "Apple 로그인에 실패했습니다. 잠시 후 다시 시도해주세요."
+                return String(localized: "auth.error.apple_failed")
             case .invalidResponse:
-                return "Apple 인증 응답이 올바르지 않습니다."
+                return String(localized: "auth.error.apple_invalid_response")
             case .notHandled:
-                return "Apple 로그인 요청을 처리하지 못했습니다."
+                return String(localized: "auth.error.apple_not_handled")
             case .notInteractive:
-                return "현재 상태에서는 Apple 로그인을 진행할 수 없습니다."
+                return String(localized: "auth.error.apple_not_interactive")
             case .matchedExcludedCredential:
-                return "이 기기에서 사용할 수 없는 Apple 자격 증명입니다."
+                return String(localized: "auth.error.apple_excluded_credential")
             case .credentialImport, .credentialExport:
-                return "Apple 자격 증명 처리 중 오류가 발생했습니다."
+                return String(localized: "auth.error.apple_credential_processing")
             case .preferSignInWithApple:
-                return "이 계정은 Apple 로그인을 사용하는 것이 권장됩니다."
+                return String(localized: "auth.error.apple_preferred")
             case .deviceNotConfiguredForPasskeyCreation:
-                return "이 기기에서는 필요한 Apple 인증 설정이 완료되지 않았습니다."
+                return String(localized: "auth.error.apple_device_not_configured")
             case .unknown:
-                return "Apple 로그인 중 알 수 없는 오류가 발생했습니다."
+                return String(localized: "auth.error.apple_unknown")
             @unknown default:
-                return "Apple 로그인 중 오류가 발생했습니다."
+                return String(localized: "auth.error.apple_generic")
             }
         }
         
         let nsError = error as NSError
         guard nsError.domain == AuthErrorDomain else {
-            return error.localizedDescription
+            return userFacingRepositoryMessage(for: error)
         }
         
         switch nsError.code {
         case AuthErrorCode.invalidEmail.rawValue:
-            return "이메일 형식이 올바르지 않습니다."
+            return String(localized: "auth.error.invalid_email")
         case AuthErrorCode.wrongPassword.rawValue:
-            return "비밀번호가 올바르지 않습니다."
+            return String(localized: "auth.error.wrong_password")
         case AuthErrorCode.userNotFound.rawValue:
-            return "가입되지 않은 이메일입니다."
+            return String(localized: "auth.error.user_not_found")
         case AuthErrorCode.emailAlreadyInUse.rawValue:
-            return "이미 가입된 이메일입니다."
+            return String(localized: "auth.error.email_already_in_use")
         case AuthErrorCode.weakPassword.rawValue:
-            return "비밀번호 강도가 너무 약합니다."
+            return String(localized: "auth.error.weak_password")
         case AuthErrorCode.networkError.rawValue:
-            return "네트워크 상태를 확인한 뒤 다시 시도해주세요."
+            return String(localized: "auth.error.network")
         case AuthErrorCode.credentialAlreadyInUse.rawValue:
-            return "이미 다른 계정에 연결된 로그인 수단입니다."
+            return String(localized: "auth.error.credential_already_in_use")
         case AuthErrorCode.accountExistsWithDifferentCredential.rawValue:
-            return "동일한 이메일로 다른 로그인 방식이 이미 등록되어 있습니다."
+            return String(localized: "auth.error.account_exists_different_credential")
         case AuthErrorCode.invalidCredential.rawValue:
-            return "인증 정보가 유효하지 않습니다. 다시 시도해주세요."
+            return String(localized: "auth.error.invalid_credential")
         default:
             return error.localizedDescription
         }
+    }
+
+    private func userFacingRepositoryMessage(for error: Error) -> String {
+        if error is FirestoreWriteTimeoutError {
+            return String(localized: "auth.error.firestore_write_timeout")
+        }
+
+        let message = error.localizedDescription
+        let lowercasedMessage = message.lowercased()
+
+        if lowercasedMessage.contains("database (default) does not exist") {
+            return String(localized: "auth.error.firestore_database_missing")
+        }
+
+        if lowercasedMessage.contains("missing or insufficient permissions")
+            || lowercasedMessage.contains("permission-denied") {
+            return String(localized: "auth.error.firestore_permission_denied")
+        }
+
+        if lowercasedMessage.contains("app check") {
+            return String(localized: "auth.error.app_check_failed")
+        }
+
+        return message
     }
     
     private func randomNonceString(length: Int = 32) -> String {
@@ -389,5 +486,11 @@ class AuthViewModel: ObservableObject {
         let inputData = Data(input.utf8)
         let hashedData = SHA256.hash(data: inputData)
         return hashedData.compactMap { String(format: "%02x", $0) }.joined()
+    }
+}
+
+private extension String {
+    var ifNotEmpty: String? {
+        isEmpty ? nil : self
     }
 }

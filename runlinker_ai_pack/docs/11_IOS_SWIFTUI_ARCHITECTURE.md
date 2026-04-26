@@ -29,6 +29,9 @@ run-linker/                          ← Xcode 프로젝트 루트
         UIComponents.swift           ← 공용 SwiftUI 컴포넌트 22개
       Models/
         Models.swift                 ← User, RunSession, MatchRequest, enum
+      Services/
+        AuthServiceProtocol.swift    ← Firebase Auth 인증 계약
+        FirebaseAuthService.swift    ← Email/Google/Apple Firebase Auth 구현체
       Repositories/
         SessionRepositoryProtocol.swift   ← 데이터 계층 인터페이스
         UserRepositoryProtocol.swift      ← 유저/프로필 저장 계약
@@ -57,6 +60,8 @@ run-linker/                          ← Xcode 프로젝트 루트
         SessionFlowView.swift        ← Match Setup → Live Run (WIP / 플레이스홀더)
 
     Assets.xcassets/
+    Resources/
+      Localizable.xcstrings          ← ko/en 문자열 카탈로그
     GoogleService-Info.plist
     run-linker.entitlements
 ```
@@ -68,13 +73,16 @@ run-linker/                          ← Xcode 프로젝트 루트
 | 레이어 | 파일 위치 | 책임 |
 |--------|-----------|------|
 | **View** | `Features/*/View.swift` | UI 렌더링만. Firebase·비즈니스 로직 금지 |
-| **ViewModel** | `Features/*/ViewModel.swift` | 화면 상태 보유, repository 호출, async 작업 |
+| **ViewModel** | `Features/*/ViewModel.swift` | 화면 상태 보유, service/repository 조합, async 작업 |
+| **Service Protocol** | `Core/Services/*Protocol.swift` | 외부 SDK·유스케이스 계약 정의 |
+| **Firebase Service** | `Core/Services/Firebase*.swift` | Firebase Auth, OAuth credential 같은 SDK 작업 구현 |
 | **Repository Protocol** | `Core/Repositories/*Protocol.swift` | 플랫폼 중립 인터페이스 정의 |
 | **Mock** | `Core/Repositories/Mock*.swift` | 개발·테스트용 구현체 |
-| **Firebase** | `Core/Repositories/Firebase*.swift` | 실제 Firestore/RTDB 구현체 |
+| **Firebase Repository** | `Core/Repositories/Firebase*.swift` | Firestore/RTDB 컬렉션·문서 저장 구현 |
 | **Models** | `Core/Models/Models.swift` | 순수 Swift 도메인 타입 |
 | **Theme** | `Core/Theme/Theme.swift` | Stitch 디자인 토큰 (색상·폰트·간격) |
 | **Components** | `Core/Components/UIComponents.swift` | 재사용 SwiftUI 뷰 |
+| **Resources** | `Resources/Localizable.xcstrings` | ko/en 다국어 문자열 |
 
 ---
 
@@ -188,6 +196,9 @@ PairViewPlaceholder
 - View 안에 Firebase 로직 직접 작성 금지
 - Firestore document key를 View에서 직접 다루지 말 것
 - ViewModel에서 Firestore 컬렉션/문서 구조를 직접 만들지 말 것. Repository로 분리할 것
+- ViewModel에서 Firebase Auth SDK 호출을 직접 작성하지 말 것. AuthService로 분리할 것
+- Firestore write completion을 무기한 기다리지 말 것. 사용자 플로우에는 명시적 timeout/error 상태를 둘 것
+- 사용자 노출 문자열은 `Localizable.xcstrings` 키를 먼저 추가하고 사용한다
 - 큰 singleton 남발 금지
 - `AppTheme.*`을 public init의 default argument 값으로 사용 금지 (internal 타입이므로 컴파일 에러 발생)
 - `@MainActor` 클래스 init에서 `@MainActor` 타입 직접 인스턴스화 금지 (optional + nil coalescing 패턴 사용)
@@ -213,6 +224,7 @@ PairViewPlaceholder
 구현 기준:
 - 화면은 `Features/*/*View.swift`에 둔다.
 - 화면 상태와 사용자 액션 처리는 `Features/*/*ViewModel.swift`에 둔다.
-- Firebase Auth, Firestore, Storage, Cloud Functions 같은 외부 SDK 세부 구현은 `Core/Repositories/Firebase*.swift` 또는 별도 Service로 둔다.
-- ViewModel은 Repository protocol에 의존하고, Firestore 컬렉션명/문서 키/필드명은 알지 않는다.
+- Firebase Auth, Google/Apple credential, App Check 같은 인증 SDK 세부 구현은 `Core/Services/Firebase*.swift`에 둔다.
+- Firestore, Storage, Cloud Functions 같은 데이터 저장/조회 구현은 `Core/Repositories/Firebase*.swift`에 둔다.
+- ViewModel은 Service/Repository protocol에 의존하고, Firestore 컬렉션명/문서 키/필드명은 알지 않는다.
 - 데이터 모델이나 enum 값이 문서와 다르면 코드보다 문서를 먼저 갱신하고, 그 다음 구현한다.

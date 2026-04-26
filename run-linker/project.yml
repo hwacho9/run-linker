@@ -23,6 +23,7 @@ targets:
       - Features
     resources:
       - Assets.xcassets
+      - Resources
       - GoogleService-Info.plist
     info:
       path: App/Info.plist

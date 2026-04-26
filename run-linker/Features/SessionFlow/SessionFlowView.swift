@@ -16,18 +16,18 @@ struct MatchSetupView: View {
     @StateObject private var viewModel = SessionFlowViewModel()
     
     var body: some View {
-        ScreenContainer(title: "Setup Run") {
+        ScreenContainer(title: "session.setup.title") {
             VStack {
-                Picker("Mode", selection: $viewModel.selectedMode) {
-                    Text("Friend").tag(RunMode.friend)
-                    Text("Random").tag(RunMode.random)
-                    Text("Solo").tag(RunMode.solo)
+                Picker("session.mode.picker", selection: $viewModel.selectedMode) {
+                    Text("session.mode.friend").tag(RunMode.friend)
+                    Text("session.mode.random").tag(RunMode.random)
+                    Text("session.mode.solo").tag(RunMode.solo)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding()
                 
                 AppCard {
-                    Text("Target Distance: \(viewModel.targetDistance, specifier: "%.1f") km")
+                    Text(String(format: String(localized: "session.target_distance_format"), viewModel.targetDistance))
                         .font(AppTheme.Fonts.subheadline)
                     Slider(value: $viewModel.targetDistance, in: 1...42, step: 0.5)
                 }
@@ -35,9 +35,9 @@ struct MatchSetupView: View {
                 
                 if viewModel.selectedMode == .random {
                     AppCard {
-                        Toggle("Hide Exact Location", isOn: $viewModel.privacyMode)
+                        Toggle("session.hide_exact_location", isOn: $viewModel.privacyMode)
                             .tint(AppTheme.primary)
-                        Text("Your exact starting and ending locations will be hidden from random partners.")
+                        Text("session.hide_exact_location.description")
                             .font(AppTheme.Fonts.caption)
                             .foregroundColor(AppTheme.textSecondary)
                     }
@@ -46,7 +46,7 @@ struct MatchSetupView: View {
                 
                 Spacer()
                 
-                PrimaryButton(title: "Find Match", action: {
+                PrimaryButton(title: "session.find_match", action: {
                     // Action transitions to Matching View
                 })
                 .padding()
@@ -63,14 +63,14 @@ struct LiveRunView: View {
         VStack(spacing: 0) {
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Live Run")
+                    Text("session.live.title")
                         .font(AppTheme.Fonts.heading)
-                    Text("Time: 05:22")
+                    Text("session.live.time_sample")
                         .font(AppTheme.Fonts.subheadline)
                         .foregroundColor(AppTheme.primary)
                 }
                 Spacer()
-                Text("Sync: \(viewModel.syncScore)%")
+                Text(String(format: String(localized: "activity.sync_format"), viewModel.syncScore))
                     .font(.headline)
                     .foregroundColor(.green)
             }
@@ -81,19 +81,19 @@ struct LiveRunView: View {
             Rectangle()
                 .fill(Color.orange.opacity(0.2))
                 .frame(height: 100)
-                .overlay(Text("Pair View: Visual progress side-by-side"))
+                .overlay(Text("session.pair_view_placeholder"))
             
             // Split Maps
             HStack(spacing: 0) {
                 Rectangle()
                     .fill(Color.blue.opacity(0.1))
-                    .overlay(Text("My Info"))
+                    .overlay(Text("session.my_info"))
                 Rectangle()
                     .fill(Color.purple.opacity(0.1))
-                    .overlay(Text("Partner Map (Fuzzed)"))
+                    .overlay(Text("session.partner_map_fuzzed"))
             }
             
-            PrimaryButton(title: "Finish Run", action: {})
+            PrimaryButton(title: "session.finish_run", action: {})
                 .padding()
         }
         .background(AppTheme.background.ignoresSafeArea())

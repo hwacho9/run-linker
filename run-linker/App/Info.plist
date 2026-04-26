@@ -33,6 +33,8 @@
 	<string>1</string>
 	<key>GIDClientID</key>
 	<string>58652839887-c81ukfb4e04qsolhabe7rpr16hv2k8j4.apps.googleusercontent.com</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchScreen</key>

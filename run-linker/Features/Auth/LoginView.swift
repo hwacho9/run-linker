@@ -29,13 +29,13 @@ struct LoginView: View {
                         .padding(.top, 20)
                         
                         VStack(spacing: AppTheme.Spacing.sm) {
-                            Text("함께 달릴 준비가\n되셨나요?")
+                            Text("auth.login.title")
                                 .font(AppTheme.Fonts.heading)
                                 .foregroundColor(AppTheme.text)
                                 .multilineTextAlignment(.center)
                                 .fixedSize(horizontal: false, vertical: true)
                             
-                            Text("RunLinker에 다시 오신 것을 환영합니다.\n오늘의 페이스를 찾아보세요.")
+                            Text("auth.login.subtitle")
                                 .font(AppTheme.Fonts.bodySmall)
                                 .foregroundColor(AppTheme.textSecondary)
                                 .multilineTextAlignment(.center)
@@ -57,20 +57,20 @@ struct LoginView: View {
                     .padding(.horizontal, AppTheme.Spacing.xxxl)
                     
                     // ─── Divider ───
-                    DividerWithText("또는 이메일로 로그인")
+                    DividerWithText("auth.login.email_divider")
                         .padding(.horizontal, AppTheme.Spacing.xxxl)
                     
                     // ─── Email / Password Fields ───
                     VStack(spacing: AppTheme.Spacing.md) {
                         ThemedTextField(
-                            placeholder: "이메일",
+                            placeholder: "auth.field.email",
                             text: $email,
                             keyboardType: .emailAddress,
                             autocapitalization: .none
                         )
                         
                         ThemedTextField(
-                            placeholder: "비밀번호",
+                            placeholder: "auth.field.password",
                             text: $password,
                             isSecure: true
                         )
@@ -92,13 +92,13 @@ struct LoginView: View {
                     // ─── Login Button + Forgot Password ───
                     VStack(spacing: AppTheme.Spacing.lg) {
                         PrimaryButton(
-                            title: "로그인",
+                            title: "auth.login.button",
                             isLoading: authVM.isLoading
                         ) {
                             Task { await authVM.login(email: email, password: password) }
                         }
                         
-                        Button("비밀번호를 잊으셨나요?") {}
+                        Button("auth.login.forgot_password") {}
                             .font(AppTheme.Fonts.caption)
                             .foregroundColor(AppTheme.primary)
                     }
@@ -112,10 +112,9 @@ struct LoginView: View {
                         }
                     } label: {
                         HStack(spacing: 4) {
-                            Text("아직 회원이 아니신가요?")
+                            Text("auth.login.no_account")
                                 .foregroundColor(AppTheme.textSecondary)
-                            Text("회원가입")
-                                .fontWeight(.bold)
+                            Text("auth.signup.button")
                                 .foregroundColor(AppTheme.primary)
                         }
                         .font(AppTheme.Fonts.bodySmall)

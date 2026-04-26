@@ -19,11 +19,11 @@ struct MyView: View {
     @State private var showsLogoutConfirmation = false
     
     private var profileName: String {
-        authVM.displayName.isEmpty ? "RunLinker Runner" : authVM.displayName
+        authVM.displayName.isEmpty ? String(localized: "my.profile.default_name") : authVM.displayName
     }
     
     private var profileSubtitle: String {
-        authVM.email.isEmpty ? "함께 달리는 즐거움, RunLinker!" : authVM.email
+        authVM.email.isEmpty ? String(localized: "my.profile.default_subtitle") : authVM.email
     }
     
     private var profileInitials: String {
@@ -43,7 +43,7 @@ struct MyView: View {
         VStack(spacing: 0) {
             // ─── Header ───
             HStack {
-                Text("마이")
+                Text("tab.my")
                     .font(AppTheme.Fonts.heading)
                     .foregroundColor(AppTheme.text)
                 Spacer()
@@ -53,6 +53,14 @@ struct MyView: View {
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: AppTheme.Spacing.xxxl) {
+                    if let warning = authVM.profileSyncWarningMessage {
+                        ProfileSyncWarningCard(message: warning) {
+                            Task {
+                                await authVM.retryProfileSync()
+                            }
+                        }
+                        .padding(.horizontal, AppTheme.Spacing.xxl)
+                    }
                     
                     // ─── Profile Card (Stitch: avatar + name + tagline + Weekly Goal badge) ───
                     HStack(spacing: AppTheme.Spacing.lg) {
@@ -68,7 +76,6 @@ struct MyView: View {
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
                             Text(profileName)
                                 .font(AppTheme.Fonts.titleLarge)
-                                .fontWeight(.bold)
                                 .foregroundColor(AppTheme.text)
                             Text(profileSubtitle)
                                 .font(AppTheme.Fonts.bodySmall)
@@ -78,9 +85,8 @@ struct MyView: View {
                         Spacer()
                         
                         // Weekly Goal badge
-                        Text("Weekly Goal")
+                        Text("my.weekly_goal.badge")
                             .font(AppTheme.Fonts.captionSmall)
-                            .fontWeight(.bold)
                             .foregroundColor(AppTheme.onSecondaryContainer)
                             .padding(.horizontal, AppTheme.Spacing.md)
                             .padding(.vertical, AppTheme.Spacing.xs)
@@ -91,9 +97,8 @@ struct MyView: View {
                     
                     // ─── Weekly Goal Card ───
                     AppCard {
-                        Text("이번 주 목표 20km")
+                        Text("my.weekly_goal.title")
                             .font(AppTheme.Fonts.subheadline)
-                            .fontWeight(.bold)
                             .foregroundColor(AppTheme.text)
                         
                         HStack(alignment: .bottom, spacing: AppTheme.Spacing.lg) {
@@ -102,15 +107,14 @@ struct MyView: View {
                                     VStack(spacing: 0) {
                                         Text("12.4")
                                             .font(AppTheme.Fonts.label)
-                                            .fontWeight(.bold)
                                             .foregroundColor(AppTheme.primary)
-                                        Text("km total")
+                                        Text("my.weekly_goal.total_unit")
                                             .font(.system(size: 8))
                                             .foregroundColor(AppTheme.textTertiary)
                                     }
                                 )
                             
-                            Text("목표까지 7.6km 남았어요!")
+                            Text("my.weekly_goal.remaining")
                                 .font(AppTheme.Fonts.bodySmall)
                                 .foregroundColor(AppTheme.textSecondary)
                         }
@@ -119,57 +123,68 @@ struct MyView: View {
                     
                     // ─── Stats Grid (Stitch: 2x2 grid of stat chips) ───
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: AppTheme.Spacing.lg) {
-                        StatChip(title: "총 누적 거리", value: "524.8km", icon: "point.topleft.down.to.point.bottomright.curvepath", variant: .neutral)
-                        StatChip(title: "러닝 횟수", value: "64회", icon: "figure.run", variant: .neutral)
-                        StatChip(title: "평균 페이스", value: "5'22\"", icon: "timer", variant: .accent)
-                        StatChip(title: "평균 싱크", value: "92%", icon: "link", variant: .accent)
+                        StatChip(title: "my.stat.total_distance", value: "524.8km", icon: "point.topleft.down.to.point.bottomright.curvepath", variant: .neutral)
+                        StatChip(title: "my.stat.run_count", value: "64회", icon: "figure.run", variant: .neutral)
+                        StatChip(title: "my.stat.average_pace", value: "5'22\"", icon: "timer", variant: .accent)
+                        StatChip(title: "my.stat.average_sync", value: "92%", icon: "link", variant: .accent)
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxl)
                     
                     // ─── Privacy & Sharing Section ───
-                    SettingsSection(title: "Privacy & Sharing") {
+                    SettingsSection(title: "my.section.privacy") {
                         SettingsToggleRow(
                             icon: "location.fill",
-                            title: "위치 공유 설정",
-                            subtitle: "러닝 중 친구들에게 내 위치를 노출합니다",
+                            title: "my.setting.location_sharing",
+                            subtitle: "my.setting.location_sharing.subtitle",
                             isOn: $viewModel.locationSharing
                         )
                         SettingsToggleRow(
                             icon: "shuffle",
-                            title: "랜덤 매칭 공개 범위",
-                            subtitle: "함께 달릴 러너를 찾는 범위를 설정합니다",
+                            title: "my.setting.random_visibility",
+                            subtitle: "my.setting.random_visibility.subtitle",
                             isOn: $viewModel.randomMatchPublic
                         )
                         SettingsToggleRow(
                             icon: "doc.text.fill",
-                            title: "러닝 기록 공개 범위",
-                            subtitle: "나의 운동 일지를 볼 수 있는 사람을 선택합니다",
+                            title: "my.setting.records_visibility",
+                            subtitle: "my.setting.records_visibility.subtitle",
                             isOn: $viewModel.recordsPublic
                         )
                         SettingsToggleRow(
                             icon: "eye.slash.fill",
-                            title: "시작/종료 지점 흐리기",
-                            subtitle: "집이나 직장 주소 노출 방지를 위해 가립니다",
+                            title: "my.setting.blur_points",
+                            subtitle: "my.setting.blur_points.subtitle",
                             isOn: $viewModel.blurStartEnd
                         )
                     }
                     
                     // ─── Notifications Section ───
-                    SettingsSection(title: "Notifications") {
-                        SettingsRow(icon: "bell.fill", title: "알림 설정")
-                        SettingsToggleRow(icon: "hands.clap.fill", title: "응원 알림", isOn: $viewModel.cheerNotifications)
-                        SettingsToggleRow(icon: "figure.run", title: "러닝 시작 알림", isOn: $viewModel.runStartNotifications)
-                        SettingsToggleRow(icon: "waveform", title: "음성 기능 설정", isOn: $viewModel.voiceEnabled)
+                    SettingsSection(title: "my.section.notifications") {
+                        SettingsRow(icon: "bell.fill", title: "my.setting.notifications")
+                        SettingsToggleRow(icon: "hands.clap.fill", title: "my.setting.cheer_notifications", isOn: $viewModel.cheerNotifications)
+                        SettingsToggleRow(icon: "figure.run", title: "my.setting.run_start_notifications", isOn: $viewModel.runStartNotifications)
+                        SettingsToggleRow(icon: "waveform", title: "my.setting.voice", isOn: $viewModel.voiceEnabled)
                     }
                     
                     // ─── Safety & Account ───
-                    SettingsSection(title: "Safety & Account") {
-                        SettingsRow(icon: "nosign", title: "차단한 사용자")
-                        SettingsRow(icon: "exclamationmark.shield.fill", title: "신고 내역")
-                        SettingsRow(icon: "person.crop.circle", title: "계정 관리")
+                    SettingsSection(title: "my.section.safety_account") {
+                        #if DEBUG
+                        SettingsRow(
+                            icon: "arrow.triangle.2.circlepath",
+                            title: "Firestore 프로필 저장 테스트",
+                            showChevron: false
+                        ) {
+                            Task {
+                                await authVM.syncCurrentUserProfileToFirestore()
+                            }
+                        }
+                        #endif
+                        SettingsRow(icon: "nosign", title: "my.setting.blocked_users")
+                        SettingsRow(icon: "exclamationmark.shield.fill", title: "my.setting.reports")
+                        SettingsRow(icon: "person.crop.circle", title: "my.setting.account")
                         SettingsRow(
                             icon: "rectangle.portrait.and.arrow.right",
-                            title: "로그아웃",
+                            title: "auth.logout",
                             showChevron: false
                         ) {
                             showsLogoutConfirmation = true
@@ -177,11 +192,11 @@ struct MyView: View {
                     }
                     
                     // ─── Support ───
-                    SettingsSection(title: "Support") {
-                        SettingsRow(icon: "questionmark.circle.fill", title: "도움말")
-                        SettingsRow(icon: "envelope.fill", title: "문의하기")
-                        SettingsRow(icon: "doc.plaintext.fill", title: "서비스 이용약관")
-                        SettingsRow(icon: "hand.raised.fill", title: "개인정보 처리방침")
+                    SettingsSection(title: "my.section.support") {
+                        SettingsRow(icon: "questionmark.circle.fill", title: "my.setting.help")
+                        SettingsRow(icon: "envelope.fill", title: "my.setting.contact")
+                        SettingsRow(icon: "doc.plaintext.fill", title: "my.setting.terms")
+                        SettingsRow(icon: "hand.raised.fill", title: "my.setting.privacy_policy")
                     }
                     .padding(.bottom, AppTheme.Spacing.xxxxl)
                 }
@@ -189,23 +204,54 @@ struct MyView: View {
             }
         }
         .background(AppTheme.background.ignoresSafeArea())
-        .alert("로그아웃", isPresented: $showsLogoutConfirmation) {
-            Button("취소", role: .cancel) {}
-            Button("로그아웃", role: .destructive) {
+        .alert("auth.logout", isPresented: $showsLogoutConfirmation) {
+            Button("common.cancel", role: .cancel) {}
+            Button("auth.logout", role: .destructive) {
                 authVM.logout()
             }
         } message: {
-            Text("현재 계정에서 로그아웃하시겠습니까?")
+            Text("auth.logout.confirm_message")
         }
+    }
+}
+
+private struct ProfileSyncWarningCard: View {
+    let message: String
+    let retry: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
+            HStack(alignment: .top, spacing: AppTheme.Spacing.md) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .foregroundColor(AppTheme.error)
+                Text(message)
+                    .font(AppTheme.Fonts.bodySmall)
+                    .foregroundColor(AppTheme.error)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
+            Button(action: retry) {
+                Text("profile_sync.retry")
+                    .font(AppTheme.Fonts.bodyMedium)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, AppTheme.Spacing.md)
+                    .background(AppTheme.error)
+                    .clipShape(Capsule())
+            }
+        }
+        .padding(AppTheme.Spacing.xl)
+        .background(AppTheme.errorContainer)
+        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.xl))
     }
 }
 
 // MARK: - Settings Section (Stitch: section with headline title, no dividers, spacing-based separation)
 private struct SettingsSection<Content: View>: View {
-    let title: String
+    let title: LocalizedStringKey
     let content: Content
     
-    init(title: String, @ViewBuilder content: () -> Content) {
+    init(title: LocalizedStringKey, @ViewBuilder content: () -> Content) {
         self.title = title
         self.content = content()
     }
@@ -214,7 +260,6 @@ private struct SettingsSection<Content: View>: View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
             Text(title)
                 .font(AppTheme.Fonts.headingSmall)
-                .fontWeight(.bold)
                 .foregroundColor(AppTheme.text)
                 .padding(.bottom, AppTheme.Spacing.sm)
             

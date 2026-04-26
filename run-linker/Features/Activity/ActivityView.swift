@@ -32,11 +32,11 @@ struct ActivityView: View {
     @State private var selectedTab = 0
     
     var body: some View {
-        ScreenContainer(title: "Activity") {
+        ScreenContainer(title: "tab.activity") {
             VStack {
-                Picker("Activity Tab", selection: $selectedTab) {
-                    Text("Session History").tag(0)
-                    Text("My Stats").tag(1)
+                Picker("activity.picker", selection: $selectedTab) {
+                    Text("activity.session_history").tag(0)
+                    Text("activity.my_stats").tag(1)
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
@@ -65,9 +65,9 @@ struct ActivityView: View {
                                     .font(AppTheme.Fonts.caption)
                                 Spacer()
                                 if session.mode == .friend {
-                                    Text("Friend Run").font(AppTheme.Fonts.caption).foregroundColor(AppTheme.primary)
+                                    Text("activity.mode.friend").font(AppTheme.Fonts.caption).foregroundColor(AppTheme.primary)
                                 } else if session.mode == .random {
-                                    Text("Random Match").font(AppTheme.Fonts.caption).foregroundColor(AppTheme.secondary)
+                                    Text("activity.mode.random").font(AppTheme.Fonts.caption).foregroundColor(AppTheme.secondary)
                                 }
                             }
                             
@@ -76,7 +76,7 @@ struct ActivityView: View {
                                     .font(AppTheme.Fonts.heading)
                                 Spacer()
                                 if let sync = session.syncScore {
-                                    Text("Sync: \(sync)%").font(AppTheme.Fonts.subheadline).foregroundColor(AppTheme.primary)
+                                    Text(String(format: String(localized: "activity.sync_format"), sync)).font(AppTheme.Fonts.subheadline).foregroundColor(AppTheme.primary)
                                 }
                             }
                         }
@@ -94,19 +94,19 @@ struct ActivityView: View {
                 if let stats = viewModel.stats {
                     AppCard {
                         HStack {
-                            StatChip(title: "Total Distance", value: String(format: "%.1f km", stats.totalDistance))
-                            StatChip(title: "Avg Pace", value: "\(stats.averagePace / 60):\(String(format: "%02d", stats.averagePace % 60)) /km")
+                            StatChip(title: "activity.stat.total_distance", value: String(format: "%.1f km", stats.totalDistance))
+                            StatChip(title: "activity.stat.avg_pace", value: "\(stats.averagePace / 60):\(String(format: "%02d", stats.averagePace % 60)) /km")
                         }
-                        StatChip(title: "Total Sessions", value: "\(stats.sessionsCount)")
+                        StatChip(title: "activity.stat.total_sessions", value: "\(stats.sessionsCount)")
                     }
                     
                     AppCard {
-                        Text("Weekly Progression")
+                        Text("activity.weekly_progression")
                             .font(AppTheme.Fonts.subheadline)
                         Rectangle()
                             .fill(Color.gray.opacity(0.2))
                             .frame(height: 150)
-                            .overlay(Text("Chart Placeholder"))
+                            .overlay(Text("activity.chart_placeholder"))
                     }
                 } else {
                     ProgressView()

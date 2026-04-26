@@ -15,7 +15,12 @@ class FriendsViewModel: ObservableObject {
         User(id: "6", name: "도윤", level: 9)
     ]
     
-    let filters = ["전체", "지금 가능", "즐겨찾기", "최근 함께 달린"]
+    let filters: [LocalizedStringKey] = [
+        "friends.filter.all",
+        "friends.filter.available",
+        "friends.filter.favorite",
+        "friends.filter.recent"
+    ]
 }
 
 struct FriendsView: View {
@@ -28,14 +33,13 @@ struct FriendsView: View {
                 HStack(spacing: AppTheme.Spacing.md) {
                     Image(systemName: "person.2.fill")
                         .foregroundColor(AppTheme.primary)
-                    Text("Friends")
+                    Text("tab.friends")
                         .font(AppTheme.Fonts.heading)
                         .foregroundColor(AppTheme.text)
                 }
                 Spacer()
-                Button("Add Friend") {}
+                Button("friends.add") {}
                     .font(AppTheme.Fonts.bodyMedium)
-                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .padding(.horizontal, AppTheme.Spacing.xl)
                     .padding(.vertical, AppTheme.Spacing.sm + 2)
@@ -54,7 +58,7 @@ struct FriendsView: View {
                         HStack(spacing: AppTheme.Spacing.md) {
                             Image(systemName: "magnifyingglass")
                                 .foregroundColor(AppTheme.outline)
-                            TextField("친구 이름 검색", text: $viewModel.query)
+                            TextField("friends.search.placeholder", text: $viewModel.query)
                                 .font(AppTheme.Fonts.body)
                         }
                         .padding(AppTheme.Spacing.lg)
@@ -78,17 +82,15 @@ struct FriendsView: View {
                     VStack(spacing: AppTheme.Spacing.lg) {
                         HStack {
                             HStack(spacing: AppTheme.Spacing.sm) {
-                                Text("지금 달릴 수 있는 친구")
+                                Text("friends.section.available")
                                     .font(AppTheme.Fonts.headingSmall)
-                                    .fontWeight(.heavy)
                                 Circle()
                                     .fill(AppTheme.secondaryFixed)
                                     .frame(width: 8, height: 8)
                             }
                             Spacer()
-                            Button("전체보기") {}
+                            Button("common.view_all") {}
                                 .font(AppTheme.Fonts.bodyMedium)
-                                .fontWeight(.bold)
                                 .foregroundColor(AppTheme.primary)
                         }
                         .padding(.horizontal, AppTheme.Spacing.xxl)
@@ -103,7 +105,7 @@ struct FriendsView: View {
                                 AvailableFriendCard(
                                     name: "민호 (Min-Ho)",
                                     avgPace: "5'12\"",
-                                    todayInfo: "준비 중"
+                                    todayInfo: String(localized: "friends.status.readying")
                                 )
                             }
                             .padding(.horizontal, AppTheme.Spacing.xxl)
@@ -112,9 +114,8 @@ struct FriendsView: View {
                     
                     // ─── Recent Partners (Stitch: bg-surface-container-low cards) ───
                     VStack(spacing: AppTheme.Spacing.lg) {
-                        Text("최근 함께 달린 친구")
+                        Text("friends.section.recent")
                             .font(AppTheme.Fonts.headingSmall)
-                            .fontWeight(.heavy)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, AppTheme.Spacing.xxl)
                         
@@ -135,15 +136,14 @@ struct FriendsView: View {
                     
                     // ─── All Friends ───
                     VStack(spacing: AppTheme.Spacing.lg) {
-                        Text("전체 친구")
+                        Text("friends.section.all")
                             .font(AppTheme.Fonts.headingSmall)
-                            .fontWeight(.heavy)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, AppTheme.Spacing.xxl)
                         
                         VStack(spacing: AppTheme.Spacing.md) {
-                            AllFriendRow(name: "유진 (Yu-Jin)", detail: "이번 주 2회 러닝 • 4'55\" 페이스", isOnline: false, statusText: "오프라인")
-                            AllFriendRow(name: "도윤 (Do-Yoon)", detail: "이번 주 5회 러닝 • 4'10\" 페이스", isOnline: true, statusText: "지금 러닝 중")
+                            AllFriendRow(name: "유진 (Yu-Jin)", detail: "이번 주 2회 러닝 • 4'55\" 페이스", isOnline: false, statusText: "friends.status.offline")
+                            AllFriendRow(name: "도윤 (Do-Yoon)", detail: "이번 주 5회 러닝 • 4'10\" 페이스", isOnline: true, statusText: "friends.status.running_now")
                         }
                         .padding(.horizontal, AppTheme.Spacing.xxl)
                     }
@@ -187,23 +187,21 @@ private struct AvailableFriendCard: View {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
                     Text(name)
                         .font(AppTheme.Fonts.titleMedium)
-                        .fontWeight(.bold)
                         .foregroundColor(AppTheme.text)
-                    FitnessChip("지금 가능")
+                    FitnessChip("friends.status.available_now")
                 }
             }
             
             // Stats grid (Stitch: grid-cols-2, bg-surface-container-low, rounded-lg)
             HStack(spacing: AppTheme.Spacing.lg) {
-                MiniStatBox(label: "Avg Pace", value: avgPace)
-                MiniStatBox(label: "Today", value: todayInfo)
+                MiniStatBox(label: "friends.stat.avg_pace", value: avgPace)
+                MiniStatBox(label: "friends.stat.today", value: todayInfo)
             }
             
             // Action buttons
             HStack(spacing: AppTheme.Spacing.sm) {
-                Button("같이 달리기") {}
+                Button("friends.run_together") {}
                     .font(AppTheme.Fonts.bodyMedium)
-                    .fontWeight(.bold)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, AppTheme.Spacing.md)
@@ -237,13 +235,13 @@ private struct MiniStatBox: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-            Text(label.uppercased())
+            Text(LocalizedStringKey(label))
                 .font(.system(size: 10, weight: .medium))
                 .foregroundColor(AppTheme.outlineVariant)
                 .tracking(0.8)
+                .textCase(.uppercase)
             Text(value)
                 .font(AppTheme.Fonts.label)
-                .fontWeight(.bold)
                 .foregroundColor(AppTheme.text)
         }
         .padding(AppTheme.Spacing.md)
@@ -273,7 +271,6 @@ private struct RecentPartnerRow: View {
                 VStack(alignment: .leading, spacing: 2) {
                     Text(name)
                         .font(AppTheme.Fonts.body)
-                        .fontWeight(.bold)
                         .foregroundColor(AppTheme.text)
                     Text(detail)
                         .font(AppTheme.Fonts.captionSmall)
@@ -285,16 +282,15 @@ private struct RecentPartnerRow: View {
             
             VStack(alignment: .trailing, spacing: AppTheme.Spacing.sm) {
                 VStack(alignment: .trailing, spacing: 0) {
-                    Text("SYNC SCORE")
+                    Text("sync.score")
                         .font(.system(size: 10, weight: .bold))
                         .foregroundColor(AppTheme.primary)
                         .tracking(0.5)
                     Text("\(syncScore)%")
                         .font(AppTheme.Fonts.label)
-                        .fontWeight(.black)
                         .foregroundColor(AppTheme.primary)
                 }
-                Button("다시 달리기") {}
+                Button("friends.run_again") {}
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(AppTheme.onPrimaryFixedVariant)
                     .padding(.horizontal, AppTheme.Spacing.lg)
@@ -314,7 +310,7 @@ private struct AllFriendRow: View {
     let name: String
     let detail: String
     let isOnline: Bool
-    let statusText: String
+    let statusText: LocalizedStringKey
     
     var body: some View {
         HStack(spacing: AppTheme.Spacing.lg) {
@@ -337,11 +333,9 @@ private struct AllFriendRow: View {
                 HStack(spacing: AppTheme.Spacing.sm) {
                     Text(name)
                         .font(AppTheme.Fonts.body)
-                        .fontWeight(.bold)
                     Text(statusText)
                         .font(.system(size: 10))
                         .foregroundColor(isOnline ? AppTheme.secondary : AppTheme.outline)
-                        .fontWeight(isOnline ? .bold : .regular)
                 }
                 Text(detail)
                     .font(AppTheme.Fonts.captionSmall)
@@ -351,7 +345,7 @@ private struct AllFriendRow: View {
             Spacer()
             
             if isOnline {
-                Button("참가하기") {}
+                Button("friends.join") {}
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.white)
                     .padding(.horizontal, AppTheme.Spacing.lg)
@@ -376,11 +370,10 @@ private struct InviteBanner: View {
         ZStack(alignment: .bottomTrailing) {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                    Text("친구를 초대하고\n같이 달려보세요")
+                    Text("friends.invite.title")
                         .font(AppTheme.Fonts.titleMedium)
-                        .fontWeight(.bold)
                         .foregroundColor(AppTheme.inverseOnSurface)
-                    Text("함께 달리면 동기부여가 2배!")
+                    Text("friends.invite.subtitle")
                         .font(AppTheme.Fonts.bodySmall)
                         .foregroundColor(AppTheme.inverseOnSurface.opacity(0.7))
                 }
@@ -389,9 +382,8 @@ private struct InviteBanner: View {
                     HStack(spacing: AppTheme.Spacing.sm) {
                         Image(systemName: "square.and.arrow.up")
                             .font(.system(size: 12))
-                        Text("초대 링크 보내기")
+                        Text("friends.invite.send_link")
                             .font(AppTheme.Fonts.bodyMedium)
-                            .fontWeight(.bold)
                     }
                     .foregroundColor(AppTheme.onSecondaryFixed)
                     .padding(.horizontal, AppTheme.Spacing.xxl)

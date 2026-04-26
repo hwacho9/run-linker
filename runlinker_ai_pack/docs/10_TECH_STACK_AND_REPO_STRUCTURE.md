@@ -73,6 +73,7 @@ run-linker/                              ← Git 루트
       10_TECH_STACK_AND_REPO_STRUCTURE.md  ← 이 파일
       11_IOS_SWIFTUI_ARCHITECTURE.md       ← 아키텍처 상세
       12_ANDROID_PHASE2_PLAN.md
+      13_FIREBASE_SETUP.md                 ← Firebase Console/rules/App Check 설정
       runlinker_ai_context.yaml
     prompts/
     stitch_exports/                        ← Stitch HTML 다운로드본
@@ -92,6 +93,9 @@ run-linker/                              ← Git 루트
           UIComponents.swift               ← 공용 컴포넌트 22개
         Models/
           Models.swift                     ← User, RunSession, MatchRequest
+        Services/
+          AuthServiceProtocol.swift
+          FirebaseAuthService.swift
         Repositories/
           SessionRepositoryProtocol.swift
           UserRepositoryProtocol.swift
@@ -116,6 +120,8 @@ run-linker/                              ← Git 루트
         SessionFlow/
           SessionFlowView.swift            ← WIP
       Assets.xcassets/
+      Resources/
+        Localizable.xcstrings
       GoogleService-Info.plist
 
   plugins/                                 ← (기타 플러그인)
@@ -139,6 +145,8 @@ run-linker/                              ← Git 루트
 ## 5. 개발 원칙
 - **Mock first**: Firebase 의존성 없이 MockSessionService로 앱 실행 가능
 - **Strong typing**: 모든 도메인 상태는 enum으로 표현
+- **Service / Repository split**: 인증·외부 SDK 작업은 Service, Firestore 컬렉션 저장은 Repository에 둔다
+- **Localization first**: 사용자 노출 문구는 `Resources/Localizable.xcstrings`에서 ko/en 키로 관리
 - **Stitch 디자인 시스템 준수**: Theme.swift + UIComponents.swift를 항상 사용
 - **No-Line Rule**: Divider 사용 금지 → tonal layering + 여백으로 구분
 - **XcodeGen**: `project.yml`로 프로젝트 재생성 가능하게 유지

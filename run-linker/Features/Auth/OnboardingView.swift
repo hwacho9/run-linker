@@ -1,8 +1,8 @@
 import SwiftUI
 
 struct OnboardingStep {
-    let title: String
-    let description: String
+    let title: LocalizedStringKey
+    let description: LocalizedStringKey
     let icon: String
     let primaryColor: Color
     let secondaryColor: Color
@@ -14,22 +14,22 @@ struct OnboardingView: View {
     
     let steps = [
         OnboardingStep(
-            title: "멀리 있어도\n함께 달리는 우리",
-            description: "실시간 위치 동기화로 친구의 페이스를 느끼며 전 세계 어디서든 함께 뛰는 즐거움을 경험하세요.",
+            title: "onboarding.step1.title",
+            description: "onboarding.step1.description",
             icon: "figure.run",
             primaryColor: AppTheme.primary,
             secondaryColor: Color(hex: "#0051DF")
         ),
         OnboardingStep(
-            title: "랜덤 매칭으로\n새로운 자극",
-            description: "프라이버시가 보호되는 랜덤 매칭으로 나와 비슷한 페이스의 러너와 새로운 달리기 경험을 즐겨보세요.",
+            title: "onboarding.step2.title",
+            description: "onboarding.step2.description",
             icon: "person.2.fill",
             primaryColor: Color(hex: "#476800"),
             secondaryColor: AppTheme.secondaryContainer
         ),
         OnboardingStep(
-            title: "목표를 향한\n작은 성취",
-            description: "개인화된 대시보드를 통해 나만의 성장 기록을 확인하고 즐거운 러닝 라이프를 설계하세요.",
+            title: "onboarding.step3.title",
+            description: "onboarding.step3.description",
             icon: "chart.line.uptrend.xyaxis",
             primaryColor: AppTheme.tertiary,
             secondaryColor: AppTheme.primary
@@ -50,7 +50,7 @@ struct OnboardingView: View {
                     Button {
                         authVM.completeOnboarding()
                     } label: {
-                        Text("건너뛰기")
+                        Text("onboarding.skip")
                             .font(AppTheme.Fonts.label)
                             .foregroundColor(AppTheme.textTertiary)
                             .padding(.horizontal, AppTheme.Spacing.lg)
@@ -160,9 +160,13 @@ struct OnboardingView: View {
                             }
                         }) {
                             HStack(spacing: AppTheme.Spacing.sm) {
-                                Text(currentStep < steps.count - 1 ? "다음 단계로" : "시작하기")
-                                    .font(AppTheme.Fonts.subheadline)
-                                    .fontWeight(.bold)
+                                if currentStep < steps.count - 1 {
+                                    Text("onboarding.next")
+                                        .font(AppTheme.Fonts.subheadline)
+                                } else {
+                                    Text("onboarding.start")
+                                        .font(AppTheme.Fonts.subheadline)
+                                }
                                 Image(systemName: "arrow.right")
                                     .font(.system(size: 16, weight: .bold))
                             }

@@ -30,11 +30,11 @@ struct SignUpView: View {
                         .padding(.top, 20)
                         
                         VStack(spacing: AppTheme.Spacing.sm) {
-                            Text("회원가입")
+                            Text("auth.signup.title")
                                 .font(AppTheme.Fonts.heading)
                                 .foregroundColor(AppTheme.text)
                             
-                            Text("RunLinker에서 함께 달려보세요!\n당신의 새로운 러닝 파트너가 기다리고 있습니다.")
+                            Text("auth.signup.subtitle")
                                 .font(AppTheme.Fonts.bodySmall)
                                 .foregroundColor(AppTheme.textSecondary)
                                 .multilineTextAlignment(.center)
@@ -56,32 +56,32 @@ struct SignUpView: View {
                     .padding(.horizontal, AppTheme.Spacing.xxxl)
                     
                     // ─── Divider ───
-                    DividerWithText("또는 이메일로 가입")
+                    DividerWithText("auth.signup.email_divider")
                         .padding(.horizontal, AppTheme.Spacing.xxxl)
                     
                     // ─── Name / Email / Password Fields ───
                     VStack(spacing: AppTheme.Spacing.md) {
                         ThemedTextField(
-                            placeholder: "이름",
+                            placeholder: "auth.field.name",
                             text: $name,
                             autocapitalization: .words
                         )
                         
                         ThemedTextField(
-                            placeholder: "이메일",
+                            placeholder: "auth.field.email",
                             text: $email,
                             keyboardType: .emailAddress,
                             autocapitalization: .none
                         )
                         
                         ThemedTextField(
-                            placeholder: "비밀번호 (6자 이상)",
+                            placeholder: "auth.field.password_min",
                             text: $password,
                             isSecure: true
                         )
                         
                         ThemedTextField(
-                            placeholder: "비밀번호 확인",
+                            placeholder: "auth.field.confirm_password",
                             text: $confirmPassword,
                             isSecure: true
                         )
@@ -102,9 +102,10 @@ struct SignUpView: View {
                     
                     // ─── Sign Up Button ───
                     PrimaryButton(
-                        title: "회원가입",
+                        title: "auth.signup.button",
                         isLoading: authVM.isLoading
                     ) {
+                        RunLinkerLogger.info("Sign-up button tapped.")
                         Task {
                             await authVM.signUp(
                                 name: name,
@@ -124,10 +125,9 @@ struct SignUpView: View {
                         }
                     } label: {
                         HStack(spacing: 4) {
-                            Text("이미 계정이 있으신가요?")
+                            Text("auth.signup.has_account")
                                 .foregroundColor(AppTheme.textSecondary)
-                            Text("로그인")
-                                .fontWeight(.bold)
+                            Text("auth.login.button")
                                 .foregroundColor(AppTheme.primary)
                         }
                         .font(AppTheme.Fonts.bodySmall)

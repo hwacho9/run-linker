@@ -12,6 +12,7 @@ struct AuthenticatedUserProfile {
     let email: String
     let displayName: String
     let photoURL: URL?
+    let createdAt: Date?
 }
 
 protocol UserRepositoryProtocol {
