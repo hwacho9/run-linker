@@ -2,28 +2,30 @@ import SwiftUI
 
 extension SessionFlowStep: CaseIterable {
     static var allCases: [SessionFlowStep] {
-        [.setup, .matching, .readyRoom, .liveRun, .results]
+        [.setup, .friendSelection, .matching, .readyRoom, .liveRun, .results]
     }
 
-    var order: Int {
-        switch self {
-        case .setup:
-            return 0
-        case .matching:
-            return 1
-        case .readyRoom:
-            return 2
-        case .liveRun:
-            return 3
-        case .results:
-            return 4
+    static func visibleCases(for mode: RunMode) -> [SessionFlowStep] {
+        switch mode {
+        case .friend:
+            return [.setup, .friendSelection, .readyRoom, .liveRun, .results]
+        case .random:
+            return [.setup, .matching, .readyRoom, .liveRun, .results]
+        case .solo:
+            return [.setup, .liveRun, .results]
         }
+    }
+
+    func order(for mode: RunMode) -> Int {
+        Self.visibleCases(for: mode).firstIndex(of: self) ?? 0
     }
 
     var title: LocalizedStringKey {
         switch self {
         case .setup:
             return "session.step.setup"
+        case .friendSelection:
+            return "session.step.friend_selection"
         case .matching:
             return "session.step.matching"
         case .readyRoom:
@@ -77,7 +79,7 @@ struct SessionFlowView: View {
     var body: some View {
         VStack(spacing: 0) {
             if viewModel.currentStep != .liveRun {
-                SessionFlowHeader(step: viewModel.currentStep) {
+                SessionFlowHeader(step: viewModel.currentStep, mode: viewModel.selectedMode) {
                     if viewModel.currentStep == .setup {
                         dismiss()
                     } else {
@@ -96,6 +98,8 @@ struct SessionFlowView: View {
                     } else {
                         MatchSetupView(viewModel: viewModel)
                     }
+                case .friendSelection:
+                    FriendSelectionView(viewModel: viewModel)
                 case .matching:
                     MatchingView(viewModel: viewModel)
                 case .readyRoom:
@@ -119,8 +123,13 @@ struct SessionFlowView: View {
 
 private struct SessionFlowHeader: View {
     let step: SessionFlowStep
+    let mode: RunMode
     let back: () -> Void
     let close: () -> Void
+
+    private var visibleSteps: [SessionFlowStep] {
+        SessionFlowStep.visibleCases(for: mode)
+    }
 
     var body: some View {
         VStack(spacing: AppTheme.Spacing.lg) {
@@ -157,9 +166,9 @@ private struct SessionFlowHeader: View {
             }
 
             HStack(spacing: AppTheme.Spacing.sm) {
-                ForEach(SessionFlowStep.allCases, id: \.self) { item in
+                ForEach(visibleSteps, id: \.self) { item in
                     Capsule()
-                        .fill(item.order <= step.order ? AppTheme.primary : AppTheme.surfaceContainerHigh)
+                        .fill(item.order(for: mode) <= step.order(for: mode) ? AppTheme.primary : AppTheme.surfaceContainerHigh)
                         .frame(height: 5)
                 }
             }

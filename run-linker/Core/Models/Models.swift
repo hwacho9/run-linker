@@ -11,6 +11,7 @@ enum MatchStatus: String, Codable {
 
 enum SessionFlowStep: String, Equatable {
     case setup
+    case friendSelection
     case matching
     case readyRoom
     case liveRun

@@ -27,11 +27,19 @@ class SessionFlowViewModel: ObservableObject {
     @Published var isSearching: Bool = false
     @Published var matchedPartner: User? = nil
     @Published var selectedCandidateIndex = 0
+    @Published var selectedFriendId: String?
 
     let candidates: [User] = [
         User(id: "candidate-1", name: "지훈", level: 8),
         User(id: "candidate-2", name: "민수", level: 6),
         User(id: "candidate-3", name: "서연", level: 7)
+    ]
+
+    let availableFriends: [User] = [
+        User(id: "friend-1", name: "민수", level: 6),
+        User(id: "friend-2", name: "서연", level: 7),
+        User(id: "friend-3", name: "지훈", level: 8),
+        User(id: "friend-4", name: "하린", level: 5)
     ]
     
     // MARK: - Ready Room State
@@ -89,6 +97,11 @@ class SessionFlowViewModel: ObservableObject {
         candidates[selectedCandidateIndex % candidates.count]
     }
 
+    var selectedFriend: User? {
+        guard let selectedFriendId else { return nil }
+        return availableFriends.first { $0.id == selectedFriendId }
+    }
+
     var displayedDistance: Double {
         selectedMode == .solo ? soloTracker.distanceKilometers : currentDistance
     }
@@ -143,6 +156,13 @@ class SessionFlowViewModel: ObservableObject {
             }
             return
         }
+
+        if selectedMode == .friend {
+            withAnimation(.spring()) {
+                currentStep = .friendSelection
+            }
+            return
+        }
         
         withAnimation(.spring()) {
             currentStep = .matching
@@ -164,6 +184,18 @@ class SessionFlowViewModel: ObservableObject {
     }
 
     func acceptMatch() {
+        guard matchedPartner != nil else { return }
+        withAnimation(.spring()) {
+            currentStep = .readyRoom
+        }
+    }
+
+    func selectFriend(_ friend: User) {
+        selectedFriendId = friend.id
+        matchedPartner = friend
+    }
+
+    func continueWithSelectedFriend() {
         guard matchedPartner != nil else { return }
         withAnimation(.spring()) {
             currentStep = .readyRoom
@@ -274,6 +306,7 @@ class SessionFlowViewModel: ObservableObject {
             currentStep = .setup
             isSearching = false
             matchedPartner = nil
+            selectedFriendId = nil
             countdown = nil
             isLiveRunPaused = false
         }

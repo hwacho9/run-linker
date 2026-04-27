@@ -4422,6 +4422,138 @@
         }
       }
     },
+    "session.friend_selection.continue": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Continue with Friend"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "友だちと待機室へ"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "친구와 대기실로"
+          }
+        }
+      }
+    },
+    "session.friend_selection.friend_meta %lld": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Level %lld · Available now"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レベル%lld · 今すぐラン可能"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "레벨 %lld · 지금 러닝 가능"
+          }
+        }
+      }
+    },
+    "session.friend_selection.run_summary": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Run Setup Summary"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ラン設定の概要"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "러닝 설정 요약"
+          }
+        }
+      }
+    },
+    "session.friend_selection.run_summary_detail %@ %@": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Target %@ · Pace %@"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "目標距離 %@ · 目標ペース %@"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "목표 거리 %@ · 목표 페이스 %@"
+          }
+        }
+      }
+    },
+    "session.friend_selection.subtitle": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Select a friend to invite, then move to the ready room."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "招待する友だちを選ぶと、待機室へ移動します。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "초대할 친구를 선택하면 바로 대기실로 이동합니다."
+          }
+        }
+      }
+    },
+    "session.friend_selection.title": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose a Friend to Run With"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一緒に走る友だちを選択"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "함께 달릴 친구 선택"
+          }
+        }
+      }
+    },
     "session.goal": {
       "localizations": {
         "en": {
@@ -5989,6 +6121,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "함께 시작하기"
+          }
+        }
+      }
+    },
+    "session.step.friend_selection": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Choose Friend"
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "友だち選択"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "친구 선택"
           }
         }
       }
