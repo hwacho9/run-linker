@@ -2,6 +2,8 @@ import SwiftUI
 
 struct MatchSetupView: View {
     @ObservedObject var viewModel: SessionFlowViewModel
+    @State private var activeInput: SetupInputField?
+    @State private var inputText = ""
 
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -14,6 +16,10 @@ struct MatchSetupView: View {
                     icon: "point.topleft.down.to.point.bottomright.curvepath",
                     value: String(format: "%.1f", viewModel.targetDistance),
                     unit: "km",
+                    valueAction: {
+                        inputText = String(format: "%.1f", viewModel.targetDistance)
+                        activeInput = .distance
+                    },
                     minusAction: { viewModel.adjustTargetDistance(by: -0.5) },
                     plusAction: { viewModel.adjustTargetDistance(by: 0.5) }
                 )
@@ -24,6 +30,10 @@ struct MatchSetupView: View {
                     icon: "gauge.with.dots.needle.bottom.50percent",
                     value: viewModel.targetPaceText,
                     unit: "/km",
+                    valueAction: {
+                        inputText = viewModel.targetPaceText
+                        activeInput = .pace
+                    },
                     minusAction: { viewModel.adjustTargetPace(by: -0.25) },
                     plusAction: { viewModel.adjustTargetPace(by: 0.25) }
                 )
@@ -41,6 +51,57 @@ struct MatchSetupView: View {
             .padding(.top, AppTheme.Spacing.lg)
             .padding(.bottom, AppTheme.Spacing.xxxxl)
         }
+        .alert(activeInput?.title ?? "", isPresented: Binding(
+            get: { activeInput != nil },
+            set: { if !$0 { activeInput = nil } }
+        )) {
+            TextField(activeInput?.placeholder ?? "", text: $inputText)
+                .keyboardType(.numbersAndPunctuation)
+            Button("취소", role: .cancel) {
+                activeInput = nil
+            }
+            Button("입력") {
+                applyInput()
+            }
+        } message: {
+            Text(activeInput?.message ?? "")
+        }
+    }
+
+    private func applyInput() {
+        guard let activeInput else { return }
+
+        switch activeInput {
+        case .distance:
+            if let value = Double(inputText.replacingOccurrences(of: ",", with: ".")) {
+                viewModel.setTargetDistance(value)
+            }
+        case .pace:
+            if let pace = parsePace(inputText) {
+                viewModel.setTargetPace(decimalMinutes: pace)
+            }
+        }
+
+        self.activeInput = nil
+    }
+
+    private func parsePace(_ rawValue: String) -> Double? {
+        let value = rawValue
+            .replacingOccurrences(of: "/km", with: "")
+            .replacingOccurrences(of: "\"", with: "")
+            .replacingOccurrences(of: "분", with: ":")
+            .replacingOccurrences(of: "초", with: "")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if value.contains("'") || value.contains(":") {
+            let separator = value.contains("'") ? "'" : ":"
+            let parts = value.split(separator: Character(separator), maxSplits: 1).map(String.init)
+            guard let minutes = Int(parts.first ?? "") else { return nil }
+            let seconds = Int(parts.dropFirst().first ?? "0") ?? 0
+            return Double(minutes) + Double(min(59, max(0, seconds))) / 60
+        }
+
+        return Double(value.replacingOccurrences(of: ",", with: "."))
     }
 
     private var modePicker: some View {
@@ -210,6 +271,7 @@ private struct SetupValueCard: View {
     let icon: String
     let value: String
     let unit: String
+    let valueAction: () -> Void
     let minusAction: () -> Void
     let plusAction: () -> Void
 
@@ -232,11 +294,14 @@ private struct SetupValueCard: View {
             }
 
             HStack(alignment: .firstTextBaseline) {
-                Text(value)
-                    .font(AppTheme.Fonts.bigNumber)
-                    .foregroundColor(AppTheme.primary)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.65)
+                Button(action: valueAction) {
+                    Text(value)
+                        .font(AppTheme.Fonts.bigNumber)
+                        .foregroundColor(AppTheme.primary)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.65)
+                }
+                .buttonStyle(.plain)
                 Text(unit)
                     .font(AppTheme.Fonts.subheadline)
                     .foregroundColor(AppTheme.textSecondary)
@@ -248,6 +313,42 @@ private struct SetupValueCard: View {
         .padding(AppTheme.Spacing.xxl)
         .background(AppTheme.surfaceContainerLow)
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.xl))
+    }
+}
+
+private enum SetupInputField: Identifiable {
+    case distance
+    case pace
+
+    var id: String {
+        title
+    }
+
+    var title: String {
+        switch self {
+        case .distance:
+            return "목표 거리 입력"
+        case .pace:
+            return "목표 페이스 입력"
+        }
+    }
+
+    var placeholder: String {
+        switch self {
+        case .distance:
+            return "예: 5.0"
+        case .pace:
+            return "예: 5:30 또는 5.5"
+        }
+    }
+
+    var message: String {
+        switch self {
+        case .distance:
+            return "1km부터 42km 사이로 설정됩니다."
+        case .pace:
+            return "4:00/km부터 8:00/km 사이로 설정됩니다."
+        }
     }
 }
 

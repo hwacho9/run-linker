@@ -91,7 +91,11 @@ struct SessionFlowView: View {
             Group {
                 switch viewModel.currentStep {
                 case .setup:
-                    MatchSetupView(viewModel: viewModel)
+                    if viewModel.selectedMode == .solo {
+                        SoloRunSetupView(viewModel: viewModel)
+                    } else {
+                        MatchSetupView(viewModel: viewModel)
+                    }
                 case .matching:
                     MatchingView(viewModel: viewModel)
                 case .readyRoom:

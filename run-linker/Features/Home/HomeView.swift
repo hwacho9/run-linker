@@ -3,8 +3,7 @@ import SwiftUI
 struct HomeView: View {
 
     @StateObject private var viewModel = HomeViewModel()
-    @State private var isShowingSessionFlow = false
-    @State private var selectedRunMode: RunMode = .friend
+    @State private var presentedRunMode: RunMode?
     
     var body: some View {
         VStack(spacing: 0) {
@@ -16,8 +15,7 @@ struct HomeView: View {
                     
                     // ─── Hero CTA (Stitch: kinetic-gradient + Lime button) ───
                     HeroCTACard {
-                        selectedRunMode = .solo
-                        isShowingSessionFlow = true
+                        presentedRunMode = .friend
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxl)
                     
@@ -25,17 +23,14 @@ struct HomeView: View {
                     VStack(spacing: AppTheme.Spacing.md) {
                         HStack(spacing: AppTheme.Spacing.md) {
                             QuickActionButton(icon: "person.2.fill", title: "home.quick.friend") {
-                                selectedRunMode = .friend
-                                isShowingSessionFlow = true
+                                presentedRunMode = .friend
                             }
                             QuickActionButton(icon: "shuffle", title: "home.quick.random") {
-                                selectedRunMode = .random
-                                isShowingSessionFlow = true
+                                presentedRunMode = .random
                             }
                         }
                         QuickActionButton(icon: "figure.run", title: "home.quick.solo") {
-                            selectedRunMode = .solo
-                            isShowingSessionFlow = true
+                            presentedRunMode = .solo
                         }
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxl)
@@ -161,8 +156,8 @@ struct HomeView: View {
         .task {
             await viewModel.loadData()
         }
-        .fullScreenCover(isPresented: $isShowingSessionFlow) {
-            SessionFlowView(initialMode: selectedRunMode)
+        .fullScreenCover(item: $presentedRunMode) { mode in
+            SessionFlowView(initialMode: mode)
         }
     }
 }

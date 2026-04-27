@@ -13,6 +13,7 @@ class SessionFlowViewModel: ObservableObject {
     @Published var runningDuration: Double = 30
     @Published var cheerEnabled = true
     @Published var voiceGuideEnabled = true
+    @Published var soloPrivateRecord = true
     @Published var preciseLocationSharing = true
     @Published var privacyMode = true
     
@@ -68,6 +69,20 @@ class SessionFlowViewModel: ObservableObject {
 
     func adjustTargetPace(by value: Double) {
         targetPace = min(8, max(4, targetPace + value))
+    }
+
+    func setTargetDistance(_ value: Double) {
+        targetDistance = min(42, max(1, value))
+    }
+
+    func setTargetPace(minutes: Int, seconds: Int) {
+        let clampedSeconds = min(59, max(0, seconds))
+        let pace = Double(minutes) + Double(clampedSeconds) / 60
+        targetPace = min(8, max(4, pace))
+    }
+
+    func setTargetPace(decimalMinutes: Double) {
+        targetPace = min(8, max(4, decimalMinutes))
     }
     
     // MARK: - Mock Transition Logic
