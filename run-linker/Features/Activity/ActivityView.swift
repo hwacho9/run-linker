@@ -75,10 +75,17 @@ struct ActivityView: View {
                         .foregroundColor(AppTheme.textSecondary)
                 }
                 Spacer()
-                Image(systemName: "line.3.horizontal.decrease.circle.fill")
-                    .font(.system(size: 28))
-                    .foregroundColor(AppTheme.primary)
             }
+            
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: AppTheme.Spacing.sm) {
+                    FilterChip("전체", isSelected: true, action: {})
+                    FilterChip("함께 달리기", isSelected: false, action: {})
+                    FilterChip("혼자 달리기", isSelected: false, action: {})
+                    FilterChip("최신순", isSelected: false, action: {})
+                }
+            }
+            .padding(.bottom, AppTheme.Spacing.sm)
 
             if viewModel.history.isEmpty {
                 EmptyActivityCard()
@@ -96,33 +103,29 @@ struct ActivityView: View {
             StatsHeroCard(snapshot: visibleStats)
 
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: AppTheme.Spacing.lg) {
-                ActivityMetricTile(
-                    label: "activity.stat.total_sessions",
-                    value: "\(visibleStats.sessionsCount)",
-                    unit: "회",
+                StatChip(
+                    title: "activity.stat.total_sessions",
+                    value: "\(visibleStats.sessionsCount)회",
                     icon: "figure.run",
-                    style: .surface
+                    variant: .neutral
                 )
-                ActivityMetricTile(
-                    label: "activity.stat.avg_pace",
+                StatChip(
+                    title: "activity.stat.avg_pace",
                     value: visibleStats.averagePaceText,
-                    unit: nil,
                     icon: "timer",
-                    style: .accent
+                    variant: .accent
                 )
-                ActivityMetricTile(
-                    label: "총 시간",
+                StatChip(
+                    title: "총 시간",
                     value: visibleStats.totalTimeText,
-                    unit: nil,
                     icon: "clock.fill",
-                    style: .surface
+                    variant: .neutral
                 )
-                ActivityMetricTile(
-                    label: "평균 싱크",
+                StatChip(
+                    title: "평균 싱크",
                     value: visibleStats.averageSyncText,
-                    unit: nil,
                     icon: "link",
-                    style: .surface
+                    variant: .neutral
                 )
             }
 
@@ -168,6 +171,7 @@ private struct ActivityStatsSnapshot {
     let togetherCount: Int
     let soloCount: Int
     let weeklyDistances: [Double]
+    let topPartner: String?
 
     init(
         stats: (totalDistance: Double, averagePace: Int, sessionsCount: Int)?,
@@ -186,6 +190,10 @@ private struct ActivityStatsSnapshot {
         self.togetherCount = history.filter { $0.mode == .friend || $0.mode == .random }.count
         self.soloCount = history.filter { $0.mode == .solo }.count
         self.weeklyDistances = Self.weeklyDistances(from: history)
+        
+        let partners = history.flatMap { $0.participants }.filter { $0.name.lowercased() != "you" }.map { $0.name }
+        let counts = partners.reduce(into: [:]) { counts, name in counts[name, default: 0] += 1 }
+        self.topPartner = counts.max(by: { $0.value < $1.value })?.key
     }
 
     var totalDistanceText: String {
@@ -253,14 +261,7 @@ private struct ActivityHeader: View {
                     .textCase(.uppercase)
             }
             Spacer()
-            Button(action: {}) {
-                Image(systemName: "calendar")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundColor(AppTheme.primary)
-                    .frame(width: 44, height: 44)
-                    .background(AppTheme.primary.opacity(0.08))
-                    .clipShape(Circle())
-            }
+            IconButton(icon: "calendar", action: {})
         }
         .padding(.horizontal, AppTheme.Spacing.xxl)
         .padding(.top, AppTheme.Spacing.lg)
@@ -384,75 +385,7 @@ private struct HeroBadge: View {
     }
 }
 
-private enum ActivityMetricTileStyle {
-    case surface
-    case accent
-}
 
-private struct ActivityMetricTile: View {
-    let label: String
-    let value: String
-    let unit: String?
-    let icon: String
-    let style: ActivityMetricTileStyle
-
-    private var backgroundColor: Color {
-        style == .accent ? AppTheme.secondaryFixed : AppTheme.surfaceContainerLowest
-    }
-
-    private var iconColor: Color {
-        style == .accent ? AppTheme.onSecondaryFixed : AppTheme.primary
-    }
-
-    private var labelColor: Color {
-        style == .accent ? AppTheme.onSecondaryFixedVariant : AppTheme.textTertiary
-    }
-
-    private var valueColor: Color {
-        style == .accent ? AppTheme.onSecondaryFixed : AppTheme.text
-    }
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-            Image(systemName: icon)
-                .font(.system(size: 20, weight: .semibold))
-                .foregroundColor(iconColor)
-
-            Spacer(minLength: 0)
-
-            VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text(LocalizedStringKey(label))
-                    .font(AppTheme.Fonts.captionSmall)
-                    .foregroundColor(labelColor)
-                    .tracking(0.9)
-                    .textCase(.uppercase)
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.78)
-                HStack(alignment: .firstTextBaseline, spacing: 3) {
-                    Text(value)
-                        .font(AppTheme.Fonts.metricSmall)
-                        .foregroundColor(valueColor)
-                        .lineLimit(1)
-                        .minimumScaleFactor(0.74)
-                    if let unit {
-                        Text(unit)
-                            .font(AppTheme.Fonts.caption)
-                            .foregroundColor(labelColor)
-                    }
-                }
-            }
-        }
-        .padding(AppTheme.Spacing.xl)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .frame(height: 136)
-        .background(backgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.lg))
-        .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.Radius.lg)
-                .stroke(AppTheme.outlineVariant.opacity(style == .accent ? 0.0 : 0.22), lineWidth: 1)
-        )
-    }
-}
 
 private struct WeeklyProgressCard: View {
     let values: [Double]
@@ -558,7 +491,7 @@ private struct ComparisonCard: View {
                     Text("가장 많이 함께 달린 친구")
                         .font(AppTheme.Fonts.caption)
                         .foregroundColor(AppTheme.textTertiary)
-                    Text("Jane")
+                    Text(snapshot.topPartner ?? "없음")
                         .font(AppTheme.Fonts.subheadline)
                         .foregroundColor(AppTheme.text)
                 }
@@ -647,20 +580,23 @@ private struct SessionHistoryCard: View {
             }
 
             HStack(spacing: AppTheme.Spacing.md) {
-                Image(systemName: "point.topleft.down.to.point.bottomright.curvepath")
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(AppTheme.primary)
-                    .frame(width: 38, height: 38)
-                    .background(AppTheme.primary.opacity(0.08))
-                    .clipShape(Circle())
+                RoundedRectangle(cornerRadius: AppTheme.Radius.md)
+                    .fill(AppTheme.surfaceContainerHighest)
+                    .frame(width: 48, height: 48)
+                    .overlay(
+                        Image(systemName: "map.fill")
+                            .foregroundColor(AppTheme.textTertiary.opacity(0.5))
+                    )
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("Pair View snapshot")
-                        .font(AppTheme.Fonts.caption)
-                        .foregroundColor(AppTheme.textTertiary)
                     Text(session.syncScore.map { "Sync Score \($0)%" } ?? "개인 기록")
                         .font(AppTheme.Fonts.bodyMedium)
                         .foregroundColor(AppTheme.text)
+                    if session.mode != .solo {
+                        Text("Pair View snapshot")
+                            .font(AppTheme.Fonts.caption)
+                            .foregroundColor(AppTheme.textTertiary)
+                    }
                 }
                 Spacer()
                 Image(systemName: "chevron.right")
