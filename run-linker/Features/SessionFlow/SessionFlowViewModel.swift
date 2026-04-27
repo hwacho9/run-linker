@@ -42,6 +42,7 @@ class SessionFlowViewModel: ObservableObject {
     @Published var currentDistance: Double = 0.0
     @Published var elapsedTime: TimeInterval = 0
     @Published var currentPace: Int = 300 // 5:00/km
+    @Published var routePoints: [RunRoutePoint] = []
 
     var targetDistanceText: String {
         String(format: "%.1f km", targetDistance)
@@ -89,11 +90,9 @@ class SessionFlowViewModel: ObservableObject {
     
     func startMatching() {
         if selectedMode == .solo {
-            // Solo skips matching and ready room
             withAnimation(.spring()) {
                 currentStep = .liveRun
             }
-            startMockRun()
             return
         }
         
@@ -161,6 +160,14 @@ class SessionFlowViewModel: ObservableObject {
         withAnimation(.spring()) {
             currentStep = .results
         }
+    }
+
+    func finishSoloRun(distance: Double, elapsedTime: TimeInterval, currentPace: Int, routePoints: [RunRoutePoint]) {
+        self.currentDistance = distance
+        self.elapsedTime = elapsedTime
+        self.currentPace = currentPace
+        self.routePoints = routePoints
+        finishRun()
     }
     
     func cancelSession() {

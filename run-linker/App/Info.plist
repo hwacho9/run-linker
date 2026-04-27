@@ -35,6 +35,8 @@
 	<string>58652839887-c81ukfb4e04qsolhabe7rpr16hv2k8j4.apps.googleusercontent.com</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>솔로 달리기 중 현재 위치, 이동 거리, 지나간 경로를 기록하기 위해 위치 권한이 필요합니다.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchScreen</key>

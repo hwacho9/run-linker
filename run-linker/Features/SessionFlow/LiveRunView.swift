@@ -2,18 +2,29 @@ import SwiftUI
 
 struct LiveRunView: View {
     @ObservedObject var viewModel: SessionFlowViewModel
+    @StateObject private var soloTracker = SoloRunTracker()
     @State private var isPaused = false
     
     private var formattedTime: String {
+        if viewModel.selectedMode == .solo {
+            return soloTracker.formattedTime
+        }
         let minutes = Int(viewModel.elapsedTime) / 60
         let seconds = Int(viewModel.elapsedTime) % 60
         return String(format: "%02d:%02d", minutes, seconds)
     }
     
     private var formattedPace: String {
+        if viewModel.selectedMode == .solo {
+            return soloTracker.formattedPace
+        }
         let minutes = viewModel.currentPace / 60
         let seconds = viewModel.currentPace % 60
         return String(format: "%d'%02d\"", minutes, seconds)
+    }
+
+    private var displayedDistance: Double {
+        viewModel.selectedMode == .solo ? soloTracker.distanceKilometers : viewModel.currentDistance
     }
     
     var body: some View {
@@ -50,12 +61,33 @@ struct LiveRunView: View {
             
             // Split Maps
             GeometryReader { geo in
-                VStack(spacing: 2) {
-                    // Partner Map (if not solo)
-                    if viewModel.selectedMode != .solo {
+                if viewModel.selectedMode == .solo {
+                    ZStack(alignment: .topLeading) {
+                        RunRouteMapView(
+                            routePoints: soloTracker.routePoints,
+                            currentLocation: soloTracker.currentLocation
+                        )
+                        .ignoresSafeArea(edges: .horizontal)
+
+                        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+                            FitnessChip("실시간 경로 기록", color: AppTheme.surfaceContainerLowest)
+                            if let message = soloTracker.locationErrorMessage {
+                                Text(message)
+                                    .font(AppTheme.Fonts.caption)
+                                    .foregroundColor(AppTheme.error)
+                                    .padding(AppTheme.Spacing.md)
+                                    .background(AppTheme.errorContainer)
+                                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
+                            }
+                        }
+                        .padding(AppTheme.Spacing.lg)
+                    }
+                    .frame(height: geo.size.height)
+                } else {
+                    VStack(spacing: 2) {
                         ZStack(alignment: .topLeading) {
                             MapPlaceholderBackground()
-                            
+
                             HStack {
                                 PartnerAvatar(name: viewModel.matchedPartner?.name ?? "Partner", isActive: true)
                                     .scaleEffect(0.6)
@@ -68,25 +100,24 @@ struct LiveRunView: View {
                             .padding(AppTheme.Spacing.md)
                         }
                         .frame(height: geo.size.height / 2)
+
+                        ZStack(alignment: .topLeading) {
+                            MapPlaceholderBackground(isMe: true)
+
+                            PartnerAvatar(name: "You", isActive: true)
+                                .scaleEffect(0.6)
+                                .frame(width: 40, height: 40)
+                                .padding(AppTheme.Spacing.md)
+                        }
+                        .frame(height: geo.size.height / 2)
                     }
-                    
-                    // My Map
-                    ZStack(alignment: .topLeading) {
-                        MapPlaceholderBackground(isMe: true)
-                        
-                        PartnerAvatar(name: "You", isActive: true)
-                            .scaleEffect(0.6)
-                            .frame(width: 40, height: 40)
-                            .padding(AppTheme.Spacing.md)
-                    }
-                    .frame(height: viewModel.selectedMode == .solo ? geo.size.height : geo.size.height / 2)
                 }
             }
             
             // Stats Panel
             VStack(spacing: AppTheme.Spacing.xl) {
                 HStack {
-                    StatMetric(title: "거리", value: String(format: "%.2f", viewModel.currentDistance), unit: "km")
+                    StatMetric(title: "거리", value: String(format: "%.2f", displayedDistance), unit: "km")
                     Spacer()
                     StatMetric(title: "현재 페이스", value: formattedPace, unit: "/km")
                 }
@@ -112,7 +143,12 @@ struct LiveRunView: View {
                     
                     // Pause/Resume
                     Button(action: {
-                        isPaused.toggle()
+                        if viewModel.selectedMode == .solo {
+                            soloTracker.isPaused ? soloTracker.resume() : soloTracker.pause()
+                            isPaused = soloTracker.isPaused
+                        } else {
+                            isPaused.toggle()
+                        }
                     }) {
                         Image(systemName: isPaused ? "play.fill" : "pause.fill")
                             .font(.system(size: 32))
@@ -125,7 +161,17 @@ struct LiveRunView: View {
                     
                     // Stop
                     Button(action: {
-                        viewModel.finishRun()
+                        if viewModel.selectedMode == .solo {
+                            soloTracker.stop()
+                            viewModel.finishSoloRun(
+                                distance: soloTracker.distanceKilometers,
+                                elapsedTime: soloTracker.elapsedTime,
+                                currentPace: soloTracker.currentPace,
+                                routePoints: soloTracker.routePoints
+                            )
+                        } else {
+                            viewModel.finishRun()
+                        }
                     }) {
                         Image(systemName: "stop.fill")
                             .font(.system(size: 28))
@@ -144,6 +190,16 @@ struct LiveRunView: View {
             .shadow(color: Color.black.opacity(0.05), radius: 20, y: -5)
         }
         .background(AppTheme.surfaceContainerLowest.ignoresSafeArea())
+        .onAppear {
+            if viewModel.selectedMode == .solo {
+                soloTracker.start()
+            }
+        }
+        .onDisappear {
+            if viewModel.selectedMode == .solo, viewModel.currentStep != .results {
+                soloTracker.stop()
+            }
+        }
     }
 }
 
@@ -237,4 +293,3 @@ struct MapPlaceholderBackground: View {
         .clipped()
     }
 }
-

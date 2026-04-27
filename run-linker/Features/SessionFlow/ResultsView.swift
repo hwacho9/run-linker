@@ -10,6 +10,7 @@ struct ResultsView: View {
     }
     
     private var formattedPace: String {
+        guard viewModel.currentPace > 0 else { return "--'--\"" }
         let minutes = viewModel.currentPace / 60
         let seconds = viewModel.currentPace % 60
         return String(format: "%d'%02d\"", minutes, seconds)
@@ -61,17 +62,33 @@ struct ResultsView: View {
                             .font(AppTheme.Fonts.headingSmall)
                             .foregroundColor(AppTheme.text)
                             .padding(.horizontal, AppTheme.Spacing.xxl)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: AppTheme.Spacing.md) {
-                                // My Route
-                                RouteCard(name: "내 경로")
-                                
-                                if viewModel.selectedMode != .solo {
-                                    RouteCard(name: "\(viewModel.matchedPartner?.name ?? "Partner")의 경로")
-                                }
+
+                        if viewModel.selectedMode == .solo, !viewModel.routePoints.isEmpty {
+                            VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+                                RunRouteMapView(
+                                    routePoints: viewModel.routePoints,
+                                    currentLocation: viewModel.routePoints.last?.coordinate,
+                                    followsUser: false
+                                )
+                                .frame(height: 220)
+                                .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.xl))
+
+                                Text("내가 지나간 길")
+                                    .font(AppTheme.Fonts.caption)
+                                    .foregroundColor(AppTheme.textSecondary)
                             }
                             .padding(.horizontal, AppTheme.Spacing.xxl)
+                        } else {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: AppTheme.Spacing.md) {
+                                    RouteCard(name: "내 경로")
+
+                                    if viewModel.selectedMode != .solo {
+                                        RouteCard(name: "\(viewModel.matchedPartner?.name ?? "Partner")의 경로")
+                                    }
+                                }
+                                .padding(.horizontal, AppTheme.Spacing.xxl)
+                            }
                         }
                     }
                     
