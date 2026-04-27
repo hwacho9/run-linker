@@ -1,101 +1,168 @@
-import Foundation
 import SwiftUI
-import Combine
 
-@MainActor
-class SessionFlowViewModel: ObservableObject {
-    @Published var selectedMode: RunMode = .friend
-    @Published var targetDistance: Double = 5.0
-    @Published var privacyMode = true
-    
-    // Live execution state
-    @Published var syncScore: Int = 95
+extension SessionFlowStep: CaseIterable {
+    static var allCases: [SessionFlowStep] {
+        [.setup, .matching, .readyRoom, .liveRun, .results]
+    }
+
+    var order: Int {
+        switch self {
+        case .setup:
+            return 0
+        case .matching:
+            return 1
+        case .readyRoom:
+            return 2
+        case .liveRun:
+            return 3
+        case .results:
+            return 4
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .setup:
+            return "Match Setup"
+        case .matching:
+            return "Matching"
+        case .readyRoom:
+            return "Ready Room"
+        case .liveRun:
+            return "Live Run"
+        case .results:
+            return "Results"
+        }
+    }
 }
 
-struct MatchSetupView: View {
-    @StateObject private var viewModel = SessionFlowViewModel()
-    
+extension RunMode: CaseIterable, Identifiable {
+    static var allCases: [RunMode] {
+        [.friend, .random, .solo]
+    }
+
+    var id: Self { self }
+
+    var title: LocalizedStringKey {
+        switch self {
+        case .friend:
+            return "session.mode.friend"
+        case .random:
+            return "session.mode.random"
+        case .solo:
+            return "session.mode.solo"
+        }
+    }
+
+    var icon: String {
+        switch self {
+        case .friend:
+            return "person.2.fill"
+        case .random:
+            return "shuffle"
+        case .solo:
+            return "figure.run"
+        }
+    }
+}
+
+struct SessionFlowView: View {
+    @Environment(\.dismiss) private var dismiss
+    @StateObject private var viewModel: SessionFlowViewModel
+
+    init(initialMode: RunMode = .friend) {
+        _viewModel = StateObject(wrappedValue: SessionFlowViewModel(initialMode: initialMode))
+    }
+
     var body: some View {
-        ScreenContainer(title: "session.setup.title") {
-            VStack {
-                Picker("session.mode.picker", selection: $viewModel.selectedMode) {
-                    Text("session.mode.friend").tag(RunMode.friend)
-                    Text("session.mode.random").tag(RunMode.random)
-                    Text("session.mode.solo").tag(RunMode.solo)
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding()
-                
-                AppCard {
-                    Text(String(format: String(localized: "session.target_distance_format"), viewModel.targetDistance))
-                        .font(AppTheme.Fonts.subheadline)
-                    Slider(value: $viewModel.targetDistance, in: 1...42, step: 0.5)
-                }
-                .padding(.horizontal)
-                
-                if viewModel.selectedMode == .random {
-                    AppCard {
-                        Toggle("session.hide_exact_location", isOn: $viewModel.privacyMode)
-                            .tint(AppTheme.primary)
-                        Text("session.hide_exact_location.description")
-                            .font(AppTheme.Fonts.caption)
-                            .foregroundColor(AppTheme.textSecondary)
+        VStack(spacing: 0) {
+            if viewModel.currentStep != .liveRun {
+                SessionFlowHeader(step: viewModel.currentStep) {
+                    if viewModel.currentStep == .setup {
+                        dismiss()
+                    } else {
+                        viewModel.cancelSession()
                     }
-                    .padding(.horizontal)
+                } close: {
+                    viewModel.closeFlow()
                 }
-                
-                Spacer()
-                
-                PrimaryButton(title: "session.find_match", action: {
-                    // Action transitions to Matching View
-                })
-                .padding()
+            }
+
+            Group {
+                switch viewModel.currentStep {
+                case .setup:
+                    MatchSetupView(viewModel: viewModel)
+                case .matching:
+                    MatchingView(viewModel: viewModel)
+                case .readyRoom:
+                    ReadyRoomView(viewModel: viewModel)
+                case .liveRun:
+                    LiveRunView(viewModel: viewModel)
+                case .results:
+                    ResultsView(viewModel: viewModel)
+                }
+            }
+            .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .move(edge: .leading).combined(with: .opacity)))
+        }
+        .background(AppTheme.background.ignoresSafeArea())
+        .onAppear {
+            viewModel.onDismiss = {
+                dismiss()
             }
         }
     }
 }
 
-// Live Run Shell
-struct LiveRunView: View {
-    @StateObject private var viewModel = SessionFlowViewModel()
+private struct SessionFlowHeader: View {
+    let step: SessionFlowStep
+    let back: () -> Void
+    let close: () -> Void
 
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: AppTheme.Spacing.lg) {
             HStack {
-                VStack(alignment: .leading) {
-                    Text("session.live.title")
-                        .font(AppTheme.Fonts.heading)
-                    Text("session.live.time_sample")
-                        .font(AppTheme.Fonts.subheadline)
-                        .foregroundColor(AppTheme.primary)
+                Button(action: back) {
+                    Image(systemName: step == .setup ? "xmark" : "chevron.left")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(AppTheme.text)
+                        .frame(width: 40, height: 40)
+                        .background(AppTheme.surfaceContainerLow)
+                        .clipShape(Circle())
                 }
-                Spacer()
-                Text(String(format: String(localized: "activity.sync_format"), viewModel.syncScore))
-                    .font(.headline)
-                    .foregroundColor(.green)
+
+                VStack(spacing: 2) {
+                    Text(step.title)
+                        .font(AppTheme.Fonts.headingMedium)
+                        .foregroundColor(AppTheme.text)
+                    Text("RunLinker")
+                        .font(AppTheme.Fonts.captionSmall)
+                        .foregroundColor(AppTheme.primary)
+                        .tracking(1.2)
+                        .textCase(.uppercase)
+                }
+                .frame(maxWidth: .infinity)
+
+                Button(action: close) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(AppTheme.textTertiary)
+                        .frame(width: 40, height: 40)
+                }
+                .opacity(step == .setup ? 0 : 1)
+                .disabled(step == .setup)
             }
-            .padding()
-            .background(AppTheme.surface)
-            
-            // Pair View Placeholder
-            Rectangle()
-                .fill(Color.orange.opacity(0.2))
-                .frame(height: 100)
-                .overlay(Text("session.pair_view_placeholder"))
-            
-            // Split Maps
-            HStack(spacing: 0) {
-                Rectangle()
-                    .fill(Color.blue.opacity(0.1))
-                    .overlay(Text("session.my_info"))
-                Rectangle()
-                    .fill(Color.purple.opacity(0.1))
-                    .overlay(Text("session.partner_map_fuzzed"))
+
+            HStack(spacing: AppTheme.Spacing.sm) {
+                ForEach(SessionFlowStep.allCases, id: \.self) { item in
+                    Capsule()
+                        .fill(item.order <= step.order ? AppTheme.primary : AppTheme.surfaceContainerHigh)
+                        .frame(height: 5)
+                }
             }
-            
-            PrimaryButton(title: "session.finish_run", action: {})
-                .padding()
         }
-        .background(AppTheme.background.ignoresSafeArea())
+        .padding(.horizontal, AppTheme.Spacing.xxl)
+        .padding(.top, AppTheme.Spacing.lg)
+        .padding(.bottom, AppTheme.Spacing.md)
+        .background(AppTheme.background)
     }
 }

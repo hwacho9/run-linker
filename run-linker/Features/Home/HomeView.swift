@@ -1,7 +1,10 @@
 import SwiftUI
 
 struct HomeView: View {
+
     @StateObject private var viewModel = HomeViewModel()
+    @State private var isShowingSessionFlow = false
+    @State private var selectedRunMode: RunMode = .friend
     
     var body: some View {
         VStack(spacing: 0) {
@@ -13,17 +16,27 @@ struct HomeView: View {
                     
                     // ─── Hero CTA (Stitch: kinetic-gradient + Lime button) ───
                     HeroCTACard {
-                        print("Start Run Tapped")
+                        selectedRunMode = .solo
+                        isShowingSessionFlow = true
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxl)
                     
                     // ─── Quick Actions (Stitch: 2-col grid + full-width) ───
                     VStack(spacing: AppTheme.Spacing.md) {
                         HStack(spacing: AppTheme.Spacing.md) {
-                            QuickActionButton(icon: "person.2.fill", title: "home.quick.friend") {}
-                            QuickActionButton(icon: "shuffle", title: "home.quick.random") {}
+                            QuickActionButton(icon: "person.2.fill", title: "home.quick.friend") {
+                                selectedRunMode = .friend
+                                isShowingSessionFlow = true
+                            }
+                            QuickActionButton(icon: "shuffle", title: "home.quick.random") {
+                                selectedRunMode = .random
+                                isShowingSessionFlow = true
+                            }
                         }
-                        QuickActionButton(icon: "person.fill", title: "home.quick.solo") {}
+                        QuickActionButton(icon: "figure.run", title: "home.quick.solo") {
+                            selectedRunMode = .solo
+                            isShowingSessionFlow = true
+                        }
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxl)
                     
@@ -147,6 +160,9 @@ struct HomeView: View {
         .background(AppTheme.background.ignoresSafeArea())
         .task {
             await viewModel.loadData()
+        }
+        .fullScreenCover(isPresented: $isShowingSessionFlow) {
+            SessionFlowView(initialMode: selectedRunMode)
         }
     }
 }

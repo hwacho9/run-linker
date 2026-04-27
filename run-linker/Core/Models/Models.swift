@@ -9,6 +9,14 @@ enum MatchStatus: String, Codable {
     case pending, finding, matched, ready, running, finished, cancelled
 }
 
+enum SessionFlowStep: String, Equatable {
+    case setup
+    case matching
+    case readyRoom
+    case liveRun
+    case results
+}
+
 // MARK: - Models
 struct User: Identifiable, Codable {
     let id: String

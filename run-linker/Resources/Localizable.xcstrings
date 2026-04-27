@@ -1,3981 +1,4127 @@
 {
-  "sourceLanguage": "ko",
-  "strings": {
-    "": {},
-    "%lld": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld"
+  "sourceLanguage" : "ko",
+  "strings" : {
+    "" : {
+
+    },
+    "“오늘은 한강을 따라 시원하게 %lldkm 뛰고 싶네요. 함께 런링크 하실 분?”" : {
+
+    },
+    "%@ (%@)" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ (%2$@)"
+          }
+        }
+      }
+    },
+    "%@님과 함께 %@ 러닝" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@님과 함께 %2$@ 러닝"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
           }
         }
       }
     },
-    "%lld%%": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "%lld%%"
+    "%lld%%" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%%"
           }
         }
       }
+    },
+    "+1" : {
+
     },
-    "12.4": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "12.4"
+    "10m" : {
+
+    },
+    "12.4" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "12.4"
           }
         }
       }
     },
-    "activity.mode.friend": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Friend Run"
+    "60m" : {
+
+    },
+    "activity.mode.friend" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Friend Run"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "친구 러닝"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "友だちラン"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "友だちラン"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "친구 러닝"
           }
         }
       }
     },
-    "activity.mode.random": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Random Match"
+    "activity.mode.random" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Random Match"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "랜덤 매칭"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランダムマッチ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランダムマッチ"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "랜덤 매칭"
           }
         }
       }
     },
-    "activity.my_stats": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "My Stats"
+    "activity.my_stats" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Stats"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "내 통계"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自分の統計"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自分の統計"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내 통계"
           }
         }
       }
     },
-    "activity.session_history": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Session History"
+    "activity.session_history" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Session History"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "러닝 기록"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランニング履歴"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランニング履歴"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝 기록"
           }
         }
       }
     },
-    "activity.stat.avg_pace": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avg Pace"
+    "activity.stat.avg_pace" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avg Pace"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "평균 페이스"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "平均ペース"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "平均ペース"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "평균 페이스"
           }
         }
       }
     },
-    "activity.stat.total_sessions": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total Sessions"
+    "activity.stat.total_sessions" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Sessions"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "러닝 횟수"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ラン回数"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ラン回数"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝 횟수"
           }
         }
       }
     },
-    "activity.sync_format": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sync: %d%%"
+    "activity.sync_format" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sync: %d%%"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "싱크: %d%%"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "シンク: %d%%"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "シンク: %d%%"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "싱크: %d%%"
           }
         }
       }
     },
-    "activity.weekly_progression": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weekly Progression"
+    "activity.weekly_progression" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly Progression"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "주간 성장"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "週間の推移"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "週間の推移"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주간 성장"
           }
         }
       }
     },
-    "auth.error.account_exists_different_credential": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This email is already registered with a different sign-in method."
+    "auth.error.account_exists_different_credential" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This email is already registered with a different sign-in method."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "동일한 이메일로 다른 로그인 방식이 이미 등록되어 있습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このメールアドレスは別のログイン方法ですでに登録されています。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このメールアドレスは別のログイン方法ですでに登録されています。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "동일한 이메일로 다른 로그인 방식이 이미 등록되어 있습니다."
           }
         }
       }
     },
-    "auth.error.all_fields_required": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Please fill in all fields."
+    "auth.error.all_fields_required" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please fill in all fields."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "모든 필드를 입력해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべての項目を入力してください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すべての項目を入力してください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모든 필드를 입력해주세요."
           }
         }
       }
     },
-    "auth.error.app_check_failed": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firebase App Check failed. Check simulator debug token registration or App Check enforcement."
+    "auth.error.app_check_failed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firebase App Check failed. Check simulator debug token registration or App Check enforcement."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firebase App Check 검증에 실패했습니다. 시뮬레이터 debug token 등록 또는 App Check enforcement 설정을 확인해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firebase App Check の検証に失敗しました。シミュレーターの debug token 登録または App Check enforcement 設定を確認してください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firebase App Check の検証に失敗しました。シミュレーターの debug token 登録または App Check enforcement 設定を確認してください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firebase App Check 검증에 실패했습니다. 시뮬레이터 debug token 등록 또는 App Check enforcement 설정을 확인해주세요."
           }
         }
       }
     },
-    "auth.error.apple_credential_processing": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An error occurred while processing Apple credentials."
+    "auth.error.apple_credential_processing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred while processing Apple credentials."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 자격 증명 처리 중 오류가 발생했습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 認証情報の処理中にエラーが発生しました。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 認証情報の処理中にエラーが発生しました。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 자격 증명 처리 중 오류가 발생했습니다."
           }
         }
       }
     },
-    "auth.error.apple_credential_unreadable": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Could not read Apple credentials."
+    "auth.error.apple_credential_unreadable" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not read Apple credentials."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 인증 정보를 읽지 못했습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 認証情報を読み取れませんでした。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 認証情報を読み取れませんでした。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 인증 정보를 읽지 못했습니다."
           }
         }
       }
     },
-    "auth.error.apple_device_not_configured": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This device is not configured for the required Apple authentication."
+    "auth.error.apple_device_not_configured" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This device is not configured for the required Apple authentication."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이 기기에서는 필요한 Apple 인증 설정이 완료되지 않았습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このデバイスでは必要な Apple 認証設定が完了していません。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このデバイスでは必要な Apple 認証設定が完了していません。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 기기에서는 필요한 Apple 인증 설정이 완료되지 않았습니다."
           }
         }
       }
     },
-    "auth.error.apple_excluded_credential": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This Apple credential cannot be used on this device."
+    "auth.error.apple_excluded_credential" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Apple credential cannot be used on this device."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이 기기에서 사용할 수 없는 Apple 자격 증명입니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "この Apple 認証情報はこのデバイスでは使用できません。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "この Apple 認証情報はこのデバイスでは使用できません。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 기기에서 사용할 수 없는 Apple 자격 증명입니다."
           }
         }
       }
     },
-    "auth.error.apple_failed": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple sign-in failed. Please try again later."
+    "auth.error.apple_failed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple sign-in failed. Please try again later."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 로그인에 실패했습니다. 잠시 후 다시 시도해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appleでのサインインに失敗しました。しばらくしてからもう一度お試しください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appleでのサインインに失敗しました。しばらくしてからもう一度お試しください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 로그인에 실패했습니다. 잠시 후 다시 시도해주세요."
           }
         }
       }
     },
-    "auth.error.apple_generic": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An error occurred during Apple sign-in."
+    "auth.error.apple_generic" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error occurred during Apple sign-in."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 로그인 중 오류가 발생했습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appleでのサインイン中にエラーが発生しました。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Appleでのサインイン中にエラーが発生しました。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 로그인 중 오류가 발생했습니다."
           }
         }
       }
     },
-    "auth.error.apple_invalid_response": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The Apple authentication response is invalid."
+    "auth.error.apple_invalid_response" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Apple authentication response is invalid."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 인증 응답이 올바르지 않습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 認証の応答が無効です。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 認証の応答が無効です。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 인증 응답이 올바르지 않습니다."
           }
         }
       }
     },
-    "auth.error.apple_nonce_missing": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple sign-in request state was lost. Please try again."
+    "auth.error.apple_nonce_missing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple sign-in request state was lost. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 로그인 요청 상태가 유실되었습니다. 다시 시도해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple サインインのリクエスト状態が失われました。もう一度お試しください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple サインインのリクエスト状態が失われました。もう一度お試しください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 로그인 요청 상태가 유실되었습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "auth.error.apple_not_handled": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Could not handle the Apple sign-in request."
+    "auth.error.apple_not_handled" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not handle the Apple sign-in request."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 로그인 요청을 처리하지 못했습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple サインインのリクエストを処理できませんでした。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple サインインのリクエストを処理できませんでした。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 로그인 요청을 처리하지 못했습니다."
           }
         }
       }
     },
-    "auth.error.apple_not_interactive": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple sign-in cannot continue in the current state."
+    "auth.error.apple_not_interactive" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple sign-in cannot continue in the current state."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 상태에서는 Apple 로그인을 진행할 수 없습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "現在の状態では Apple サインインを続行できません。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "現在の状態では Apple サインインを続行できません。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 상태에서는 Apple 로그인을 진행할 수 없습니다."
           }
         }
       }
     },
-    "auth.error.apple_preferred": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sign in with Apple is recommended for this account."
+    "auth.error.apple_preferred" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign in with Apple is recommended for this account."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이 계정은 Apple 로그인을 사용하는 것이 권장됩니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このアカウントでは Apple でのサインインをおすすめします。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このアカウントでは Apple でのサインインをおすすめします。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이 계정은 Apple 로그인을 사용하는 것이 권장됩니다."
           }
         }
       }
     },
-    "auth.error.apple_token_missing": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Could not get the Apple authentication token."
+    "auth.error.apple_token_missing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not get the Apple authentication token."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 인증 토큰을 가져오지 못했습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 認証トークンを取得できませんでした。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 認証トークンを取得できませんでした。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 인증 토큰을 가져오지 못했습니다."
           }
         }
       }
     },
-    "auth.error.apple_unknown": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "An unknown Apple sign-in error occurred."
+    "auth.error.apple_unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unknown Apple sign-in error occurred."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple 로그인 중 알 수 없는 오류가 발생했습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple サインイン中に不明なエラーが発生しました。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Apple サインイン中に不明なエラーが発生しました。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple 로그인 중 알 수 없는 오류가 발생했습니다."
           }
         }
       }
     },
-    "auth.error.credential_already_in_use": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This sign-in method is already linked to another account."
+    "auth.error.credential_already_in_use" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This sign-in method is already linked to another account."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이미 다른 계정에 연결된 로그인 수단입니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このログイン方法はすでに別のアカウントに連携されています。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このログイン方法はすでに別のアカウントに連携されています。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미 다른 계정에 연결된 로그인 수단입니다."
           }
         }
       }
     },
-    "auth.error.email_already_in_use": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This email is already registered."
+    "auth.error.email_already_in_use" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This email is already registered."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이미 가입된 이메일입니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このメールアドレスはすでに登録されています。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このメールアドレスはすでに登録されています。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미 가입된 이메일입니다."
           }
         }
       }
     },
-    "auth.error.email_password_required": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Please enter your email and password."
+    "auth.error.email_password_required" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter your email and password."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이메일과 비밀번호를 입력해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メールアドレスとパスワードを入力してください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メールアドレスとパスワードを入力してください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이메일과 비밀번호를 입력해주세요."
           }
         }
       }
     },
-    "auth.error.firestore_database_missing": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The default Firestore database has not been created yet. Create Firestore Database in Firebase Console and try again."
+    "auth.error.firestore_database_missing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The default Firestore database has not been created yet. Create Firestore Database in Firebase Console and try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firestore 기본 데이터베이스가 아직 생성되지 않았습니다. Firebase Console에서 Firestore Database를 만든 뒤 다시 시도해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "デフォルトの Firestore データベースがまだ作成されていません。Firebase Console で Firestore Database を作成してからもう一度お試しください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "デフォルトの Firestore データベースがまだ作成されていません。Firebase Console で Firestore Database を作成してからもう一度お試しください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firestore 기본 데이터베이스가 아직 생성되지 않았습니다. Firebase Console에서 Firestore Database를 만든 뒤 다시 시도해주세요."
           }
         }
       }
     },
-    "auth.error.firestore_permission_denied": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firestore security rules do not allow saving users/profiles. Allow signed-in users to write their own documents."
+    "auth.error.firestore_permission_denied" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firestore security rules do not allow saving users/profiles. Allow signed-in users to write their own documents."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firestore 보안 규칙이 users/profiles 저장을 허용하지 않습니다. 로그인한 사용자가 본인 문서에 쓸 수 있도록 rules를 확인해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firestore セキュリティルールにより users/profiles の保存が許可されていません。ログイン中のユーザーが自分のドキュメントに書き込めるよう rules を確認してください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firestore セキュリティルールにより users/profiles の保存が許可されていません。ログイン中のユーザーが自分のドキュメントに書き込めるよう rules を確認してください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firestore 보안 규칙이 users/profiles 저장을 허용하지 않습니다. 로그인한 사용자가 본인 문서에 쓸 수 있도록 rules를 확인해주세요."
           }
         }
       }
     },
-    "auth.error.firestore_write_timeout": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firestore user profile save is taking too long. Check Firestore Database, security rules, App Check, and network status, then try logging in again."
+    "auth.error.firestore_write_timeout" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firestore user profile save is taking too long. Check Firestore Database, security rules, App Check, and network status, then try logging in again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firestore 사용자 프로필 저장이 지연되고 있습니다. Firestore Database, 보안 규칙, App Check, 네트워크 상태를 확인한 뒤 다시 로그인해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firestore のユーザープロフィール保存に時間がかかっています。Firestore Database、セキュリティルール、App Check、ネットワーク状態を確認してから再度ログインしてください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firestore のユーザープロフィール保存に時間がかかっています。Firestore Database、セキュリティルール、App Check、ネットワーク状態を確認してから再度ログインしてください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firestore 사용자 프로필 저장이 지연되고 있습니다. Firestore Database, 보안 규칙, App Check, 네트워크 상태를 확인한 뒤 다시 로그인해주세요."
           }
         }
       }
     },
-    "auth.error.google_config_missing": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google sign-in is not configured. Check GoogleService-Info.plist and URL Scheme."
+    "auth.error.google_config_missing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google sign-in is not configured. Check GoogleService-Info.plist and URL Scheme."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google 로그인 설정이 누락되었습니다. GoogleService-Info.plist와 URL Scheme를 확인해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google ログイン設定が不足しています。GoogleService-Info.plist と URL Scheme を確認してください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google ログイン設定が不足しています。GoogleService-Info.plist と URL Scheme を確認してください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google 로그인 설정이 누락되었습니다. GoogleService-Info.plist와 URL Scheme를 확인해주세요."
           }
         }
       }
     },
-    "auth.error.google_present_failed": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Could not open the Google sign-in screen."
+    "auth.error.google_present_failed" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not open the Google sign-in screen."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google 로그인 화면을 열 수 없습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google ログイン画面を開けませんでした。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google ログイン画面を開けませんでした。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google 로그인 화면을 열 수 없습니다."
           }
         }
       }
     },
-    "auth.error.google_token_missing": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Could not get the Google authentication token."
+    "auth.error.google_token_missing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not get the Google authentication token."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google 인증 토큰을 가져올 수 없습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google 認証トークンを取得できませんでした。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google 認証トークンを取得できませんでした。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google 인증 토큰을 가져올 수 없습니다."
           }
         }
       }
     },
-    "auth.error.invalid_credential": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The credential is invalid. Please try again."
+    "auth.error.invalid_credential" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The credential is invalid. Please try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "인증 정보가 유효하지 않습니다. 다시 시도해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "認証情報が無効です。もう一度お試しください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "認証情報が無効です。もう一度お試しください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "인증 정보가 유효하지 않습니다. 다시 시도해주세요."
           }
         }
       }
     },
-    "auth.error.invalid_email": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "The email format is invalid."
+    "auth.error.invalid_email" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The email format is invalid."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이메일 형식이 올바르지 않습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メールアドレスの形式が正しくありません。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メールアドレスの形式が正しくありません。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이메일 형식이 올바르지 않습니다."
           }
         }
       }
     },
-    "auth.error.invalid_email_format": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Please enter a valid email address."
+    "auth.error.invalid_email_format" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please enter a valid email address."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "올바른 이메일 형식을 입력해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "有効なメールアドレスを入力してください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "有効なメールアドレスを入力してください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "올바른 이메일 형식을 입력해주세요."
           }
         }
       }
     },
-    "auth.error.login_cancelled": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sign-in was cancelled."
+    "auth.error.login_cancelled" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign-in was cancelled."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "로그인이 취소되었습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サインインがキャンセルされました。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "サインインがキャンセルされました。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그인이 취소되었습니다."
           }
         }
       }
     },
-    "auth.error.network": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Check your network connection and try again."
+    "auth.error.network" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check your network connection and try again."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "네트워크 상태를 확인한 뒤 다시 시도해주세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ネットワーク接続を確認してからもう一度お試しください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ネットワーク接続を確認してからもう一度お試しください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "네트워크 상태를 확인한 뒤 다시 시도해주세요."
           }
         }
       }
     },
-    "auth.error.password_min_length": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Password must be at least 6 characters."
+    "auth.error.password_min_length" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password must be at least 6 characters."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "비밀번호는 6자 이상이어야 합니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パスワードは6文字以上にしてください。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パスワードは6文字以上にしてください。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비밀번호는 6자 이상이어야 합니다."
           }
         }
       }
     },
-    "auth.error.password_mismatch": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Password confirmation does not match."
+    "auth.error.password_mismatch" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password confirmation does not match."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "비밀번호 확인이 일치하지 않습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "確認用パスワードが一致しません。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "確認用パスワードが一致しません。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비밀번호 확인이 일치하지 않습니다."
           }
         }
       }
     },
-    "auth.error.user_not_found": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This email is not registered."
+    "auth.error.user_not_found" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This email is not registered."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "가입되지 않은 이메일입니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "このメールアドレスは登録されていません。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "このメールアドレスは登録されていません。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "가입되지 않은 이메일입니다."
           }
         }
       }
     },
-    "auth.error.weak_password": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Password is too weak."
+    "auth.error.weak_password" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password is too weak."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "비밀번호 강도가 너무 약합니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パスワードが弱すぎます。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パスワードが弱すぎます。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비밀번호 강도가 너무 약합니다."
           }
         }
       }
     },
-    "auth.error.wrong_password": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Password is incorrect."
+    "auth.error.wrong_password" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password is incorrect."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "비밀번호가 올바르지 않습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パスワードが正しくありません。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パスワードが正しくありません。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비밀번호가 올바르지 않습니다."
           }
         }
       }
     },
-    "auth.field.confirm_password": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Confirm password"
+    "auth.field.confirm_password" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm password"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "비밀번호 확인"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パスワード確認"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パスワード確認"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비밀번호 확인"
           }
         }
       }
     },
-    "auth.field.email": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Email"
+    "auth.field.email" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이메일"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "メールアドレス"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "メールアドレス"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이메일"
           }
         }
       }
     },
-    "auth.field.name": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Name"
+    "auth.field.name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이름"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "名前"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "名前"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이름"
           }
         }
       }
     },
-    "auth.field.password": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Password"
+    "auth.field.password" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "비밀번호"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パスワード"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パスワード"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비밀번호"
           }
         }
       }
     },
-    "auth.field.password_min": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Password (6+ characters)"
+    "auth.field.password_min" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password (6+ characters)"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "비밀번호 (6자 이상)"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パスワード（6文字以上）"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パスワード（6文字以上）"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비밀번호 (6자 이상)"
           }
         }
       }
     },
-    "auth.google.continue": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Continue with Google"
+    "auth.google.continue" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Continue with Google"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Google로 계속하기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Googleで続ける"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Googleで続ける"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Google로 계속하기"
           }
         }
       }
     },
-    "auth.login.button": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Log In"
+    "auth.login.button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log In"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "로그인"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログイン"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ログイン"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그인"
           }
         }
       }
     },
-    "auth.login.email_divider": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "or log in with email"
+    "auth.login.email_divider" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "or log in with email"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "또는 이메일로 로그인"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "またはメールでログイン"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "またはメールでログイン"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "또는 이메일로 로그인"
           }
         }
       }
     },
-    "auth.login.forgot_password": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Forgot your password?"
+    "auth.login.forgot_password" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forgot your password?"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "비밀번호를 잊으셨나요?"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パスワードをお忘れですか？"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パスワードをお忘れですか？"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "비밀번호를 잊으셨나요?"
           }
         }
       }
     },
-    "auth.login.no_account": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Not a member yet?"
+    "auth.login.no_account" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not a member yet?"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "아직 회원이 아니신가요?"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "まだ会員ではありませんか？"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "まだ会員ではありませんか？"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "아직 회원이 아니신가요?"
           }
         }
       }
     },
-    "auth.login.subtitle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Welcome back to RunLinker.\nFind today's pace."
+    "auth.login.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome back to RunLinker.\nFind today's pace."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RunLinker에 다시 오신 것을 환영합니다.\n오늘의 페이스를 찾아보세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RunLinkerへようこそ。\n今日のペースを見つけましょう。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RunLinkerへようこそ。\n今日のペースを見つけましょう。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RunLinker에 다시 오신 것을 환영합니다.\n오늘의 페이스를 찾아보세요."
           }
         }
       }
     },
-    "auth.login.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ready to run\ntogether?"
+    "auth.login.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready to run\ntogether?"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "함께 달릴 준비가\n되셨나요?"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一緒に走る準備は\nできましたか？"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一緒に走る準備は\nできましたか？"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "함께 달릴 준비가\n되셨나요?"
           }
         }
       }
     },
-    "auth.logout": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Log Out"
+    "auth.logout" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log Out"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "로그아웃"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ログアウト"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ログアウト"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "로그아웃"
           }
         }
       }
     },
-    "auth.logout.confirm_message": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Do you want to log out of the current account?"
+    "auth.logout.confirm_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to log out of the current account?"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "현재 계정에서 로그아웃하시겠습니까?"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "現在のアカウントからログアウトしますか？"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "現在のアカウントからログアウトしますか？"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "현재 계정에서 로그아웃하시겠습니까?"
           }
         }
       }
     },
-    "auth.signup.button": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sign Up"
+    "auth.signup.button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Up"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "회원가입"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新規登録"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "新規登録"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "회원가입"
           }
         }
       }
     },
-    "auth.signup.email_divider": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "or sign up with email"
+    "auth.signup.email_divider" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "or sign up with email"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "또는 이메일로 가입"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "またはメールで登録"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "またはメールで登録"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "또는 이메일로 가입"
           }
         }
       }
     },
-    "auth.signup.has_account": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Already have an account?"
+    "auth.signup.has_account" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already have an account?"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이미 계정이 있으신가요?"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すでにアカウントをお持ちですか？"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すでにアカウントをお持ちですか？"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이미 계정이 있으신가요?"
           }
         }
       }
     },
-    "auth.signup.subtitle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run together with RunLinker!\nYour new running partner is waiting."
+    "auth.signup.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run together with RunLinker!\nYour new running partner is waiting."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RunLinker에서 함께 달려보세요!\n당신의 새로운 러닝 파트너가 기다리고 있습니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RunLinkerで一緒に走りましょう！\n新しいランニングパートナーが待っています。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RunLinkerで一緒に走りましょう！\n新しいランニングパートナーが待っています。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RunLinker에서 함께 달려보세요!\n당신의 새로운 러닝 파트너가 기다리고 있습니다."
           }
         }
       }
     },
-    "auth.signup.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Sign Up"
+    "auth.signup.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign Up"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "회원가입"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新規登録"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "新規登録"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "회원가입"
           }
         }
       }
     },
-    "common.cancel": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cancel"
+    "common.cancel" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "취소"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キャンセル"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "キャンセル"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "취소"
           }
         }
       }
     },
-    "common.detail": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Details"
+    "common.detail" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Details"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "상세보기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "詳細"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "詳細"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "상세보기"
           }
         }
       }
     },
-    "common.more": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "More"
+    "common.more" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "더보기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "もっと見る"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "もっと見る"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "더보기"
           }
         }
       }
     },
-    "common.view_all": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "View All"
+    "common.view_all" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View All"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "전체보기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべて見る"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すべて見る"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전체보기"
           }
         }
       }
     },
-    "Firestore 프로필 저장 테스트": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Firestoreプロフィール保存テスト"
+    "Firestore 프로필 저장 테스트" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Firestoreプロフィール保存テスト"
           }
         }
       }
     },
-    "friends.add": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Add Friend"
+    "friends.add" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add Friend"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "친구 추가"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "友だち追加"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "友だち追加"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "친구 추가"
           }
         }
       }
     },
-    "friends.filter.all": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All"
+    "friends.filter.all" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "전체"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべて"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すべて"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전체"
           }
         }
       }
     },
-    "friends.filter.available": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Available Now"
+    "friends.filter.available" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Available Now"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "지금 가능"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今すぐ可能"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今すぐ可能"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "지금 가능"
           }
         }
       }
     },
-    "friends.filter.favorite": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Favorites"
+    "friends.filter.favorite" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Favorites"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "즐겨찾기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "お気に入り"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "お気に入り"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "즐겨찾기"
           }
         }
       }
     },
-    "friends.filter.recent": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recent Partners"
+    "friends.filter.recent" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent Partners"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "최근 함께 달린"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近一緒に走った"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最近一緒に走った"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최근 함께 달린"
           }
         }
       }
     },
-    "friends.invite.send_link": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Send Invite Link"
+    "friends.invite.send_link" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send Invite Link"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "초대 링크 보내기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "招待リンクを送る"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "招待リンクを送る"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "초대 링크 보내기"
           }
         }
       }
     },
-    "friends.invite.subtitle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Running together doubles the motivation!"
+    "friends.invite.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Running together doubles the motivation!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "함께 달리면 동기부여가 2배!"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一緒に走ればモチベーションは2倍！"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一緒に走ればモチベーションは2倍！"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "함께 달리면 동기부여가 2배!"
           }
         }
       }
     },
-    "friends.invite.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Invite a friend\nand run together"
+    "friends.invite.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invite a friend\nand run together"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "친구를 초대하고\n같이 달려보세요"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "友だちを招待して\n一緒に走りましょう"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "友だちを招待して\n一緒に走りましょう"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "친구를 초대하고\n같이 달려보세요"
           }
         }
       }
     },
-    "friends.join": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Join"
+    "friends.join" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Join"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "참가하기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "参加する"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "参加する"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "참가하기"
           }
         }
       }
     },
-    "friends.run_again": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run Again"
+    "friends.run_again" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run Again"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "다시 달리기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "もう一度走る"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "もう一度走る"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다시 달리기"
           }
         }
       }
     },
-    "friends.run_together": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run Together"
+    "friends.run_together" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run Together"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "같이 달리기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一緒に走る"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一緒に走る"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "같이 달리기"
           }
         }
       }
     },
-    "friends.search.placeholder": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Search friend name"
+    "friends.search.placeholder" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search friend name"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "친구 이름 검색"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "友だちの名前を検索"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "友だちの名前を検索"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "친구 이름 검색"
           }
         }
       }
     },
-    "friends.section.all": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "All Friends"
+    "friends.section.all" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All Friends"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "전체 친구"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべての友だち"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すべての友だち"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "전체 친구"
           }
         }
       }
     },
-    "friends.section.available": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Friends Available Now"
+    "friends.section.available" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Friends Available Now"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "지금 달릴 수 있는 친구"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今走れる友だち"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今走れる友だち"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "지금 달릴 수 있는 친구"
           }
         }
       }
     },
-    "friends.section.recent": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recent Running Partners"
+    "friends.section.recent" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent Running Partners"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "최근 함께 달린 친구"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近一緒に走った友だち"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最近一緒に走った友だち"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최근 함께 달린 친구"
           }
         }
       }
     },
-    "friends.stat.avg_pace": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Avg Pace"
+    "friends.stat.avg_pace" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avg Pace"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "평균 페이스"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "平均ペース"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "平均ペース"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "평균 페이스"
           }
         }
       }
     },
-    "friends.stat.today": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Today"
+    "friends.stat.today" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "오늘"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今日"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今日"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오늘"
           }
         }
       }
     },
-    "friends.status.available_now": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Available Now"
+    "friends.status.available_now" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Available Now"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "지금 가능"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今すぐ可能"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今すぐ可能"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "지금 가능"
           }
         }
       }
     },
-    "friends.status.offline": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Offline"
+    "friends.status.offline" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Offline"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "오프라인"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "オフライン"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "オフライン"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "오프라인"
           }
         }
       }
     },
-    "friends.status.readying": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Getting ready"
+    "friends.status.readying" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Getting ready"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "준비 중"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "準備中"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "準備中"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "준비 중"
           }
         }
       }
     },
-    "friends.status.running_now": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Running Now"
+    "friends.status.running_now" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Running Now"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "지금 러닝 중"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランニング中"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランニング中"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "지금 러닝 중"
           }
         }
       }
     },
-    "home.hero.button": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Start Running Together"
+    "home.hero.button" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Running Together"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "같이 달리기 시작"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一緒に走り始める"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一緒に走り始める"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "같이 달리기 시작"
           }
         }
       }
     },
-    "home.hero.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Ready to run\ntogether?"
+    "home.hero.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ready to run\ntogether?"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "함께 달릴 준비가\n되었나요?"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一緒に走る準備は\nできましたか？"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一緒に走る準備は\nできましたか？"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "함께 달릴 준비가\n되었나요?"
           }
         }
       }
     },
-    "home.quick.friend": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run with a Friend"
+    "home.quick.friend" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run with a Friend"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "친구와 달리기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "友だちと走る"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "友だちと走る"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "친구와 달리기"
           }
         }
       }
     },
-    "home.quick.random": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Random Match"
+    "home.quick.random" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Random Match"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "랜덤 매칭"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランダムマッチ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランダムマッチ"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "랜덤 매칭"
           }
         }
       }
     },
-    "home.quick.solo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run Solo"
+    "home.quick.solo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run Solo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "혼자 달리기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ひとりで走る"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ひとりで走る"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "혼자 달리기"
           }
         }
       }
     },
-    "home.recent.completed_suffix": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "completed with you!"
+    "home.recent.completed_suffix" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "completed with you!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "님과 함께 완료!"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "さんと一緒に完了！"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "さんと一緒に完了！"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "님과 함께 완료!"
           }
         }
       }
     },
-    "home.recent.date": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Nov 24, 2023 • 7:30 AM"
+    "home.recent.date" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nov 24, 2023 • 7:30 AM"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "2023. 11. 24 • 오전 7:30"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2023年11月24日 • 午前7:30"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "2023年11月24日 • 午前7:30"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "2023. 11. 24 • 오전 7:30"
           }
         }
       }
     },
-    "home.recent.partner_label": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Partner"
+    "home.recent.partner_label" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partner"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "파트너"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パートナー"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パートナー"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "파트너"
           }
         }
       }
     },
-    "home.recent.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Han River City Run"
+    "home.recent.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Han River City Run"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "한강 시티 런"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "漢江シティラン"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "漢江シティラン"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "한강 시티 런"
           }
         }
       }
     },
-    "home.section.recent_crew": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recent Running Crew"
+    "home.section.recent_crew" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent Running Crew"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "최근 함께한 러닝 크루"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近一緒に走ったクルー"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最近一緒に走ったクルー"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최근 함께한 러닝 크루"
           }
         }
       }
     },
-    "home.section.recent_report": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Recent Run Report"
+    "home.section.recent_report" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent Run Report"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "최근 러닝 리포트"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近のランニングレポート"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最近のランニングレポート"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "최근 러닝 리포트"
           }
         }
       }
     },
-    "home.section.weekly_stats": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This Week's Stats"
+    "home.section.weekly_stats" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Week's Stats"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이번 주 통계"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今週の統計"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今週の統計"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이번 주 통계"
           }
         }
       }
     },
-    "home.stat.average_pace": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Average Pace"
+    "home.stat.average_pace" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average Pace"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "평균 페이스"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "平均ペース"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "平均ペース"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "평균 페이스"
           }
         }
       }
     },
-    "home.stat.total_distance": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total Distance"
+    "home.stat.total_distance" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Distance"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "누적 거리"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "累計距離"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "累計距離"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "누적 거리"
           }
         }
       }
     },
-    "J": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "J"
+    "J" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "J"
           }
         }
       }
     },
-    "km": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "km"
+    "km" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km"
           }
         }
       }
+    },
+    "Live Run" : {
+
     },
-    "M": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "M"
+    "M" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "M"
           }
         }
       }
     },
-    "my.profile.default_name": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RunLinker Runner"
+    "my.profile.default_name" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RunLinker Runner"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RunLinker Runner"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RunLinkerランナー"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RunLinkerランナー"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RunLinker Runner"
           }
         }
       }
     },
-    "my.profile.default_subtitle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run together with RunLinker!"
+    "my.profile.default_subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run together with RunLinker!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "함께 달리는 즐거움, RunLinker!"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RunLinkerで一緒に走る楽しさを！"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RunLinkerで一緒に走る楽しさを！"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "함께 달리는 즐거움, RunLinker!"
           }
         }
       }
     },
-    "my.section.notifications": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notifications"
+    "my.section.notifications" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "알림"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "通知"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림"
           }
         }
       }
     },
-    "my.section.privacy": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy & Sharing"
+    "my.section.privacy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy & Sharing"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "개인정보 및 공유"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシーと共有"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プライバシーと共有"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인정보 및 공유"
           }
         }
       }
     },
-    "my.section.safety_account": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Safety & Account"
+    "my.section.safety_account" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safety & Account"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "안전 및 계정"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "安全とアカウント"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "安全とアカウント"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "안전 및 계정"
           }
         }
       }
     },
-    "my.section.support": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Support"
+    "my.section.support" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Support"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "고객지원"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "サポート"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "サポート"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "고객지원"
           }
         }
       }
     },
-    "my.setting.account": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Account Management"
+    "my.setting.account" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account Management"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "계정 관리"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "アカウント管理"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "アカウント管理"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "계정 관리"
           }
         }
       }
     },
-    "my.setting.blocked_users": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blocked Users"
+    "my.setting.blocked_users" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blocked Users"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "차단한 사용자"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ブロックしたユーザー"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ブロックしたユーザー"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "차단한 사용자"
           }
         }
       }
     },
-    "my.setting.blur_points": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Blur Start/End Points"
+    "my.setting.blur_points" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Blur Start/End Points"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "시작/종료 지점 흐리기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "開始/終了地点をぼかす"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "開始/終了地点をぼかす"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시작/종료 지점 흐리기"
           }
         }
       }
     },
-    "my.setting.blur_points.subtitle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hide home or work address exposure."
+    "my.setting.blur_points.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide home or work address exposure."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "집이나 직장 주소 노출 방지를 위해 가립니다"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自宅や職場の住所が見えないようにします。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自宅や職場の住所が見えないようにします。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "집이나 직장 주소 노출 방지를 위해 가립니다"
           }
         }
       }
     },
-    "my.setting.cheer_notifications": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Cheer Notifications"
+    "my.setting.cheer_notifications" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cheer Notifications"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "응원 알림"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "応援通知"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "応援通知"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "응원 알림"
           }
         }
       }
     },
-    "my.setting.contact": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Contact Us"
+    "my.setting.contact" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact Us"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "문의하기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "お問い合わせ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "お問い合わせ"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "문의하기"
           }
         }
       }
     },
-    "my.setting.help": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Help"
+    "my.setting.help" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "도움말"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ヘルプ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ヘルプ"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "도움말"
           }
         }
       }
     },
-    "my.setting.location_sharing": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Location Sharing"
+    "my.setting.location_sharing" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location Sharing"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "위치 공유 설정"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "位置情報共有設定"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "位置情報共有設定"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "위치 공유 설정"
           }
         }
       }
     },
-    "my.setting.location_sharing.subtitle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Show your location to friends while running."
+    "my.setting.location_sharing.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show your location to friends while running."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "러닝 중 친구들에게 내 위치를 노출합니다"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランニング中、友だちに自分の位置を表示します。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランニング中、友だちに自分の位置を表示します。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝 중 친구들에게 내 위치를 노출합니다"
           }
         }
       }
     },
-    "my.setting.notifications": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Notification Settings"
+    "my.setting.notifications" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notification Settings"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "알림 설정"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通知設定"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "通知設定"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "알림 설정"
           }
         }
       }
     },
-    "my.setting.privacy_policy": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Privacy Policy"
+    "my.setting.privacy_policy" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacy Policy"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "개인정보 처리방침"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシーポリシー"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プライバシーポリシー"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인정보 처리방침"
           }
         }
       }
     },
-    "my.setting.random_visibility": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Random Match Visibility"
+    "my.setting.random_visibility" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Random Match Visibility"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "랜덤 매칭 공개 범위"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランダムマッチの公開範囲"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランダムマッチの公開範囲"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "랜덤 매칭 공개 범위"
           }
         }
       }
     },
-    "my.setting.random_visibility.subtitle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Set the range for finding runners to run with."
+    "my.setting.random_visibility.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set the range for finding runners to run with."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "함께 달릴 러너를 찾는 범위를 설정합니다"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一緒に走るランナーを探す範囲を設定します。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一緒に走るランナーを探す範囲を設定します。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "함께 달릴 러너를 찾는 범위를 설정합니다"
           }
         }
       }
     },
-    "my.setting.records_visibility": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run History Visibility"
+    "my.setting.records_visibility" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run History Visibility"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "러닝 기록 공개 범위"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランニング履歴の公開範囲"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランニング履歴の公開範囲"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝 기록 공개 범위"
           }
         }
       }
     },
-    "my.setting.records_visibility.subtitle": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Choose who can see your workout journal."
+    "my.setting.records_visibility.subtitle" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose who can see your workout journal."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "나의 운동 일지를 볼 수 있는 사람을 선택합니다"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自分の運動記録を見られる人を選択します。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自分の運動記録を見られる人を選択します。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "나의 운동 일지를 볼 수 있는 사람을 선택합니다"
           }
         }
       }
     },
-    "my.setting.reports": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Report History"
+    "my.setting.reports" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Report History"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "신고 내역"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "通報履歴"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "通報履歴"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "신고 내역"
           }
         }
       }
     },
-    "my.setting.run_start_notifications": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run Start Notifications"
+    "my.setting.run_start_notifications" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run Start Notifications"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "러닝 시작 알림"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランニング開始通知"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランニング開始通知"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝 시작 알림"
           }
         }
       }
     },
-    "my.setting.terms": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Terms of Service"
+    "my.setting.terms" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Terms of Service"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "서비스 이용약관"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "利用規約"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "利用規約"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "서비스 이용약관"
           }
         }
       }
     },
-    "my.setting.voice": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Voice Feature Settings"
+    "my.setting.voice" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voice Feature Settings"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "음성 기능 설정"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "音声機能設定"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "音声機能設定"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "음성 기능 설정"
           }
         }
       }
     },
-    "my.stat.average_pace": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Average Pace"
+    "my.stat.average_pace" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average Pace"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "평균 페이스"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "平均ペース"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "平均ペース"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "평균 페이스"
           }
         }
       }
     },
-    "my.stat.average_sync": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Average Sync"
+    "my.stat.average_sync" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average Sync"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "평균 싱크"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "平均シンク"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "平均シンク"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "평균 싱크"
           }
         }
       }
     },
-    "my.stat.run_count": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Run Count"
+    "my.stat.run_count" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run Count"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "러닝 횟수"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ラン回数"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ラン回数"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝 횟수"
           }
         }
       }
     },
-    "my.stat.total_distance": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Total Distance"
+    "my.stat.total_distance" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Distance"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "총 누적 거리"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "累計距離"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "累計距離"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "총 누적 거리"
           }
         }
       }
     },
-    "my.weekly_goal.badge": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Weekly Goal"
+    "my.weekly_goal.badge" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Weekly Goal"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "주간 목표"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "週間目標"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "週間目標"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "주간 목표"
           }
         }
       }
     },
-    "my.weekly_goal.remaining": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "7.6km left to your goal!"
+    "my.weekly_goal.remaining" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7.6km left to your goal!"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "목표까지 7.6km 남았어요!"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標まであと7.6km！"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目標まであと7.6km！"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표까지 7.6km 남았어요!"
           }
         }
       }
     },
-    "my.weekly_goal.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "This Week's Goal 20km"
+    "my.weekly_goal.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Week's Goal 20km"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "이번 주 목표 20km"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今週の目標 20km"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今週の目標 20km"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "이번 주 목표 20km"
           }
         }
       }
     },
-    "my.weekly_goal.total_unit": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "km total"
+    "my.weekly_goal.total_unit" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km total"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "km 누적"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km 累計"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "km 累計"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "km 누적"
           }
         }
       }
     },
-    "onboarding.next": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Next"
+    "onboarding.next" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Next"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "다음 단계로"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "次へ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "次へ"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "다음 단계로"
           }
         }
       }
     },
-    "onboarding.skip": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Skip"
+    "onboarding.skip" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Skip"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "건너뛰기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "スキップ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "スキップ"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "건너뛰기"
           }
         }
       }
     },
-    "onboarding.start": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Get Started"
+    "onboarding.start" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Started"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "시작하기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "始める"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "始める"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시작하기"
           }
         }
       }
     },
-    "onboarding.step1.description": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Feel your friend's pace through real-time location sync and experience the joy of running together anywhere in the world."
+    "onboarding.step1.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Feel your friend's pace through real-time location sync and experience the joy of running together anywhere in the world."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "실시간 위치 동기화로 친구의 페이스를 느끼며 전 세계 어디서든 함께 뛰는 즐거움을 경험하세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "リアルタイムの位置同期で友だちのペースを感じながら、世界中どこにいても一緒に走る楽しさを体験しましょう。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "リアルタイムの位置同期で友だちのペースを感じながら、世界中どこにいても一緒に走る楽しさを体験しましょう。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "실시간 위치 동기화로 친구의 페이스를 느끼며 전 세계 어디서든 함께 뛰는 즐거움을 경험하세요."
           }
         }
       }
     },
-    "onboarding.step1.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Together even\nwhen apart"
+    "onboarding.step1.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Together even\nwhen apart"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "멀리 있어도\n함께 달리는 우리"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "離れていても\n一緒に走る"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "離れていても\n一緒に走る"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "멀리 있어도\n함께 달리는 우리"
           }
         }
       }
     },
-    "onboarding.step2.description": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Enjoy a new running experience with runners at a similar pace through privacy-safe random matching."
+    "onboarding.step2.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enjoy a new running experience with runners at a similar pace through privacy-safe random matching."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "프라이버시가 보호되는 랜덤 매칭으로 나와 비슷한 페이스의 러너와 새로운 달리기 경험을 즐겨보세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プライバシーを守るランダムマッチで、自分と近いペースのランナーと新しいランニング体験を楽しみましょう。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プライバシーを守るランダムマッチで、自分と近いペースのランナーと新しいランニング体験を楽しみましょう。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프라이버시가 보호되는 랜덤 매칭으로 나와 비슷한 페이스의 러너와 새로운 달리기 경험을 즐겨보세요."
           }
         }
       }
     },
-    "onboarding.step2.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Fresh motivation\nwith random matching"
+    "onboarding.step2.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fresh motivation\nwith random matching"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "랜덤 매칭으로\n새로운 자극"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランダムマッチで\n新しい刺激を"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランダムマッチで\n新しい刺激を"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "랜덤 매칭으로\n새로운 자극"
           }
         }
       }
     },
-    "onboarding.step3.description": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Track your personal growth with a personalized dashboard and build a joyful running life."
+    "onboarding.step3.description" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Track your personal growth with a personalized dashboard and build a joyful running life."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "개인화된 대시보드를 통해 나만의 성장 기록을 확인하고 즐거운 러닝 라이프를 설계하세요."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パーソナライズされたダッシュボードで自分の成長記録を確認し、楽しいランニングライフを作りましょう。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パーソナライズされたダッシュボードで自分の成長記録を確認し、楽しいランニングライフを作りましょう。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "개인화된 대시보드를 통해 나만의 성장 기록을 확인하고 즐거운 러닝 라이프를 설계하세요."
           }
         }
       }
     },
-    "onboarding.step3.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Small wins\ntoward your goal"
+    "onboarding.step3.title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Small wins\ntoward your goal"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "목표를 향한\n작은 성취"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標へ向かう\n小さな達成"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目標へ向かう\n小さな達成"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표를 향한\n작은 성취"
           }
         }
       }
     },
-    "Pair View snapshot": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pair View スナップショット"
+    "Pair View snapshot" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pair View スナップショット"
           }
         }
       }
     },
-    "profile_sync.retry": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Retry Profile Sync"
+    "profile_sync.retry" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retry Profile Sync"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "프로필 동기화 재시도"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プロフィール同期を再試行"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プロフィール同期を再試行"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "프로필 동기화 재시도"
           }
         }
       }
     },
-    "Records": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "記録"
+    "RECOMMENDED MATCH" : {
+
+    },
+    "Records" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記録"
           }
         }
       }
     },
-    "run.metric.distance": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Distance"
+    "run.metric.distance" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "거리"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "距離"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "距離"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "거리"
           }
         }
       }
     },
-    "run.metric.pace": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pace"
+    "run.metric.pace" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pace"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "페이스"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ペース"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ペース"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페이스"
           }
         }
       }
     },
-    "run.metric.time": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time"
+    "run.metric.time" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "시간"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "時間"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시간"
           }
         }
       }
     },
-    "RunLinker": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "RunLinker"
+    "RunLinker" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "RunLinker"
           }
         }
       }
     },
-    "session.find_match": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Find Match"
+    "RUNNING DURATION" : {
+
+    },
+    "session.find_match" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Find Match"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "매칭 찾기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "マッチを探す"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "マッチを探す"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "매칭 찾기"
           }
         }
       }
     },
-    "session.finish_run": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Finish Run"
+    "session.finish_run" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Finish Run"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "러닝 종료"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランニング終了"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランニング終了"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝 종료"
           }
         }
       }
     },
-    "session.hide_exact_location": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Hide Exact Location"
+    "session.hide_exact_location" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hide Exact Location"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "정확한 위치 숨기기"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "正確な位置を隠す"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "正確な位置を隠す"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "정확한 위치 숨기기"
           }
         }
       }
     },
-    "session.hide_exact_location.description": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Your exact starting and ending locations will be hidden from random partners."
+    "session.hide_exact_location.description" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your exact starting and ending locations will be hidden from random partners."
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "랜덤 파트너에게 정확한 시작/종료 위치를 숨깁니다."
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランダムパートナーには正確な開始/終了位置を隠します。"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランダムパートナーには正確な開始/終了位置を隠します。"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "랜덤 파트너에게 정확한 시작/종료 위치를 숨깁니다."
           }
         }
       }
     },
-    "session.live.time_sample": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Time: 05:22"
+    "session.live.time_sample" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time: 05:22"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "시간: 05:22"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "時間: 05:22"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "時間: 05:22"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "시간: 05:22"
           }
         }
       }
     },
-    "session.live.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Live Run"
+    "session.live.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live Run"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "실시간 러닝"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ライブラン"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ライブラン"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "실시간 러닝"
           }
         }
       }
     },
-    "session.mode.friend": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Friend"
+    "session.mode.friend" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Friend"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "친구"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "友だち"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "友だち"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "친구"
           }
         }
       }
     },
-    "session.mode.picker": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Mode"
+    "session.mode.picker" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mode"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "모드"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "モード"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "モード"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "모드"
           }
         }
       }
     },
-    "session.mode.random": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Random"
+    "session.mode.random" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Random"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "랜덤"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランダム"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランダム"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "랜덤"
           }
         }
       }
     },
-    "session.mode.solo": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Solo"
+    "session.mode.solo" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Solo"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "솔로"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ソロ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ソロ"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "솔로"
           }
         }
       }
     },
-    "session.my_info": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "My Info"
+    "session.my_info" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My Info"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "내 정보"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自分の情報"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自分の情報"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "내 정보"
           }
         }
       }
     },
-    "session.pair_view_placeholder": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pair View: Visual progress side-by-side"
+    "session.pair_view_placeholder" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pair View: Visual progress side-by-side"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "페어 뷰: 진행 상황을 나란히 표시"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pair View: 進捗を横並びで表示"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Pair View: 進捗を横並びで表示"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "페어 뷰: 진행 상황을 나란히 표시"
           }
         }
       }
     },
-    "session.partner_map_fuzzed": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Partner Map (Fuzzed)"
+    "session.partner_map_fuzzed" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Partner Map (Fuzzed)"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "파트너 지도 (흐림)"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "パートナーの地図（ぼかし）"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "パートナーの地図（ぼかし）"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "파트너 지도 (흐림)"
           }
         }
       }
     },
-    "session.setup.title": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Setup Run"
+    "session.setup.title" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Setup Run"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "러닝 설정"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ランニング設定"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ランニング設定"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "러닝 설정"
           }
         }
       }
     },
-    "session.target_distance_format": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Target Distance: %.1f km"
+    "session.target_distance_format" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Target Distance: %.1f km"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "목표 거리: %.1f km"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "目標距離: %.1f km"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "目標距離: %.1f km"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "목표 거리: %.1f km"
           }
         }
       }
     },
-    "Solo Run": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ソロラン"
+    "Solo Run" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ソロラン"
           }
         }
       }
+    },
+    "Sync Score" : {
+
     },
-    "SYNC SCORE": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "シンクスコア"
+    "SYNC SCORE" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "シンクスコア"
           }
         }
       }
     },
-    "Sync Score %lld%%": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "シンクスコア %lld%%"
+    "Sync Score %lld%%" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "シンクスコア %lld%%"
           }
         }
       }
     },
-    "sync.score": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "SYNC SCORE"
+    "sync.score" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "SYNC SCORE"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "싱크 점수"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "シンクスコア"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "シンクスコア"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "싱크 점수"
           }
         }
       }
     },
-    "tab.activity": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Activity"
+    "tab.activity" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activity"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "기록"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "記録"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "記録"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "기록"
           }
         }
       }
     },
-    "tab.friends": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Friends"
+    "tab.friends" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Friends"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "친구"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "友だち"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "友だち"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "친구"
           }
         }
       }
     },
-    "tab.home": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Home"
+    "tab.home" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "홈"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ホーム"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ホーム"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "홈"
           }
         }
       }
     },
-    "tab.my": {
-      "localizations": {
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "My"
+    "tab.my" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "My"
           }
         },
-        "ko": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "마이"
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "マイ"
           }
         },
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "マイ"
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "마이"
           }
         }
       }
     },
-    "가장 많이 함께 달린 친구": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一番多く一緒に走った友だち"
+    "가장 많이 함께 달린 친구" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一番多く一緒に走った友だち"
           }
         }
       }
     },
-    "개인 기록": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "個人記録"
+    "개인 기록" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "個人記録"
           }
         }
       }
     },
-    "김지수": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "キム・ジス"
+    "개인 기록 모드로 시작합니다." : {
+
+    },
+    "경로" : {
+
+    },
+    "김지수" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "キム・ジス"
           }
         }
       }
+    },
+    "나가기" : {
+
     },
-    "나의 러닝 성장": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "自分のランニング成長"
+    "나의 러닝 성장" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "自分のランニング成長"
           }
         }
       }
+    },
+    "다른 러너 찾기" : {
+
+    },
+    "다음 단계로" : {
+
+    },
+    "당신의 페이스와 목표에 딱 맞는 파트너를 검색하고 있습니다." : {
+
     },
-    "무시": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "無視"
+    "대략적으로 선택 시 근처 지역 정보만 노출됩니다." : {
+
+    },
+    "랜덤 매칭" : {
+
+    },
+    "러닝 결과" : {
+
+    },
+    "러닝 시작" : {
+
+    },
+    "러닝 준비 완료" : {
+
+    },
+    "무시" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "無視"
           }
         }
       }
     },
-    "아직 기록이 없어요": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "まだ記録がありません"
+    "서울, 서초구 반포한강공원" : {
+
+    },
+    "아직 기록이 없어요" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "まだ記録がありません"
           }
         }
       }
+    },
+    "어제 밤, 한강 7km 러닝" : {
+
+    },
+    "오늘의 매칭" : {
+
+    },
+    "요약" : {
+
+    },
+    "운동 기능 설정" : {
+
+    },
+    "운동 시간" : {
+
     },
-    "이번 주 거리 흐름": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "今週の距離の推移"
+    "위치 공유 수준" : {
+
+    },
+    "이번 주 거리 흐름" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "今週の距離の推移"
           }
         }
       }
     },
-    "재시도": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "再試行"
+    "재시도" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "再試行"
           }
         }
       }
     },
-    "전체": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "すべて"
+    "전체" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "すべて"
           }
         }
       }
     },
-    "지금까지 연결한 총 누적 거리": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "これまでつないだ累計距離"
+    "정밀하게 선택 시 10m 단위로 실시간 위치를 친구에게 공유합니다." : {
+
+    },
+    "지금까지 연결한 총 누적 거리" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "これまでつないだ累計距離"
           }
         }
       }
     },
-    "첫 러닝을 시작하면 세션 히스토리와 내 통계가 자동으로 채워집니다.": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最初のランニングを始めると、セッション履歴と自分の統計が自動で追加されます。"
+    "첫 러닝을 시작하면 세션 히스토리와 내 통계가 자동으로 채워집니다." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最初のランニングを始めると、セッション履歴と自分の統計が自動で追加されます。"
           }
         }
       }
+    },
+    "총 시간" : {
+
     },
-    "최근 러닝을 빠르게 확인하고 다시 이어 달릴 수 있어요.": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "最近のランニングをすばやく確認し、また続けて走れます。"
+    "최근 러닝을 빠르게 확인하고 다시 이어 달릴 수 있어요." : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "最近のランニングをすばやく確認し、また続けて走れます。"
           }
         }
       }
     },
-    "최신순": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "新しい順"
+    "최근 활동" : {
+
+    },
+    "최신순" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "新しい順"
           }
         }
       }
+    },
+    "최적의 러너를 찾는 중..." : {
+
+    },
+    "추천 러너를 찾았습니다" : {
+
     },
-    "프로필 저장 실패": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プロフィール保存失敗"
+    "친구와 달리기" : {
+
+    },
+    "평균 싱크" : {
+
+    },
+    "프로필 저장 실패" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "プロフィール保存失敗"
           }
         }
       }
     },
-    "함께 달리기": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一緒に走る"
+    "함께 달리기" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一緒に走る"
           }
         }
       }
     },
-    "함께 달린 비율": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "一緒に走った割合"
+    "함께 달린 비율" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "一緒に走った割合"
           }
         }
       }
+    },
+    "함께 시작하기" : {
+
     },
-    "혼자 달리기": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ひとりで走る"
+    "현재 대기 중인 러너" : {
+
+    },
+    "혼자 달리기" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ひとりで走る"
           }
         }
       }
+    },
+    "홈으로 돌아가기" : {
+
+    },
+    "흐림 처리됨" : {
+
     }
   },
-  "version": "1.0"
+  "version" : "1.0"
 }
