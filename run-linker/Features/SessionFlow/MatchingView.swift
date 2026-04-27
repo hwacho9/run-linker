@@ -14,12 +14,12 @@ struct MatchingView: View {
                 radar
 
                 VStack(spacing: AppTheme.Spacing.sm) {
-                    Text(viewModel.matchedPartner == nil ? "최적의 러너를 찾는 중..." : "추천 러너를 찾았습니다")
+                    Text(viewModel.matchedPartner == nil ? "session.matching.searching_title" : "session.matching.found_title")
                         .font(AppTheme.Fonts.heading)
                         .foregroundColor(AppTheme.text)
                         .multilineTextAlignment(.center)
 
-                    Text("당신의 페이스와 목표에 딱 맞는 파트너를 검색하고 있습니다.")
+                    Text(viewModel.matchedPartner == nil ? "session.matching.searching_description" : "session.matching.found_description")
                         .font(AppTheme.Fonts.body)
                         .foregroundColor(AppTheme.textSecondary)
                         .multilineTextAlignment(.center)
@@ -29,7 +29,7 @@ struct MatchingView: View {
                 recommendedMatchCard
 
                 VStack(spacing: AppTheme.Spacing.md) {
-                    PrimaryButton(title: "함께 시작하기", icon: "bolt.fill") {
+                    PrimaryButton(title: "session.start_together", icon: "bolt.fill") {
                         viewModel.acceptMatch()
                     }
                     .disabled(viewModel.matchedPartner == nil)
@@ -39,7 +39,7 @@ struct MatchingView: View {
                         viewModel.findAnotherRunner()
                     } label: {
                         HStack(spacing: AppTheme.Spacing.sm) {
-                            Text("다른 러너 찾기")
+                            Text("session.matching.find_another")
                                 .font(AppTheme.Fonts.subheadline)
                             Image(systemName: "arrow.clockwise")
                                 .font(.system(size: 14, weight: .bold))
@@ -109,7 +109,7 @@ struct MatchingView: View {
                     HStack(spacing: AppTheme.Spacing.sm) {
                         Image(systemName: "mappin.circle.fill")
                             .foregroundColor(AppTheme.textSecondary)
-                        Text("서울, 서초구 반포한강공원")
+                    Text("session.matching.location.banpo")
                             .font(AppTheme.Fonts.bodyMedium)
                             .foregroundColor(AppTheme.textSecondary)
                     }
@@ -133,16 +133,16 @@ struct MatchingView: View {
             }
 
             HStack(spacing: AppTheme.Spacing.lg) {
-                MatchStatBox(title: "평균 페이스", value: pace(for: currentPartner), unit: "/km")
-                MatchStatBox(title: "목표 거리", value: viewModel.targetDistanceText, unit: nil)
+                MatchStatBox(title: "session.average_pace", value: pace(for: currentPartner), unit: "/km")
+                MatchStatBox(title: "session.target_distance", value: viewModel.targetDistanceText, unit: nil)
             }
 
             HStack(spacing: AppTheme.Spacing.md) {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                    Text("최근 활동")
+                    Text("session.recent_activity")
                         .font(AppTheme.Fonts.caption)
                         .foregroundColor(AppTheme.primary)
-                    Text("어제 밤, 한강 7km 러닝")
+                    Text("session.matching.recent_activity")
                         .font(AppTheme.Fonts.subheadline)
                         .foregroundColor(AppTheme.text)
                 }
@@ -156,7 +156,7 @@ struct MatchingView: View {
             .background(AppTheme.primaryFixed.opacity(0.72))
             .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.xl))
 
-            Text("“오늘은 한강을 따라 시원하게 \(Int(viewModel.targetDistance))km 뛰고 싶네요. 함께 런링크 하실 분?”")
+            Text("session.matching.quote \(Int(viewModel.targetDistance))")
                 .font(AppTheme.Fonts.body)
                 .foregroundColor(AppTheme.text)
                 .italic()
@@ -201,7 +201,7 @@ struct MatchingView: View {
 }
 
 private struct MatchStatBox: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: String
     let unit: String?
 

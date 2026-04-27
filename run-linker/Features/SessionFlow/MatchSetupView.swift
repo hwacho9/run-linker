@@ -12,7 +12,7 @@ struct MatchSetupView: View {
 
                 SetupValueCard(
                     eyebrow: "TARGET DISTANCE",
-                    title: "목표 거리",
+                    title: "session.target_distance",
                     icon: "point.topleft.down.to.point.bottomright.curvepath",
                     value: String(format: "%.1f", viewModel.targetDistance),
                     unit: "km",
@@ -26,7 +26,7 @@ struct MatchSetupView: View {
 
                 SetupValueCard(
                     eyebrow: "TARGET PACE",
-                    title: "목표 페이스",
+                    title: "session.target_pace",
                     icon: "gauge.with.dots.needle.bottom.50percent",
                     value: viewModel.targetPaceText,
                     unit: "/km",
@@ -43,7 +43,7 @@ struct MatchSetupView: View {
                 locationSharing
                 waitingRunners
 
-                PrimaryButton(title: "다음 단계로", icon: "arrow.right") {
+                PrimaryButton(title: "session.next_step", icon: "arrow.right") {
                     viewModel.startMatching()
                 }
             }
@@ -57,10 +57,10 @@ struct MatchSetupView: View {
         )) {
             TextField(activeInput?.placeholder ?? "", text: $inputText)
                 .keyboardType(.numbersAndPunctuation)
-            Button("취소", role: .cancel) {
+            Button("common.cancel", role: .cancel) {
                 activeInput = nil
             }
-            Button("입력") {
+            Button("common.enter") {
                 applyInput()
             }
         } message: {
@@ -106,8 +106,8 @@ struct MatchSetupView: View {
 
     private var modePicker: some View {
         HStack(spacing: AppTheme.Spacing.sm) {
-            setupModeSegment(mode: .friend, title: "친구와 달리기")
-            setupModeSegment(mode: .random, title: "랜덤 매칭")
+            setupModeSegment(mode: .friend, title: "session.mode.friend")
+            setupModeSegment(mode: .random, title: "session.mode.random")
         }
         .padding(AppTheme.Spacing.xs)
         .background(AppTheme.surfaceContainerHigh)
@@ -138,7 +138,7 @@ struct MatchSetupView: View {
                         .font(AppTheme.Fonts.captionSmall)
                         .foregroundColor(AppTheme.textSecondary)
                         .tracking(1.8)
-                    Text("운동 시간")
+                    Text("session.running_duration")
                         .font(AppTheme.Fonts.headingSmall)
                         .foregroundColor(AppTheme.text)
                 }
@@ -166,7 +166,7 @@ struct MatchSetupView: View {
 
     private var featureSettings: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-            Text("운동 기능 설정")
+            Text("session.workout_features")
                 .font(AppTheme.Fonts.headingSmall)
                 .foregroundColor(AppTheme.text)
 
@@ -174,8 +174,8 @@ struct MatchSetupView: View {
                 SetupToggleRow(
                     icon: "megaphone.fill",
                     iconBackground: AppTheme.secondaryContainer,
-                    title: "응원 보내기",
-                    subtitle: "친구와 소리로 응원을 주고받습니다",
+                    title: "session.feature.cheer",
+                    subtitle: "session.feature.cheer.subtitle",
                     isOn: $viewModel.cheerEnabled
                 )
 
@@ -185,8 +185,8 @@ struct MatchSetupView: View {
                 SetupToggleRow(
                     icon: "person.wave.2.fill",
                     iconBackground: AppTheme.primaryFixed,
-                    title: "음성 가이드",
-                    subtitle: "KM마다 페이스 및 정보를 안내합니다",
+                    title: "session.feature.voice_guide",
+                    subtitle: "session.feature.voice_guide.subtitle",
                     isOn: $viewModel.voiceGuideEnabled
                 )
             }
@@ -197,14 +197,14 @@ struct MatchSetupView: View {
 
     private var locationSharing: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-            Text("위치 공유 수준")
+            Text("session.location_sharing_level")
                 .font(AppTheme.Fonts.headingSmall)
                 .foregroundColor(AppTheme.text)
 
             HStack(spacing: AppTheme.Spacing.md) {
                 LocationLevelButton(
                     icon: "mappin.circle.fill",
-                    title: "정밀하게",
+                    title: "session.location.precise",
                     isSelected: viewModel.preciseLocationSharing
                 ) {
                     withAnimation(.spring(response: 0.32, dampingFraction: 0.86)) {
@@ -215,7 +215,7 @@ struct MatchSetupView: View {
 
                 LocationLevelButton(
                     icon: "scope",
-                    title: "대략적으로",
+                    title: "session.location.approximate",
                     isSelected: !viewModel.preciseLocationSharing
                 ) {
                     withAnimation(.spring(response: 0.32, dampingFraction: 0.86)) {
@@ -225,7 +225,7 @@ struct MatchSetupView: View {
                 }
             }
 
-            Text(viewModel.preciseLocationSharing ? "정밀하게 선택 시 10m 단위로 실시간 위치를 친구에게 공유합니다." : "대략적으로 선택 시 근처 지역 정보만 노출됩니다.")
+            Text(viewModel.preciseLocationSharing ? "session.location.precise.description" : "session.location.approximate.description")
                 .font(AppTheme.Fonts.caption)
                 .foregroundColor(AppTheme.textTertiary)
                 .multilineTextAlignment(.center)
@@ -250,7 +250,7 @@ struct MatchSetupView: View {
             Spacer()
 
             VStack(alignment: .trailing, spacing: 2) {
-                Text("현재 대기 중인 러너")
+                Text("session.waiting_runners")
                     .font(AppTheme.Fonts.caption)
                     .foregroundColor(AppTheme.textTertiary)
                 Text(viewModel.waitingRunnerSummary)
@@ -266,8 +266,8 @@ struct MatchSetupView: View {
 }
 
 private struct SetupValueCard: View {
-    let eyebrow: String
-    let title: String
+    let eyebrow: LocalizedStringKey
+    let title: LocalizedStringKey
     let icon: String
     let value: String
     let unit: String
@@ -327,27 +327,27 @@ private enum SetupInputField: Identifiable {
     var title: String {
         switch self {
         case .distance:
-            return "목표 거리 입력"
+            return String(localized: "session.input.target_distance.title")
         case .pace:
-            return "목표 페이스 입력"
+            return String(localized: "session.input.target_pace.title")
         }
     }
 
     var placeholder: String {
         switch self {
         case .distance:
-            return "예: 5.0"
+            return String(localized: "session.input.distance.placeholder")
         case .pace:
-            return "예: 5:30 또는 5.5"
+            return String(localized: "session.input.pace.placeholder")
         }
     }
 
     var message: String {
         switch self {
         case .distance:
-            return "1km부터 42km 사이로 설정됩니다."
+            return String(localized: "session.input.distance.message")
         case .pace:
-            return "4:00/km부터 8:00/km 사이로 설정됩니다."
+            return String(localized: "session.input.pace.message")
         }
     }
 }
@@ -373,8 +373,8 @@ private struct RoundStepButton: View {
 private struct SetupToggleRow: View {
     let icon: String
     let iconBackground: Color
-    let title: String
-    let subtitle: String
+    let title: LocalizedStringKey
+    let subtitle: LocalizedStringKey
     @Binding var isOn: Bool
 
     var body: some View {
@@ -407,7 +407,7 @@ private struct SetupToggleRow: View {
 
 private struct LocationLevelButton: View {
     let icon: String
-    let title: String
+    let title: LocalizedStringKey
     let isSelected: Bool
     let action: () -> Void
 

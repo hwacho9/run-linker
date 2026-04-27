@@ -14,7 +14,7 @@ struct ProfileSyncWarningBanner: View {
                     .font(.system(size: 16))
                 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("프로필 저장 실패")
+                    Text("profile_sync.save_failed")
                         .font(AppTheme.Fonts.bodyMedium)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
@@ -34,7 +34,7 @@ struct ProfileSyncWarningBanner: View {
             }
             
             HStack(spacing: AppTheme.Spacing.md) {
-                Button("재시도", action: retryAction)
+                Button("profile_sync.retry", action: retryAction)
                     .font(AppTheme.Fonts.captionSmall)
                     .fontWeight(.bold)
                     .foregroundColor(.white)
@@ -43,7 +43,7 @@ struct ProfileSyncWarningBanner: View {
                     .background(AppTheme.primary)
                     .clipShape(Capsule())
                 
-                Button("무시", action: dismissAction)
+                Button("common.ignore", action: dismissAction)
                     .font(AppTheme.Fonts.captionSmall)
                     .foregroundColor(.white.opacity(0.6))
             }

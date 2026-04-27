@@ -171,7 +171,7 @@ struct MyView: View {
                         #if DEBUG
                         SettingsRow(
                             icon: "arrow.triangle.2.circlepath",
-                            title: "Firestore 프로필 저장 테스트",
+                            title: "my.setting.firestore_profile_sync_test",
                             showChevron: false
                         ) {
                             Task {

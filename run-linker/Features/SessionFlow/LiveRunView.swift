@@ -32,7 +32,7 @@ struct LiveRunView: View {
             // Header
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Live Run")
+                    Text("session.live_run")
                         .font(AppTheme.Fonts.captionSmall)
                         .foregroundColor(AppTheme.primary)
                         .tracking(1.2)
@@ -70,7 +70,7 @@ struct LiveRunView: View {
                         .ignoresSafeArea(edges: .horizontal)
 
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                            FitnessChip("실시간 경로 기록", color: AppTheme.surfaceContainerLowest)
+                            FitnessChip("session.live.route_recording", color: AppTheme.surfaceContainerLowest)
                             if let message = soloTracker.locationErrorMessage {
                                 Text(message)
                                     .font(AppTheme.Fonts.caption)
@@ -89,12 +89,12 @@ struct LiveRunView: View {
                             MapPlaceholderBackground()
 
                             HStack {
-                                PartnerAvatar(name: viewModel.matchedPartner?.name ?? "Partner", isActive: true)
+                                PartnerAvatar(name: viewModel.matchedPartner?.name ?? String(localized: "session.partner"), isActive: true)
                                     .scaleEffect(0.6)
                                     .frame(width: 40, height: 40)
                                 Spacer()
                                 if viewModel.privacyMode {
-                                    FitnessChip("흐림 처리됨", color: AppTheme.surfaceContainerHigh)
+                                    FitnessChip("session.location.blurred", color: AppTheme.surfaceContainerHigh)
                                 }
                             }
                             .padding(AppTheme.Spacing.md)
@@ -104,7 +104,7 @@ struct LiveRunView: View {
                         ZStack(alignment: .topLeading) {
                             MapPlaceholderBackground(isMe: true)
 
-                            PartnerAvatar(name: "You", isActive: true)
+                            PartnerAvatar(name: String(localized: "session.you"), isActive: true)
                                 .scaleEffect(0.6)
                                 .frame(width: 40, height: 40)
                                 .padding(AppTheme.Spacing.md)
@@ -117,9 +117,9 @@ struct LiveRunView: View {
             // Stats Panel
             VStack(spacing: AppTheme.Spacing.xl) {
                 HStack {
-                    StatMetric(title: "거리", value: String(format: "%.2f", displayedDistance), unit: "km")
+                    StatMetric(title: "session.distance", value: String(format: "%.2f", displayedDistance), unit: "km")
                     Spacer()
-                    StatMetric(title: "현재 페이스", value: formattedPace, unit: "/km")
+                    StatMetric(title: "session.current_pace", value: formattedPace, unit: "/km")
                 }
                 
                 // Controls
@@ -204,7 +204,7 @@ struct LiveRunView: View {
 }
 
 struct StatMetric: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: String
     let unit: String
     

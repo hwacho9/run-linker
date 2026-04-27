@@ -17,7 +17,7 @@ struct ResultsView: View {
     }
     
     var body: some View {
-        ScreenContainer(title: "러닝 결과") {
+        ScreenContainer(title: "session.results.title") {
             ScrollView(showsIndicators: false) {
                 VStack(spacing: AppTheme.Spacing.xxl) {
                     
@@ -26,15 +26,15 @@ struct ResultsView: View {
                         VStack(spacing: AppTheme.Spacing.xl) {
                             if viewModel.selectedMode != .solo {
                                 HStack(spacing: AppTheme.Spacing.sm) {
-                                    PartnerAvatar(name: "You", isActive: false)
+                                    PartnerAvatar(name: String(localized: "session.you"), isActive: false)
                                     Image(systemName: "link")
                                         .foregroundColor(AppTheme.outlineVariant)
-                                    PartnerAvatar(name: viewModel.matchedPartner?.name ?? "Partner", isActive: false)
+                                    PartnerAvatar(name: viewModel.matchedPartner?.name ?? String(localized: "session.partner"), isActive: false)
                                 }
                                 .padding(.bottom, AppTheme.Spacing.sm)
                                 
                                 VStack(spacing: AppTheme.Spacing.xs) {
-                                    Text("Sync Score")
+                                    Text("sync.score")
                                         .font(AppTheme.Fonts.caption)
                                         .foregroundColor(AppTheme.textTertiary)
                                     Text("\(viewModel.syncScore)%")
@@ -42,15 +42,15 @@ struct ResultsView: View {
                                         .foregroundColor(AppTheme.primary)
                                 }
                                 
-                                DividerWithText("요약")
+                                DividerWithText("session.summary")
                             }
                             
                             HStack(spacing: AppTheme.Spacing.lg) {
-                                StatMetric(title: "거리", value: String(format: "%.2f", viewModel.currentDistance), unit: "km")
+                                StatMetric(title: "session.distance", value: String(format: "%.2f", viewModel.currentDistance), unit: "km")
                                 Spacer()
-                                StatMetric(title: "시간", value: formattedTime, unit: "")
+                                StatMetric(title: "session.time", value: formattedTime, unit: "")
                                 Spacer()
-                                StatMetric(title: "평균 페이스", value: formattedPace, unit: "")
+                                StatMetric(title: "session.average_pace", value: formattedPace, unit: "")
                             }
                         }
                     }
@@ -58,7 +58,7 @@ struct ResultsView: View {
                     
                     // Map Summary
                     VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                        Text("경로")
+                        Text("session.route")
                             .font(AppTheme.Fonts.headingSmall)
                             .foregroundColor(AppTheme.text)
                             .padding(.horizontal, AppTheme.Spacing.xxl)
@@ -73,7 +73,7 @@ struct ResultsView: View {
                                 .frame(height: 220)
                                 .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.xl))
 
-                                Text("내가 지나간 길")
+                                Text("session.my_route_path")
                                     .font(AppTheme.Fonts.caption)
                                     .foregroundColor(AppTheme.textSecondary)
                             }
@@ -81,10 +81,10 @@ struct ResultsView: View {
                         } else {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: AppTheme.Spacing.md) {
-                                    RouteCard(name: "내 경로")
+                                    RouteCard(name: "session.my_route")
 
                                     if viewModel.selectedMode != .solo {
-                                        RouteCard(name: "\(viewModel.matchedPartner?.name ?? "Partner")의 경로")
+                                        RouteCard(name: LocalizedStringKey(String.localizedStringWithFormat(String(localized: "session.partner_route_format"), viewModel.matchedPartner?.name ?? String(localized: "session.partner"))))
                                     }
                                 }
                                 .padding(.horizontal, AppTheme.Spacing.xxl)
@@ -100,7 +100,7 @@ struct ResultsView: View {
         .overlay(
             VStack {
                 Spacer()
-                PrimaryButton(title: "홈으로 돌아가기") {
+                PrimaryButton(title: "session.back_home") {
                     viewModel.closeFlow()
                 }
                 .padding(.horizontal, AppTheme.Spacing.xxl)
@@ -120,7 +120,7 @@ struct ResultsView: View {
 }
 
 struct RouteCard: View {
-    let name: String
+    let name: LocalizedStringKey
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {

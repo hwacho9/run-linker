@@ -20,18 +20,18 @@ extension SessionFlowStep: CaseIterable {
         }
     }
 
-    var title: String {
+    var title: LocalizedStringKey {
         switch self {
         case .setup:
-            return "Match Setup"
+            return "session.step.setup"
         case .matching:
-            return "Matching"
+            return "session.step.matching"
         case .readyRoom:
-            return "Ready Room"
+            return "session.step.ready_room"
         case .liveRun:
-            return "Live Run"
+            return "session.step.live_run"
         case .results:
-            return "Results"
+            return "session.step.results"
         }
     }
 }

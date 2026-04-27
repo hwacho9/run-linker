@@ -70,7 +70,7 @@ struct ActivityView: View {
                     Text("activity.session_history")
                         .font(AppTheme.Fonts.headingSmall)
                         .foregroundColor(AppTheme.text)
-                    Text("최근 러닝을 빠르게 확인하고 다시 이어 달릴 수 있어요.")
+                    Text("activity.session_history.subtitle")
                         .font(AppTheme.Fonts.bodySmall)
                         .foregroundColor(AppTheme.textSecondary)
                 }
@@ -79,10 +79,10 @@ struct ActivityView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: AppTheme.Spacing.sm) {
-                    FilterChip("전체", isSelected: true, action: {})
-                    FilterChip("함께 달리기", isSelected: false, action: {})
-                    FilterChip("혼자 달리기", isSelected: false, action: {})
-                    FilterChip("최신순", isSelected: false, action: {})
+                    FilterChip("activity.filter.all", isSelected: true, action: {})
+                    FilterChip("activity.filter.together", isSelected: false, action: {})
+                    FilterChip("activity.filter.solo", isSelected: false, action: {})
+                    FilterChip("activity.filter.latest", isSelected: false, action: {})
                 }
             }
             .padding(.bottom, AppTheme.Spacing.sm)
@@ -105,7 +105,7 @@ struct ActivityView: View {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: AppTheme.Spacing.lg) {
                 StatChip(
                     title: "activity.stat.total_sessions",
-                    value: "\(visibleStats.sessionsCount)회",
+                    value: visibleStats.sessionsCountText,
                     icon: "figure.run",
                     variant: .neutral
                 )
@@ -116,13 +116,13 @@ struct ActivityView: View {
                     variant: .accent
                 )
                 StatChip(
-                    title: "총 시간",
+                    title: "activity.stat.total_time",
                     value: visibleStats.totalTimeText,
                     icon: "clock.fill",
                     variant: .neutral
                 )
                 StatChip(
-                    title: "평균 싱크",
+                    title: "activity.stat.average_sync",
                     value: visibleStats.averageSyncText,
                     icon: "link",
                     variant: .neutral
@@ -200,6 +200,10 @@ private struct ActivityStatsSnapshot {
         String(format: "%.1f", totalDistance)
     }
 
+    var sessionsCountText: String {
+        String.localizedStringWithFormat(String(localized: "activity.sessions_count_format"), sessionsCount)
+    }
+
     var averagePaceText: String {
         Self.paceText(averagePace)
     }
@@ -254,7 +258,7 @@ private struct ActivityHeader: View {
                 Text("tab.activity")
                     .font(AppTheme.Fonts.heading)
                     .foregroundColor(AppTheme.text)
-                Text("Records")
+                Text("activity.records")
                     .font(AppTheme.Fonts.captionSmall)
                     .foregroundColor(AppTheme.primary)
                     .tracking(1.4)
@@ -315,7 +319,7 @@ private struct StatsHeroCard: View {
                             .foregroundColor(.white.opacity(0.76))
                             .tracking(1.8)
                             .textCase(.uppercase)
-                        Text("나의 러닝 성장")
+                        Text("activity.my_growth")
                             .font(AppTheme.Fonts.headingMedium)
                             .foregroundColor(.white)
                     }
@@ -339,14 +343,14 @@ private struct StatsHeroCard: View {
                             .font(AppTheme.Fonts.metricSmall)
                             .foregroundColor(.white.opacity(0.72))
                     }
-                    Text("지금까지 연결한 총 누적 거리")
+                    Text("activity.total_distance_caption")
                         .font(AppTheme.Fonts.bodySmall)
                         .foregroundColor(.white.opacity(0.78))
                 }
 
                 HStack(spacing: AppTheme.Spacing.sm) {
-                    HeroBadge(title: "Best", value: snapshot.bestPaceText)
-                    HeroBadge(title: "Together", value: snapshot.togetherShareText)
+                    HeroBadge(title: "activity.best", value: snapshot.bestPaceText)
+                    HeroBadge(title: "activity.together", value: snapshot.togetherShareText)
                 }
             }
             .padding(AppTheme.Spacing.xxl)
@@ -364,7 +368,7 @@ private struct StatsHeroCard: View {
 }
 
 private struct HeroBadge: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: String
 
     var body: some View {
@@ -389,7 +393,15 @@ private struct HeroBadge: View {
 
 private struct WeeklyProgressCard: View {
     let values: [Double]
-    private let labels = ["월", "화", "수", "목", "금", "토", "일"]
+    private let labels: [LocalizedStringKey] = [
+        "weekday.mon",
+        "weekday.tue",
+        "weekday.wed",
+        "weekday.thu",
+        "weekday.fri",
+        "weekday.sat",
+        "weekday.sun"
+    ]
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xl) {
@@ -398,7 +410,7 @@ private struct WeeklyProgressCard: View {
                     Text("activity.weekly_progression")
                         .font(AppTheme.Fonts.headingSmall)
                         .foregroundColor(AppTheme.text)
-                    Text("이번 주 거리 흐름")
+                    Text("activity.weekly_progression.subtitle")
                         .font(AppTheme.Fonts.bodySmall)
                         .foregroundColor(AppTheme.textSecondary)
                 }
@@ -433,7 +445,7 @@ private struct WeeklyProgressCard: View {
 private struct WeeklyBar: View {
     let value: Double
     let maxValue: Double
-    let label: String
+    let label: LocalizedStringKey
     let isHighlighted: Bool
 
     var body: some View {
@@ -460,19 +472,19 @@ private struct ComparisonCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xl) {
-            Text("함께 달린 비율")
+            Text("activity.together_share")
                 .font(AppTheme.Fonts.headingSmall)
                 .foregroundColor(AppTheme.text)
 
             HStack(spacing: AppTheme.Spacing.lg) {
                 ComparisonMeter(
-                    title: "Together",
+                    title: "activity.together",
                     value: snapshot.togetherCount,
                     total: max(snapshot.togetherCount + snapshot.soloCount, 1),
                     color: AppTheme.primary
                 )
                 ComparisonMeter(
-                    title: "Solo",
+                    title: "activity.solo",
                     value: snapshot.soloCount,
                     total: max(snapshot.togetherCount + snapshot.soloCount, 1),
                     color: AppTheme.secondaryFixedDim
@@ -488,10 +500,10 @@ private struct ComparisonCard: View {
                     .clipShape(Circle())
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text("가장 많이 함께 달린 친구")
+                    Text("activity.top_partner")
                         .font(AppTheme.Fonts.caption)
                         .foregroundColor(AppTheme.textTertiary)
-                    Text(snapshot.topPartner ?? "없음")
+                    Text(snapshot.topPartner ?? String(localized: "common.none"))
                         .font(AppTheme.Fonts.subheadline)
                         .foregroundColor(AppTheme.text)
                 }
@@ -509,7 +521,7 @@ private struct ComparisonCard: View {
 }
 
 private struct ComparisonMeter: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: Int
     let total: Int
     let color: Color
@@ -553,7 +565,7 @@ private struct SessionHistoryCard: View {
         let names = session.participants
             .filter { $0.name.lowercased() != "you" }
             .map(\.name)
-        return names.isEmpty ? "Solo Run" : names.joined(separator: ", ")
+        return names.isEmpty ? String(localized: "activity.mode.solo") : names.joined(separator: ", ")
     }
 
     var body: some View {
@@ -574,9 +586,9 @@ private struct SessionHistoryCard: View {
             }
 
             HStack(spacing: AppTheme.Spacing.lg) {
-                HistoryMetric(label: "거리", value: String(format: "%.1f km", session.distance))
-                HistoryMetric(label: "시간", value: session.durationFormatted)
-                HistoryMetric(label: "페이스", value: ActivityStatsSnapshot.paceText(session.averagePace))
+                HistoryMetric(label: "session.distance", value: String(format: "%.1f km", session.distance))
+                HistoryMetric(label: "session.time", value: session.durationFormatted)
+                HistoryMetric(label: "session.pace", value: ActivityStatsSnapshot.paceText(session.averagePace))
             }
 
             HStack(spacing: AppTheme.Spacing.md) {
@@ -589,11 +601,11 @@ private struct SessionHistoryCard: View {
                     )
 
                 VStack(alignment: .leading, spacing: 2) {
-                    Text(session.syncScore.map { "Sync Score \($0)%" } ?? "개인 기록")
+                    Text(session.syncScore.map { String.localizedStringWithFormat(String(localized: "activity.sync_score_format"), $0) } ?? String(localized: "session.personal_record"))
                         .font(AppTheme.Fonts.bodyMedium)
                         .foregroundColor(AppTheme.text)
                     if session.mode != .solo {
-                        Text("Pair View snapshot")
+                        Text("activity.pair_view_snapshot")
                             .font(AppTheme.Fonts.caption)
                             .foregroundColor(AppTheme.textTertiary)
                     }
@@ -627,7 +639,7 @@ private struct ModeBadge: View {
         case .random:
             return "activity.mode.random"
         case .solo:
-            return "Solo Run"
+            return "activity.mode.solo"
         }
     }
 
@@ -654,7 +666,7 @@ private struct ModeBadge: View {
 }
 
 private struct HistoryMetric: View {
-    let label: String
+    let label: LocalizedStringKey
     let value: String
 
     var body: some View {
@@ -678,10 +690,10 @@ private struct EmptyActivityCard: View {
             Image(systemName: "figure.run.circle.fill")
                 .font(.system(size: 44))
                 .foregroundColor(AppTheme.primary)
-            Text("아직 기록이 없어요")
+            Text("activity.empty.title")
                 .font(AppTheme.Fonts.titleMedium)
                 .foregroundColor(AppTheme.text)
-            Text("첫 러닝을 시작하면 세션 히스토리와 내 통계가 자동으로 채워집니다.")
+            Text("activity.empty.subtitle")
                 .font(AppTheme.Fonts.bodySmall)
                 .foregroundColor(AppTheme.textSecondary)
                 .multilineTextAlignment(.center)

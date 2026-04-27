@@ -83,7 +83,7 @@ struct HomeView: View {
                                 Text("home.recent.partner_label")
                                     .font(AppTheme.Fonts.bodyMedium)
                                 
-                                Text("김지수")
+                                Text(verbatim: "김지수")
                                     .font(AppTheme.Fonts.bodyMedium)
                                     .foregroundColor(AppTheme.primary)
                                 

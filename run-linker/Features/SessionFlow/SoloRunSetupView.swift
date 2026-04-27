@@ -12,7 +12,7 @@ struct SoloRunSetupView: View {
 
                 SoloValueCard(
                     eyebrow: "SOLO DISTANCE",
-                    title: "개인 목표 거리",
+                    title: "session.solo.target_distance",
                     icon: "figure.run",
                     value: String(format: "%.1f", viewModel.targetDistance),
                     unit: "km",
@@ -26,7 +26,7 @@ struct SoloRunSetupView: View {
 
                 SoloValueCard(
                     eyebrow: "SOLO PACE",
-                    title: "목표 페이스",
+                    title: "session.target_pace",
                     icon: "timer",
                     value: viewModel.targetPaceText,
                     unit: "/km",
@@ -41,7 +41,7 @@ struct SoloRunSetupView: View {
                 durationCard
                 soloOptions
 
-                PrimaryButton(title: "혼자 달리기 시작", icon: "play.fill") {
+                PrimaryButton(title: "session.solo.start", icon: "play.fill") {
                     viewModel.startMatching()
                 }
             }
@@ -55,10 +55,10 @@ struct SoloRunSetupView: View {
         )) {
             TextField(activeInput?.placeholder ?? "", text: $inputText)
                 .keyboardType(.numbersAndPunctuation)
-            Button("취소", role: .cancel) {
+            Button("common.cancel", role: .cancel) {
                 activeInput = nil
             }
-            Button("입력") {
+            Button("common.enter") {
                 applyInput()
             }
         } message: {
@@ -74,14 +74,14 @@ struct SoloRunSetupView: View {
                     .foregroundColor(.white.opacity(0.72))
                     .tracking(1.4)
 
-                Text("오늘은 나만의\n페이스로 달려요")
+                Text("session.solo.hero.title")
                     .font(AppTheme.Fonts.heading)
                     .foregroundColor(.white)
                     .lineSpacing(4)
 
                 HStack(spacing: AppTheme.Spacing.sm) {
-                    SoloMetricPill(title: "기록", value: "개인 기록", inverse: true)
-                    SoloMetricPill(title: "목표", value: viewModel.targetDistanceText, inverse: true)
+                    SoloMetricPill(title: "session.record", value: "session.personal_record", inverse: true)
+                    SoloMetricPill(title: "session.goal", value: LocalizedStringKey(viewModel.targetDistanceText), inverse: true)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
@@ -104,7 +104,7 @@ struct SoloRunSetupView: View {
                         .font(AppTheme.Fonts.captionSmall)
                         .foregroundColor(AppTheme.textSecondary)
                         .tracking(1.8)
-                    Text("운동 시간")
+                    Text("session.running_duration")
                         .font(AppTheme.Fonts.headingSmall)
                         .foregroundColor(AppTheme.text)
                 }
@@ -132,7 +132,7 @@ struct SoloRunSetupView: View {
 
     private var soloOptions: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
-            Text("혼자 달리기 설정")
+            Text("session.solo.settings")
                 .font(AppTheme.Fonts.headingSmall)
                 .foregroundColor(AppTheme.text)
 
@@ -140,8 +140,8 @@ struct SoloRunSetupView: View {
                 SoloToggleRow(
                     icon: "waveform",
                     iconBackground: AppTheme.primaryFixed,
-                    title: "음성 가이드",
-                    subtitle: "KM마다 시간, 거리, 페이스를 안내합니다",
+                    title: "session.feature.voice_guide",
+                    subtitle: "session.solo.voice_guide.subtitle",
                     isOn: $viewModel.voiceGuideEnabled
                 )
 
@@ -151,8 +151,8 @@ struct SoloRunSetupView: View {
                 SoloToggleRow(
                     icon: "lock.shield.fill",
                     iconBackground: AppTheme.secondaryContainer,
-                    title: "개인 기록으로 저장",
-                    subtitle: "친구 피드에는 공유하지 않고 내 기록에만 저장합니다",
+                    title: "session.solo.private_record",
+                    subtitle: "session.solo.private_record.subtitle",
                     isOn: $viewModel.soloPrivateRecord
                 )
             }
@@ -199,8 +199,8 @@ struct SoloRunSetupView: View {
 }
 
 private struct SoloValueCard: View {
-    let eyebrow: String
-    let title: String
+    let eyebrow: LocalizedStringKey
+    let title: LocalizedStringKey
     let icon: String
     let value: String
     let unit: String
@@ -269,8 +269,8 @@ private struct SoloRoundStepButton: View {
 }
 
 private struct SoloMetricPill: View {
-    let title: String
-    let value: String
+    let title: LocalizedStringKey
+    let value: LocalizedStringKey
     var inverse = false
 
     var body: some View {
@@ -294,8 +294,8 @@ private struct SoloMetricPill: View {
 private struct SoloToggleRow: View {
     let icon: String
     let iconBackground: Color
-    let title: String
-    let subtitle: String
+    let title: LocalizedStringKey
+    let subtitle: LocalizedStringKey
     @Binding var isOn: Bool
 
     var body: some View {
@@ -335,27 +335,27 @@ private enum SoloInputField: Identifiable {
     var title: String {
         switch self {
         case .distance:
-            return "개인 목표 거리 입력"
+            return String(localized: "session.input.solo_distance.title")
         case .pace:
-            return "목표 페이스 입력"
+            return String(localized: "session.input.target_pace.title")
         }
     }
 
     var placeholder: String {
         switch self {
         case .distance:
-            return "예: 5.0"
+            return String(localized: "session.input.distance.placeholder")
         case .pace:
-            return "예: 5:30 또는 5.5"
+            return String(localized: "session.input.pace.placeholder")
         }
     }
 
     var message: String {
         switch self {
         case .distance:
-            return "1km부터 42km 사이로 설정됩니다."
+            return String(localized: "session.input.distance.message")
         case .pace:
-            return "4:00/km부터 8:00/km 사이로 설정됩니다."
+            return String(localized: "session.input.pace.message")
         }
     }
 }

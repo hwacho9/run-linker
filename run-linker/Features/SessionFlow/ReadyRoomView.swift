@@ -8,25 +8,25 @@ struct ReadyRoomView: View {
             ZStack {
                 VStack(spacing: AppTheme.Spacing.xxl) {
                     VStack(spacing: AppTheme.Spacing.xxl) {
-                        Text("러닝 준비 완료")
+                        Text("session.ready.title")
                             .font(AppTheme.Fonts.heading)
                             .foregroundColor(.white)
 
                         HStack(spacing: AppTheme.Spacing.lg) {
-                            ReadyRoomRunnerAvatar(name: "You", subtitle: "Ready", color: AppTheme.secondaryContainer)
+                            ReadyRoomRunnerAvatar(name: String(localized: "session.you"), subtitle: String(localized: "session.ready.status"), color: AppTheme.secondaryContainer)
                             Image(systemName: "link")
                                 .font(.system(size: 22, weight: .bold))
                                 .foregroundColor(.white.opacity(0.7))
                             ReadyRoomRunnerAvatar(
-                                name: viewModel.selectedMode == .solo ? "Solo" : (viewModel.matchedPartner?.name ?? "Partner"),
-                                subtitle: viewModel.selectedMode == .solo ? "Personal" : "Lv.\(viewModel.matchedPartner?.level ?? 0)",
+                                name: viewModel.selectedMode == .solo ? String(localized: "session.solo") : (viewModel.matchedPartner?.name ?? String(localized: "session.partner")),
+                                subtitle: viewModel.selectedMode == .solo ? String(localized: "session.personal") : "Lv.\(viewModel.matchedPartner?.level ?? 0)",
                                 color: AppTheme.primaryFixedDim
                             )
                         }
 
                         HStack(spacing: AppTheme.Spacing.sm) {
-                            ReadyRoomMetricPill(title: "거리", value: viewModel.targetDistanceText, inverse: true)
-                            ReadyRoomMetricPill(title: "예상 페이스", value: viewModel.targetPaceText, inverse: true)
+                            ReadyRoomMetricPill(title: "session.distance", value: viewModel.targetDistanceText, inverse: true)
+                            ReadyRoomMetricPill(title: "session.estimated_pace", value: viewModel.targetPaceText, inverse: true)
                         }
                     }
                     .padding(AppTheme.Spacing.xxxl)
@@ -35,9 +35,9 @@ struct ReadyRoomView: View {
                     .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.xl))
 
                     VStack(spacing: AppTheme.Spacing.md) {
-                        ReadyChecklistRow(icon: "location.fill", title: "위치 동기화", detail: viewModel.privacyMode ? "시작/종료 지점은 보호됩니다." : "정확한 위치 공유가 켜져 있습니다.", isReady: true)
-                        ReadyChecklistRow(icon: "timer", title: "페이스 기준", detail: "\(viewModel.targetPaceText) 근처에서 싱크를 계산합니다.", isReady: true)
-                        ReadyChecklistRow(icon: "waveform.path.ecg", title: "라이브 연결", detail: "Pair View와 Sync Score가 준비되었습니다.", isReady: true)
+                        ReadyChecklistRow(icon: "location.fill", title: "session.ready.location_sync", detail: viewModel.privacyMode ? "session.ready.location_sync.private_detail" : "session.ready.location_sync.precise_detail", isReady: true)
+                        ReadyChecklistRow(icon: "timer", title: "session.ready.pace_standard", detail: "session.ready.pace_standard.detail \(viewModel.targetPaceText)", isReady: true)
+                        ReadyChecklistRow(icon: "waveform.path.ecg", title: "session.ready.live_connection", detail: "session.ready.live_connection.detail", isReady: true)
                     }
                     .padding(AppTheme.Spacing.xl)
                     .background(AppTheme.surfaceContainerLow)
@@ -46,19 +46,25 @@ struct ReadyRoomView: View {
                     AppCard {
                         HStack {
                             VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                                Text("오늘의 매칭")
+                                Text("session.today_match")
                                     .font(AppTheme.Fonts.subheadline)
                                     .foregroundColor(AppTheme.text)
-                                Text(viewModel.selectedMode == .solo ? "개인 기록 모드로 시작합니다." : "\(viewModel.matchedPartner?.name ?? "Partner")님과 함께 \(viewModel.targetDistanceText) 러닝")
-                                    .font(AppTheme.Fonts.bodySmall)
-                                    .foregroundColor(AppTheme.textSecondary)
+                                if viewModel.selectedMode == .solo {
+                                    Text("session.ready.solo_summary")
+                                        .font(AppTheme.Fonts.bodySmall)
+                                        .foregroundColor(AppTheme.textSecondary)
+                                } else {
+                                    Text("session.ready.match_summary \(viewModel.matchedPartner?.name ?? String(localized: "session.partner")) \(viewModel.targetDistanceText)")
+                                        .font(AppTheme.Fonts.bodySmall)
+                                        .foregroundColor(AppTheme.textSecondary)
+                                }
                             }
                             Spacer()
                             FitnessChip(viewModel.selectedMode.title)
                         }
                     }
 
-                    PrimaryButton(title: viewModel.countdown == nil ? "러닝 시작" : "\(viewModel.countdown ?? 0)", icon: viewModel.countdown == nil ? "bolt.fill" : nil) {
+                    PrimaryButton(title: viewModel.countdown == nil ? "session.start_run" : LocalizedStringKey("\(viewModel.countdown ?? 0)"), icon: viewModel.countdown == nil ? "bolt.fill" : nil) {
                         viewModel.readyToRun()
                     }
                     .disabled(viewModel.countdown != nil)
@@ -66,7 +72,7 @@ struct ReadyRoomView: View {
                     Button {
                         viewModel.cancelSession()
                     } label: {
-                        Text("나가기")
+                        Text("session.leave")
                             .font(AppTheme.Fonts.bodyMedium)
                             .foregroundColor(AppTheme.textTertiary)
                     }
@@ -127,8 +133,8 @@ private struct ReadyRoomRunnerAvatar: View {
 
 private struct ReadyChecklistRow: View {
     let icon: String
-    let title: String
-    let detail: String
+    let title: LocalizedStringKey
+    let detail: LocalizedStringKey
     let isReady: Bool
 
     var body: some View {
@@ -157,7 +163,7 @@ private struct ReadyChecklistRow: View {
 }
 
 private struct ReadyRoomMetricPill: View {
-    let title: String
+    let title: LocalizedStringKey
     let value: String
     var inverse = false
 

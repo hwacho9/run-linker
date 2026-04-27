@@ -57,7 +57,7 @@ class SessionFlowViewModel: ObservableObject {
     }
 
     var waitingRunnerSummary: String {
-        "민수님 외 2명"
+        String.localizedStringWithFormat(String(localized: "session.waiting_runner_summary_format"), "민수", 2)
     }
 
     var selectedCandidate: User {
