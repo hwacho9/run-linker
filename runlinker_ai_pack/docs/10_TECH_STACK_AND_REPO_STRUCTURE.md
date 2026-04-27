@@ -117,8 +117,19 @@ run-linker/                              ← Git 루트
           FriendsView.swift                ← ViewModel 인라인
         My/
           MyView.swift                     ← ViewModel 인라인
-        SessionFlow/
-          SessionFlowView.swift            ← WIP
+        RunSession/
+          Views/
+            SessionFlowView.swift
+            MatchSetupView.swift
+            MatchingView.swift
+            ReadyRoomView.swift
+            LiveRunView.swift
+            ResultsView.swift
+            SoloRunSetupView.swift
+          ViewModels/
+            SessionFlowViewModel.swift
+          Components/
+            RunRouteMapView.swift
       Assets.xcassets/
       Resources/
         Localizable.xcstrings

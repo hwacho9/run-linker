@@ -1,8 +1,6 @@
 import Combine
 import CoreLocation
 import Foundation
-import MapKit
-import SwiftUI
 
 struct RunRoutePoint: Codable, Equatable {
     let latitude: Double
@@ -14,8 +12,25 @@ struct RunRoutePoint: Codable, Equatable {
     }
 }
 
+protocol RunTrackingServiceProtocol: AnyObject {
+    var authorizationStatus: CLAuthorizationStatus { get }
+    var routePoints: [RunRoutePoint] { get }
+    var currentLocation: CLLocationCoordinate2D? { get }
+    var totalDistance: Double { get }
+    var elapsedTime: TimeInterval { get }
+    var currentPace: Int { get }
+    var isTracking: Bool { get }
+    var isPaused: Bool { get }
+    var locationErrorMessage: String? { get }
+
+    func start()
+    func pause()
+    func resume()
+    func stop()
+}
+
 @MainActor
-final class SoloRunTracker: NSObject, ObservableObject {
+final class SoloRunTracker: NSObject, ObservableObject, RunTrackingServiceProtocol {
     @Published var authorizationStatus: CLAuthorizationStatus
     @Published var routePoints: [RunRoutePoint] = []
     @Published var currentLocation: CLLocationCoordinate2D?
@@ -79,10 +94,10 @@ final class SoloRunTracker: NSObject, ObservableObject {
         case .authorizedAlways, .authorizedWhenInUse:
             beginLocationUpdates()
         case .denied, .restricted:
-            locationErrorMessage = "위치 권한이 꺼져 있어 실제 경로를 기록할 수 없습니다."
+            locationErrorMessage = String(localized: "run_tracking.location_permission_denied")
             startTimer()
         @unknown default:
-            locationErrorMessage = "위치 권한 상태를 확인할 수 없습니다."
+            locationErrorMessage = String(localized: "run_tracking.location_permission_unknown")
             startTimer()
         }
     }
@@ -176,7 +191,7 @@ extension SoloRunTracker: CLLocationManagerDelegate {
             if isTracking, authorizationStatus == .authorizedAlways || authorizationStatus == .authorizedWhenInUse {
                 beginLocationUpdates()
             } else if authorizationStatus == .denied || authorizationStatus == .restricted {
-                locationErrorMessage = "위치 권한이 꺼져 있어 실제 경로를 기록할 수 없습니다."
+                locationErrorMessage = String(localized: "run_tracking.location_permission_denied")
             }
         }
     }
@@ -190,59 +205,6 @@ extension SoloRunTracker: CLLocationManagerDelegate {
     nonisolated func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         Task { @MainActor in
             locationErrorMessage = error.localizedDescription
-        }
-    }
-}
-
-struct RunRouteMapView: UIViewRepresentable {
-    let routePoints: [RunRoutePoint]
-    let currentLocation: CLLocationCoordinate2D?
-    var followsUser = true
-
-    func makeUIView(context: Context) -> MKMapView {
-        let mapView = MKMapView()
-        mapView.delegate = context.coordinator
-        mapView.showsUserLocation = true
-        mapView.userTrackingMode = followsUser ? .follow : .none
-        mapView.pointOfInterestFilter = .excludingAll
-        mapView.isRotateEnabled = false
-        return mapView
-    }
-
-    func updateUIView(_ mapView: MKMapView, context: Context) {
-        let existingPolylines = mapView.overlays.filter { $0 is MKPolyline }
-        mapView.removeOverlays(existingPolylines)
-
-        let coordinates = routePoints.map(\.coordinate)
-        if coordinates.count >= 2 {
-            let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
-            mapView.addOverlay(polyline)
-            mapView.setVisibleMapRect(
-                polyline.boundingMapRect,
-                edgePadding: UIEdgeInsets(top: 72, left: 48, bottom: 72, right: 48),
-                animated: true
-            )
-        } else if let currentLocation {
-            let region = MKCoordinateRegion(center: currentLocation, latitudinalMeters: 700, longitudinalMeters: 700)
-            mapView.setRegion(region, animated: true)
-        }
-    }
-
-    func makeCoordinator() -> Coordinator {
-        Coordinator()
-    }
-
-    final class Coordinator: NSObject, MKMapViewDelegate {
-        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            guard let polyline = overlay as? MKPolyline else {
-                return MKOverlayRenderer(overlay: overlay)
-            }
-            let renderer = MKPolylineRenderer(polyline: polyline)
-            renderer.strokeColor = UIColor(AppTheme.primary)
-            renderer.lineWidth = 6
-            renderer.lineCap = .round
-            renderer.lineJoin = .round
-            return renderer
         }
     }
 }

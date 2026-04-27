@@ -4,6 +4,10 @@ import Combine
 
 @MainActor
 class SessionFlowViewModel: ObservableObject {
+    private let repository: SessionRepositoryProtocol
+    let soloTracker: SoloRunTracker
+    private var cancellables: Set<AnyCancellable> = []
+
     @Published var currentStep: SessionFlowStep = .setup
     
     // MARK: - Setup State
@@ -18,10 +22,6 @@ class SessionFlowViewModel: ObservableObject {
     @Published var privacyMode = true
     
     var onDismiss: (() -> Void)?
-    
-    init(initialMode: RunMode = .friend) {
-        self.selectedMode = initialMode
-    }
     
     // MARK: - Matching State
     @Published var isSearching: Bool = false
@@ -43,6 +43,31 @@ class SessionFlowViewModel: ObservableObject {
     @Published var elapsedTime: TimeInterval = 0
     @Published var currentPace: Int = 300 // 5:00/km
     @Published var routePoints: [RunRoutePoint] = []
+    @Published var isLiveRunPaused = false
+
+    convenience init(initialMode: RunMode = .friend) {
+        self.init(
+            initialMode: initialMode,
+            repository: MockSessionService(),
+            soloTracker: SoloRunTracker()
+        )
+    }
+
+    init(
+        initialMode: RunMode,
+        repository: SessionRepositoryProtocol,
+        soloTracker: SoloRunTracker
+    ) {
+        self.selectedMode = initialMode
+        self.repository = repository
+        self.soloTracker = soloTracker
+
+        soloTracker.objectWillChange
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
+    }
 
     var targetDistanceText: String {
         String(format: "%.1f km", targetDistance)
@@ -62,6 +87,28 @@ class SessionFlowViewModel: ObservableObject {
 
     var selectedCandidate: User {
         candidates[selectedCandidateIndex % candidates.count]
+    }
+
+    var displayedDistance: Double {
+        selectedMode == .solo ? soloTracker.distanceKilometers : currentDistance
+    }
+
+    var formattedLiveTime: String {
+        if selectedMode == .solo {
+            return soloTracker.formattedTime
+        }
+        let minutes = Int(elapsedTime) / 60
+        let seconds = Int(elapsedTime) % 60
+        return String(format: "%02d:%02d", minutes, seconds)
+    }
+
+    var formattedLivePace: String {
+        if selectedMode == .solo {
+            return soloTracker.formattedPace
+        }
+        let minutes = currentPace / 60
+        let seconds = currentPace % 60
+        return String(format: "%d'%02d\"", minutes, seconds)
     }
 
     func adjustTargetDistance(by value: Double) {
@@ -89,6 +136,7 @@ class SessionFlowViewModel: ObservableObject {
     // MARK: - Mock Transition Logic
     
     func startMatching() {
+        isLiveRunPaused = false
         if selectedMode == .solo {
             withAnimation(.spring()) {
                 currentStep = .liveRun
@@ -162,11 +210,62 @@ class SessionFlowViewModel: ObservableObject {
         }
     }
 
-    func finishSoloRun(distance: Double, elapsedTime: TimeInterval, currentPace: Int, routePoints: [RunRoutePoint]) {
+    func startLiveRunTrackingIfNeeded() {
+        guard selectedMode == .solo else { return }
+        soloTracker.start()
+        isLiveRunPaused = false
+    }
+
+    func pauseOrResumeLiveRun() {
+        if selectedMode == .solo {
+            soloTracker.isPaused ? soloTracker.resume() : soloTracker.pause()
+            isLiveRunPaused = soloTracker.isPaused
+        } else {
+            isLiveRunPaused.toggle()
+        }
+    }
+
+    func stopLiveRun() {
+        if selectedMode == .solo {
+            soloTracker.stop()
+            finishSoloRun(
+                distance: soloTracker.distanceKilometers,
+                elapsedTime: soloTracker.elapsedTime,
+                currentPace: soloTracker.currentPace,
+                routePoints: soloTracker.routePoints
+            )
+        } else {
+            finishRun()
+        }
+    }
+
+    func stopLiveRunTrackingIfNeeded() {
+        guard selectedMode == .solo, currentStep != .results else { return }
+        soloTracker.stop()
+    }
+
+    private func finishSoloRun(distance: Double, elapsedTime: TimeInterval, currentPace: Int, routePoints: [RunRoutePoint]) {
+        let endTime = Date()
+        let session = RunSession(
+            id: UUID().uuidString,
+            participants: [User(id: "current-user", name: String(localized: "session.you"), level: 0)],
+            mode: .solo,
+            startTime: endTime.addingTimeInterval(-elapsedTime),
+            endTime: endTime,
+            distance: distance,
+            averagePace: currentPace,
+            syncScore: nil
+        )
+
         self.currentDistance = distance
         self.elapsedTime = elapsedTime
         self.currentPace = currentPace
         self.routePoints = routePoints
+
+        Task {
+            try? await repository.saveSession(session, routePoints: routePoints)
+        }
+
         finishRun()
     }
     
@@ -176,6 +275,7 @@ class SessionFlowViewModel: ObservableObject {
             isSearching = false
             matchedPartner = nil
             countdown = nil
+            isLiveRunPaused = false
         }
     }
     
@@ -199,6 +299,7 @@ class SessionFlowViewModel: ObservableObject {
                     self?.runTimer?.invalidate()
                     return
                 }
+                guard !self.isLiveRunPaused else { return }
                 
                 self.elapsedTime += 1
                 self.currentDistance += (1000.0 / Double(self.currentPace)) / 1000.0 // rough distance based on pace

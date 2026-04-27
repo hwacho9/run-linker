@@ -12,4 +12,5 @@ protocol SessionRepositoryProtocol {
     // Session Data
     func getSessionHistory() async throws -> [RunSession]
     func getMyStats() async throws -> (totalDistance: Double, averagePace: Int, sessionsCount: Int)
+    func saveSession(_ session: RunSession, routePoints: [RunRoutePoint]) async throws
 }

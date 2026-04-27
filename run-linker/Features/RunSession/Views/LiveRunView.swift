@@ -2,30 +2,6 @@ import SwiftUI
 
 struct LiveRunView: View {
     @ObservedObject var viewModel: SessionFlowViewModel
-    @StateObject private var soloTracker = SoloRunTracker()
-    @State private var isPaused = false
-    
-    private var formattedTime: String {
-        if viewModel.selectedMode == .solo {
-            return soloTracker.formattedTime
-        }
-        let minutes = Int(viewModel.elapsedTime) / 60
-        let seconds = Int(viewModel.elapsedTime) % 60
-        return String(format: "%02d:%02d", minutes, seconds)
-    }
-    
-    private var formattedPace: String {
-        if viewModel.selectedMode == .solo {
-            return soloTracker.formattedPace
-        }
-        let minutes = viewModel.currentPace / 60
-        let seconds = viewModel.currentPace % 60
-        return String(format: "%d'%02d\"", minutes, seconds)
-    }
-
-    private var displayedDistance: Double {
-        viewModel.selectedMode == .solo ? soloTracker.distanceKilometers : viewModel.currentDistance
-    }
     
     var body: some View {
         VStack(spacing: 0) {
@@ -37,7 +13,7 @@ struct LiveRunView: View {
                         .foregroundColor(AppTheme.primary)
                         .tracking(1.2)
                         .textCase(.uppercase)
-                    Text(formattedTime)
+                    Text(viewModel.formattedLiveTime)
                         .font(.system(size: 32, weight: .bold, design: .rounded))
                         .foregroundColor(AppTheme.text)
                 }
@@ -64,14 +40,14 @@ struct LiveRunView: View {
                 if viewModel.selectedMode == .solo {
                     ZStack(alignment: .topLeading) {
                         RunRouteMapView(
-                            routePoints: soloTracker.routePoints,
-                            currentLocation: soloTracker.currentLocation
+                            routePoints: viewModel.soloTracker.routePoints,
+                            currentLocation: viewModel.soloTracker.currentLocation
                         )
                         .ignoresSafeArea(edges: .horizontal)
 
                         VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
                             FitnessChip("session.live.route_recording", color: AppTheme.surfaceContainerLowest)
-                            if let message = soloTracker.locationErrorMessage {
+                            if let message = viewModel.soloTracker.locationErrorMessage {
                                 Text(message)
                                     .font(AppTheme.Fonts.caption)
                                     .foregroundColor(AppTheme.error)
@@ -117,9 +93,9 @@ struct LiveRunView: View {
             // Stats Panel
             VStack(spacing: AppTheme.Spacing.xl) {
                 HStack {
-                    StatMetric(title: "session.distance", value: String(format: "%.2f", displayedDistance), unit: "km")
+                    StatMetric(title: "session.distance", value: String(format: "%.2f", viewModel.displayedDistance), unit: "km")
                     Spacer()
-                    StatMetric(title: "session.current_pace", value: formattedPace, unit: "/km")
+                    StatMetric(title: "session.current_pace", value: viewModel.formattedLivePace, unit: "/km")
                 }
                 
                 // Controls
@@ -143,35 +119,20 @@ struct LiveRunView: View {
                     
                     // Pause/Resume
                     Button(action: {
-                        if viewModel.selectedMode == .solo {
-                            soloTracker.isPaused ? soloTracker.resume() : soloTracker.pause()
-                            isPaused = soloTracker.isPaused
-                        } else {
-                            isPaused.toggle()
-                        }
+                        viewModel.pauseOrResumeLiveRun()
                     }) {
-                        Image(systemName: isPaused ? "play.fill" : "pause.fill")
+                        Image(systemName: viewModel.isLiveRunPaused ? "play.fill" : "pause.fill")
                             .font(.system(size: 32))
-                            .foregroundColor(isPaused ? .white : AppTheme.text)
+                            .foregroundColor(viewModel.isLiveRunPaused ? .white : AppTheme.text)
                             .frame(width: 88, height: 88)
-                            .background(isPaused ? AppTheme.primary : AppTheme.surfaceContainerHighest)
+                            .background(viewModel.isLiveRunPaused ? AppTheme.primary : AppTheme.surfaceContainerHighest)
                             .clipShape(Circle())
-                            .shadow(color: (isPaused ? AppTheme.primary : Color.black).opacity(0.15), radius: 10, y: 5)
+                            .shadow(color: (viewModel.isLiveRunPaused ? AppTheme.primary : Color.black).opacity(0.15), radius: 10, y: 5)
                     }
                     
                     // Stop
                     Button(action: {
-                        if viewModel.selectedMode == .solo {
-                            soloTracker.stop()
-                            viewModel.finishSoloRun(
-                                distance: soloTracker.distanceKilometers,
-                                elapsedTime: soloTracker.elapsedTime,
-                                currentPace: soloTracker.currentPace,
-                                routePoints: soloTracker.routePoints
-                            )
-                        } else {
-                            viewModel.finishRun()
-                        }
+                        viewModel.stopLiveRun()
                     }) {
                         Image(systemName: "stop.fill")
                             .font(.system(size: 28))
@@ -191,14 +152,10 @@ struct LiveRunView: View {
         }
         .background(AppTheme.surfaceContainerLowest.ignoresSafeArea())
         .onAppear {
-            if viewModel.selectedMode == .solo {
-                soloTracker.start()
-            }
+            viewModel.startLiveRunTrackingIfNeeded()
         }
         .onDisappear {
-            if viewModel.selectedMode == .solo, viewModel.currentStep != .results {
-                soloTracker.stop()
-            }
+            viewModel.stopLiveRunTrackingIfNeeded()
         }
     }
 }

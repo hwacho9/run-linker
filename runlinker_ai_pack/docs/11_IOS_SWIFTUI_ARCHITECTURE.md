@@ -56,12 +56,23 @@ run-linker/                          ← Xcode 프로젝트 루트
       My/
         MyView.swift                 ← 프로필·목표·StatChip 그리드·설정 섹션
                                        + MyViewModel 인라인
-      SessionFlow/
-        SessionFlowView.swift        ← Match Setup → Live Run (WIP / 플레이스홀더)
+      RunSession/
+        Views/
+          SessionFlowView.swift      ← Match Setup → Matching → Ready Room → Live Run → Results
+          MatchSetupView.swift
+          MatchingView.swift
+          ReadyRoomView.swift
+          LiveRunView.swift
+          ResultsView.swift
+          SoloRunSetupView.swift
+        ViewModels/
+          SessionFlowViewModel.swift
+        Components/
+          RunRouteMapView.swift
 
     Assets.xcassets/
     Resources/
-      Localizable.xcstrings          ← ko/en 문자열 카탈로그
+      Localizable.xcstrings          ← ko/en/ja 문자열 카탈로그
     GoogleService-Info.plist
     run-linker.entitlements
 ```

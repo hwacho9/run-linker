@@ -39,4 +39,8 @@ class FirebaseSessionService: SessionRepositoryProtocol {
     func getMyStats() async throws -> (totalDistance: Double, averagePace: Int, sessionsCount: Int) {
         return (totalDistance: 0.0, averagePace: 0, sessionsCount: 0)
     }
+
+    func saveSession(_ session: RunSession, routePoints: [RunRoutePoint]) async throws {
+        // TODO: Persist session metadata and route points to Firestore.
+    }
 }

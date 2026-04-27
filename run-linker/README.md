@@ -22,7 +22,10 @@ run-linker/
     ├── Activity/        # ActivityView & ActivityViewModel
     ├── Friends/         # FriendsView & FriendsViewModel
     ├── My/              # MyView & MyViewModel
-    └── SessionFlow/     # MatchSetupView & LiveRunView
+    └── RunSession/      # Match setup, live run, results
+        ├── Views/
+        ├── ViewModels/
+        └── Components/
 ```
 
 ### 🧠 MVVM Pattern Rules

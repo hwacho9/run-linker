@@ -2,6 +2,7 @@ import Foundation
 
 class MockSessionService: SessionRepositoryProtocol {
     private var isSimulatingMatch: Bool = false
+    private var savedSessions: [RunSession] = []
     
     func fetchMatchStatus() async throws -> MatchStatus {
         if isSimulatingMatch {
@@ -38,7 +39,7 @@ class MockSessionService: SessionRepositoryProtocol {
     }
     
     func getSessionHistory() async throws -> [RunSession] {
-        return [
+        return savedSessions + [
             RunSession(
                 id: "1",
                 participants: [User(id: "1", name: "You", level: 5), User(id: "2", name: "Jane", level: 6)],
@@ -64,5 +65,9 @@ class MockSessionService: SessionRepositoryProtocol {
     
     func getMyStats() async throws -> (totalDistance: Double, averagePace: Int, sessionsCount: Int) {
         return (totalDistance: 154.2, averagePace: 335, sessionsCount: 42)
+    }
+
+    func saveSession(_ session: RunSession, routePoints: [RunRoutePoint]) async throws {
+        savedSessions.insert(session, at: 0)
     }
 }
