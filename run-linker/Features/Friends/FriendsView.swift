@@ -230,12 +230,12 @@ private struct AvailableFriendCard: View {
 
 // MARK: - Mini Stat Box
 private struct MiniStatBox: View {
-    let label: String
+    let label: LocalizedStringKey
     let value: String
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-            Text(LocalizedStringKey(label))
+            Text(label)
                 .font(.system(size: 10, weight: .medium))
                 .foregroundColor(AppTheme.outlineVariant)
                 .tracking(0.8)

@@ -226,7 +226,7 @@ public struct AppCard<Content: View>: View {
 // MARK: - Stat Chip (Stitch: icon + label + value, h-32 (128px), rounded-xl)
 // Two variants: neutral (surface-container-highest) and accent (secondary-fixed)
 public struct StatChip: View {
-    public let title: String
+    public let title: LocalizedStringKey
     public let value: String
     public let icon: String?
     public let variant: StatChipVariant
@@ -236,7 +236,7 @@ public struct StatChip: View {
         case accent    // bg: secondary-fixed (lime)
     }
     
-    public init(title: String, value: String, icon: String? = nil, variant: StatChipVariant = .neutral) {
+    public init(title: LocalizedStringKey, value: String, icon: String? = nil, variant: StatChipVariant = .neutral) {
         self.title = title
         self.value = value
         self.icon = icon
@@ -270,7 +270,7 @@ public struct StatChip: View {
             Spacer()
             
             VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text(LocalizedStringKey(title))
+                Text(title)
                     .font(AppTheme.Fonts.captionSmall)
                     .foregroundColor(titleColor)
                     .tracking(0.8)

@@ -1,6 +1,11 @@
 name: RunLinker
 options:
   bundleIdPrefix: com.runlinker
+  knownRegions:
+    - en
+    - ko
+    - ja
+    - Base
   deploymentTarget:
     iOS: "16.0"
 

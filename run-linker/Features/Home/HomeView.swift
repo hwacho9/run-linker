@@ -153,13 +153,13 @@ struct HomeView: View {
 
 // MARK: - Stat Cell (used in run report card)
 private struct StatCell: View {
-    let label: String
+    let label: LocalizedStringKey
     let value: String
     let unit: String?
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                Text(LocalizedStringKey(label))
+                Text(label)
                 .font(AppTheme.Fonts.captionSmall)
                 .foregroundColor(AppTheme.textTertiary)
             HStack(alignment: .firstTextBaseline, spacing: 2) {
