@@ -152,7 +152,7 @@ class SessionFlowViewModel: ObservableObject {
         isLiveRunPaused = false
         if selectedMode == .solo {
             withAnimation(.spring()) {
-                currentStep = .liveRun
+                currentStep = .readyRoom
             }
             return
         }
@@ -232,7 +232,9 @@ class SessionFlowViewModel: ObservableObject {
                 countdown = nil
                 currentStep = .liveRun
             }
-            startMockRun()
+            if selectedMode != .solo {
+                startMockRun()
+            }
         }
     }
     

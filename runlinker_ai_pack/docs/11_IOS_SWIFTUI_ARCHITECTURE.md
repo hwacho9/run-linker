@@ -32,6 +32,7 @@ run-linker/                          ← Xcode 프로젝트 루트
       Services/
         AuthServiceProtocol.swift    ← Firebase Auth 인증 계약
         FirebaseAuthService.swift    ← Email/Google/Apple Firebase Auth 구현체
+        SoloRunTracker.swift         ← CoreLocation 위치 추적, 거리/페이스 계산
       Repositories/
         SessionRepositoryProtocol.swift   ← 데이터 계층 인터페이스
         UserRepositoryProtocol.swift      ← 유저/프로필 저장 계약
@@ -58,8 +59,9 @@ run-linker/                          ← Xcode 프로젝트 루트
                                        + MyViewModel 인라인
       RunSession/
         Views/
-          SessionFlowView.swift      ← Match Setup → Matching → Ready Room → Live Run → Results
+          SessionFlowView.swift      ← RunSession 전체 라우팅
           MatchSetupView.swift
+          FriendSelectionView.swift  ← 친구와 달리기 대상 선택
           MatchingView.swift
           ReadyRoomView.swift
           LiveRunView.swift
@@ -87,13 +89,14 @@ run-linker/                          ← Xcode 프로젝트 루트
 | **ViewModel** | `Features/*/ViewModel.swift` | 화면 상태 보유, service/repository 조합, async 작업 |
 | **Service Protocol** | `Core/Services/*Protocol.swift` | 외부 SDK·유스케이스 계약 정의 |
 | **Firebase Service** | `Core/Services/Firebase*.swift` | Firebase Auth, OAuth credential 같은 SDK 작업 구현 |
+| **Device Service** | `Core/Services/SoloRunTracker.swift` | CoreLocation 위치 추적, 거리/페이스 계산 |
 | **Repository Protocol** | `Core/Repositories/*Protocol.swift` | 플랫폼 중립 인터페이스 정의 |
 | **Mock** | `Core/Repositories/Mock*.swift` | 개발·테스트용 구현체 |
 | **Firebase Repository** | `Core/Repositories/Firebase*.swift` | Firestore/RTDB 컬렉션·문서 저장 구현 |
 | **Models** | `Core/Models/Models.swift` | 순수 Swift 도메인 타입 |
 | **Theme** | `Core/Theme/Theme.swift` | Stitch 디자인 토큰 (색상·폰트·간격) |
-| **Components** | `Core/Components/UIComponents.swift` | 재사용 SwiftUI 뷰 |
-| **Resources** | `Resources/Localizable.xcstrings` | ko/en 다국어 문자열 |
+| **Components** | `Core/Components/UIComponents.swift`, `Features/*/Components/*.swift` | 공용 또는 feature 전용 재사용 SwiftUI 뷰 |
+| **Resources** | `Resources/Localizable.xcstrings` | ko/en/ja 다국어 문자열 |
 
 ---
 
@@ -125,8 +128,9 @@ RunLinkerApp
             
 세션 플로우 (탭 외 Modal/FullScreen):
 HomeView → SessionFlowView
-  MatchSetupView → MatchingView → ReadyRoomView → LiveRunView → ResultsView
-  (현재 SessionFlowView.swift에 통합 WIP)
+  친구와 달리기: MatchSetupView → FriendSelectionView → ReadyRoomView → LiveRunView → ResultsView
+  랜덤 매칭: MatchSetupView → MatchingView → ReadyRoomView → LiveRunView → ResultsView
+  혼자 달리기: SoloRunSetupView → ReadyRoomView(카운트다운 버퍼) → LiveRunView → ResultsView
 ```
 
 ---
@@ -198,7 +202,7 @@ PairViewPlaceholder
 | Activity (기록) | ✅ 기본 | ✅ 인라인 | 차트 플레이스홀더 |
 | Friends (친구) | ✅ Stitch 완성 | ✅ 인라인 | 실제 친구 데이터 연결 필요 |
 | My (마이) | ✅ Stitch 완성 | ✅ 인라인 | 실제 유저 데이터 연결 필요 |
-| SessionFlow | ⚠️ WIP | ❌ 미분리 | MatchSetup → LiveRun 플로우 미완성 |
+| RunSession | ✅ 기본 플로우 구현 | ✅ 분리 | 친구 선택, 랜덤 매칭, 솔로 카운트다운 버퍼, 라이브 지도/결과 |
 | Firebase Repository | ⚠️ Stub | - | MockSessionService로 대체 중 |
 
 ---
@@ -233,8 +237,9 @@ PairViewPlaceholder
 10. `11_IOS_SWIFTUI_ARCHITECTURE.md`: View/ViewModel/Repository 분리 기준 확인
 
 구현 기준:
-- 화면은 `Features/*/*View.swift`에 둔다.
-- 화면 상태와 사용자 액션 처리는 `Features/*/*ViewModel.swift`에 둔다.
+- 화면은 `Features/*/Views/*View.swift`에 둔다.
+- 화면 상태와 사용자 액션 처리는 `Features/*/ViewModels/*ViewModel.swift`에 둔다.
+- feature 전용 재사용 UI는 `Features/*/Components/*.swift`에 둔다.
 - Firebase Auth, Google/Apple credential, App Check 같은 인증 SDK 세부 구현은 `Core/Services/Firebase*.swift`에 둔다.
 - Firestore, Storage, Cloud Functions 같은 데이터 저장/조회 구현은 `Core/Repositories/Firebase*.swift`에 둔다.
 - ViewModel은 Service/Repository protocol에 의존하고, Firestore 컬렉션명/문서 키/필드명은 알지 않는다.

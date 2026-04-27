@@ -15,23 +15,34 @@ run-linker/
 ├── Core/                # Shared Business Logic & UI Foundations
 │   ├── Components/      # Reusable SwiftUI Atoms (Buttons, Cards, Chips)
 │   ├── Models/          # Pure Data Structs (User, Session, MatchRequest)
-│   ├── Repositories/    # Data Access Layer Protocols & Services (Firebase / Mock)
+│   ├── Services/        # SDK / device services (Auth, location tracking)
+│   ├── Repositories/    # Data access protocols & implementations (Firebase / Mock)
 │   └── Theme/           # Global Design System (Colors, Fonts)
 └── Features/            # Independent Feature Modules (MVVM)
     ├── Home/            # HomeView & HomeViewModel
     ├── Activity/        # ActivityView & ActivityViewModel
     ├── Friends/         # FriendsView & FriendsViewModel
     ├── My/              # MyView & MyViewModel
-    └── RunSession/      # Match setup, live run, results
+    └── RunSession/      # Friend/random/solo running session flow
         ├── Views/
+        │   ├── MatchSetupView.swift
+        │   ├── FriendSelectionView.swift
+        │   ├── MatchingView.swift
+        │   ├── ReadyRoomView.swift
+        │   ├── LiveRunView.swift
+        │   ├── ResultsView.swift
+        │   └── SoloRunSetupView.swift
         ├── ViewModels/
+        │   └── SessionFlowViewModel.swift
         └── Components/
+            └── RunRouteMapView.swift
 ```
 
 ### 🧠 MVVM Pattern Rules
 1. **Views (`.swift`)**: Only define the UI layout. NO direct Firebase calls. They observe states via `@StateObject` or `@EnvironmentObject`.
 2. **ViewModels (`.swift`)**: Define all business logic. They fetch data via protocols (e.g., `SessionRepositoryProtocol`) and publish state changes.
-3. **Repositories**: Abstract the data source. Currently, `MockSessionService` drives the UI. When ready, it will be swapped for `FirebaseSessionService`.
+3. **Services**: Own SDK/device behavior such as Firebase Auth and CoreLocation tracking.
+4. **Repositories**: Abstract the data source. Currently, `MockSessionService` drives the UI. When ready, it will be swapped for `FirebaseSessionService`.
 
 ## 🚀 Getting Started
 

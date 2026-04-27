@@ -12,7 +12,7 @@ extension SessionFlowStep: CaseIterable {
         case .random:
             return [.setup, .matching, .readyRoom, .liveRun, .results]
         case .solo:
-            return [.setup, .liveRun, .results]
+            return [.setup, .readyRoom, .liveRun, .results]
         }
     }
 

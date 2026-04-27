@@ -96,6 +96,7 @@ run-linker/                              ← Git 루트
         Services/
           AuthServiceProtocol.swift
           FirebaseAuthService.swift
+          SoloRunTracker.swift             ← CoreLocation 기반 솔로 러닝 추적
         Repositories/
           SessionRepositoryProtocol.swift
           UserRepositoryProtocol.swift
@@ -121,6 +122,7 @@ run-linker/                              ← Git 루트
           Views/
             SessionFlowView.swift
             MatchSetupView.swift
+            FriendSelectionView.swift
             MatchingView.swift
             ReadyRoomView.swift
             LiveRunView.swift
