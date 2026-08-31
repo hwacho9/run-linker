@@ -19,5 +19,280 @@ service cloud.firestore {
       allow read, create, update: if isOwner(userId);
       allow delete: if false;
     }
+
+    function hasValidPublicProfile(data, userId) {
+      return data.keys().hasAll([
+               'userId', 'nickname', 'searchName', 'avatarUrl', 'level',
+               'discoverable', 'lastActiveAt', 'updatedAt'
+             ]) &&
+             data.keys().hasOnly([
+               'userId', 'nickname', 'searchName', 'avatarUrl', 'level',
+               'discoverable', 'lastActiveAt', 'updatedAt',
+               'averagePaceSecPerKm', 'weeklyRunCount', 'weeklyDistanceMeters',
+               'isAvailable'
+             ]) &&
+             data.userId == userId &&
+             data.nickname is string &&
+             data.nickname.size() > 0 &&
+             data.nickname.size() <= 80 &&
+             data.searchName is string &&
+             data.avatarUrl is string &&
+             data.level is int && data.level >= 1 && data.level <= 999 &&
+             data.discoverable is bool &&
+             data.lastActiveAt is timestamp &&
+             data.updatedAt is timestamp &&
+             (!('averagePaceSecPerKm' in data) ||
+               (data.averagePaceSecPerKm is int && data.averagePaceSecPerKm >= 0)) &&
+             (!('weeklyRunCount' in data) ||
+               (data.weeklyRunCount is int && data.weeklyRunCount >= 0)) &&
+             (!('weeklyDistanceMeters' in data) ||
+               (data.weeklyDistanceMeters is number && data.weeklyDistanceMeters >= 0)) &&
+             (!('isAvailable' in data) || data.isAvailable is bool);
+    }
+
+    // 검색과 친구 화면에는 이메일·정확 위치가 없는 최소 공개 프로필만 사용한다.
+    match /public_profiles/{userId} {
+      allow read: if isSignedIn();
+      allow create, update: if isOwner(userId) &&
+                              hasValidPublicProfile(request.resource.data, userId);
+      allow delete: if isOwner(userId);
+    }
+
+    match /user_settings/{userId} {
+      allow read: if isOwner(userId);
+      allow create, update: if isOwner(userId) &&
+                              request.resource.data.userId == userId &&
+                              request.resource.data.locationSharing is bool &&
+                              request.resource.data.randomMatchPublic is bool &&
+                              request.resource.data.recordsPublic is bool &&
+                              request.resource.data.blurStartEnd is bool &&
+                              request.resource.data.cheerNotifications is bool &&
+                              request.resource.data.runStartNotifications is bool &&
+                              request.resource.data.voiceEnabled is bool &&
+                              request.resource.data.weeklyDistanceGoalKm is number &&
+                              request.resource.data.weeklyDistanceGoalKm >= 1 &&
+                              request.resource.data.weeklyDistanceGoalKm <= 500 &&
+                              request.resource.data.updatedAt is timestamp;
+      allow delete: if isOwner(userId);
+    }
+
+    function hasValidFriendship(data) {
+      return data.keys().hasAll([
+               'requesterUid', 'addresseeUid', 'memberUids', 'status',
+               'favoriteUids', 'createdAt', 'updatedAt'
+             ]) &&
+             data.keys().hasOnly([
+               'requesterUid', 'addresseeUid', 'memberUids', 'status',
+               'favoriteUids', 'createdAt', 'updatedAt'
+             ]) &&
+             data.requesterUid is string &&
+             data.addresseeUid is string &&
+             data.requesterUid != data.addresseeUid &&
+             data.memberUids is list &&
+             data.memberUids.size() == 2 &&
+             data.requesterUid in data.memberUids &&
+             data.addresseeUid in data.memberUids &&
+             data.favoriteUids is list &&
+             data.status in ['pending', 'accepted', 'declined', 'cancelled', 'blocked'] &&
+             data.createdAt is timestamp &&
+             data.updatedAt is timestamp;
+    }
+
+    match /friendships/{friendshipId} {
+      allow read: if isSignedIn() && request.auth.uid in resource.data.memberUids;
+      allow create: if isSignedIn() &&
+                      request.auth.uid == request.resource.data.requesterUid &&
+                      request.resource.data.status == 'pending' &&
+                      request.resource.data.favoriteUids.size() == 0 &&
+                      hasValidFriendship(request.resource.data);
+      allow update: if isSignedIn() &&
+                      request.auth.uid in resource.data.memberUids &&
+                      request.resource.data.requesterUid == resource.data.requesterUid &&
+                      request.resource.data.addresseeUid == resource.data.addresseeUid &&
+                      request.resource.data.memberUids == resource.data.memberUids &&
+                      request.resource.data.createdAt == resource.data.createdAt &&
+                      hasValidFriendship(request.resource.data) &&
+                      (
+                        (resource.data.status == 'pending' &&
+                          ((request.auth.uid == resource.data.addresseeUid &&
+                            request.resource.data.status in ['accepted', 'declined', 'blocked']) ||
+                           (request.auth.uid == resource.data.requesterUid &&
+                            request.resource.data.status in ['cancelled', 'blocked']))) ||
+                        (resource.data.status == 'accepted' &&
+                          request.resource.data.status in ['accepted', 'blocked'])
+                      );
+      allow delete: if false;
+    }
+
+    function hasValidMatchRequest(data) {
+      return data.keys().hasAll([
+               'requesterUid', 'mode', 'status', 'privacyEnabled',
+               'createdAt', 'updatedAt', 'expiresAt'
+             ]) &&
+             data.keys().hasOnly([
+               'requesterUid', 'mode', 'status', 'privacyEnabled',
+               'targetDistanceMeters', 'targetPaceSecPerKm', 'invitedUid',
+               'matchedUid', 'sessionId', 'createdAt', 'updatedAt', 'expiresAt'
+             ]) &&
+             data.requesterUid is string &&
+             data.mode in ['friend', 'random'] &&
+             data.status in ['finding', 'matched', 'cancelled'] &&
+             data.privacyEnabled is bool &&
+             data.createdAt is timestamp &&
+             data.updatedAt is timestamp &&
+             data.expiresAt is timestamp &&
+             (!('targetDistanceMeters' in data) ||
+               (data.targetDistanceMeters is number && data.targetDistanceMeters >= 1000 && data.targetDistanceMeters <= 100000)) &&
+             (!('targetPaceSecPerKm' in data) ||
+               (data.targetPaceSecPerKm is int && data.targetPaceSecPerKm >= 120 && data.targetPaceSecPerKm <= 1200)) &&
+             ((data.mode == 'random' && !('invitedUid' in data)) ||
+               (data.mode == 'friend' && data.invitedUid is string && data.invitedUid != data.requesterUid));
+    }
+
+    match /match_requests/{requestId} {
+      allow read: if isSignedIn() &&
+                    (request.auth.uid == resource.data.requesterUid ||
+                     (('invitedUid' in resource.data) && request.auth.uid == resource.data.invitedUid) ||
+                     (('matchedUid' in resource.data) && request.auth.uid == resource.data.matchedUid));
+      allow create: if isSignedIn() &&
+                      request.auth.uid == request.resource.data.requesterUid &&
+                      request.resource.data.status == 'finding' &&
+                      request.resource.data.expiresAt > request.time &&
+                      hasValidMatchRequest(request.resource.data);
+      // 매칭 확정은 Admin SDK만 수행한다. 클라이언트는 본인의 검색 취소만 가능하다.
+      allow update: if isSignedIn() &&
+                      request.auth.uid == resource.data.requesterUid &&
+                      resource.data.status == 'finding' &&
+                      request.resource.data.status == 'cancelled' &&
+                      request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']) &&
+                      hasValidMatchRequest(request.resource.data);
+      allow delete: if false;
+    }
+
+    function isLiveSessionMember(sessionId) {
+      return isSignedIn() &&
+        request.auth.uid in get(/databases/$(database)/documents/live_sessions/$(sessionId)).data.participantUids;
+    }
+
+    match /live_sessions/{sessionId} {
+      allow read: if isSignedIn() && request.auth.uid in resource.data.participantUids;
+      allow write: if false;
+
+      match /participants/{userId} {
+        allow read: if isLiveSessionMember(sessionId);
+        allow create, update: if isOwner(userId) &&
+                                isLiveSessionMember(sessionId) &&
+                                request.resource.data.userUid == userId &&
+                                request.resource.data.distanceMeters is number &&
+                                request.resource.data.distanceMeters >= 0 &&
+                                request.resource.data.elapsedTimeSec is int &&
+                                request.resource.data.elapsedTimeSec >= 0 &&
+                                request.resource.data.currentPaceSecPerKm is int &&
+                                request.resource.data.currentPaceSecPerKm >= 0 &&
+                                request.resource.data.isPaused is bool &&
+                                request.resource.data.updatedAt is timestamp;
+        allow delete: if false;
+      }
+
+      match /reactions/{reactionId} {
+        allow read: if isLiveSessionMember(sessionId);
+        allow create: if isLiveSessionMember(sessionId) &&
+                        request.resource.data.senderUid == request.auth.uid &&
+                        request.resource.data.receiverUid in get(/databases/$(database)/documents/live_sessions/$(sessionId)).data.participantUids &&
+                        request.resource.data.type in ['cheer', 'nice', 'keep_going', 'together'] &&
+                        request.resource.data.createdAt is timestamp;
+        allow update, delete: if false;
+      }
+    }
+
+    function hasValidRunSessionShape(data) {
+      return data.keys().hasAll([
+               'ownerUid', 'participantUids', 'mode', 'status', 'startedAt',
+               'endedAt', 'distanceMeters', 'averagePaceSecPerKm',
+               'participants', 'schemaVersion', 'createdAt', 'updatedAt'
+             ]) &&
+             data.keys().hasOnly([
+               'ownerUid', 'participantUids', 'mode', 'status', 'startedAt',
+               'endedAt', 'distanceMeters', 'averagePaceSecPerKm', 'syncScore', 'participants',
+               'schemaVersion', 'createdAt', 'updatedAt'
+             ]) &&
+             data.ownerUid is string &&
+             data.participantUids is list &&
+             data.ownerUid in data.participantUids &&
+             data.participants is list &&
+             data.mode in ['friend', 'random', 'solo'] &&
+             data.status == 'completed' &&
+             data.startedAt is timestamp &&
+             data.endedAt is timestamp &&
+             data.endedAt >= data.startedAt &&
+             data.distanceMeters is number &&
+             data.distanceMeters >= 0 &&
+             data.averagePaceSecPerKm is int &&
+             data.averagePaceSecPerKm >= 0 &&
+             (!('syncScore' in data) ||
+               (data.syncScore is int && data.syncScore >= 0 && data.syncScore <= 100)) &&
+             data.schemaVersion == 1 &&
+             data.createdAt is timestamp &&
+             data.updatedAt is timestamp;
+    }
+
+    match /run_sessions/{sessionId} {
+      allow read: if isOwner(resource.data.ownerUid);
+      allow create: if isOwner(request.resource.data.ownerUid) &&
+                       hasValidRunSessionShape(request.resource.data);
+      allow update: if isOwner(resource.data.ownerUid) &&
+                       request.resource.data.ownerUid == resource.data.ownerUid &&
+                       hasValidRunSessionShape(request.resource.data);
+      allow delete: if isOwner(resource.data.ownerUid);
+
+      match /route_points/{pointId} {
+        allow read: if isSignedIn() &&
+                      get(/databases/$(database)/documents/run_sessions/$(sessionId)).data.ownerUid == request.auth.uid;
+        allow create, update: if isSignedIn() &&
+                                get(/databases/$(database)/documents/run_sessions/$(sessionId)).data.ownerUid == request.auth.uid &&
+                                request.resource.data.keys().hasAll([
+                                  'latitude', 'longitude', 'capturedAt', 'sequence'
+                                ]) &&
+                                request.resource.data.keys().hasOnly([
+                                  'latitude', 'longitude', 'capturedAt', 'sequence'
+                                ]) &&
+                                request.resource.data.latitude is number &&
+                                request.resource.data.latitude >= -90 &&
+                                request.resource.data.latitude <= 90 &&
+                                request.resource.data.longitude is number &&
+                                request.resource.data.longitude >= -180 &&
+                                request.resource.data.longitude <= 180 &&
+                                request.resource.data.capturedAt is timestamp &&
+                                request.resource.data.sequence is int &&
+                                request.resource.data.sequence >= 0;
+        allow delete: if isSignedIn() &&
+                        get(/databases/$(database)/documents/run_sessions/$(sessionId)).data.ownerUid == request.auth.uid;
+      }
+    }
+
+    // 서버가 run_sessions를 검증·투영한 공유용 최소 요약이다.
+    match /fitnessActivities/{activityId} {
+      allow read: if isOwner(resource.data.ownerUid);
+      allow write: if false;
+    }
+
+    match /activity_stats/{userId} {
+      allow read: if isOwner(userId);
+      allow write: if false;
+    }
+
+    // 계정 연결과 일회용 인증 코드는 Admin SDK에서만 생성·소비한다.
+    match /accountLinks/{userId} {
+      allow read: if isOwner(userId);
+      allow write: if false;
+    }
+
+    match /accountLinkAuthorizations/{authorizationId} {
+      allow read, write: if false;
+    }
+
+    match /accountLinkRateLimits/{userId} {
+      allow read, write: if false;
+    }
   }
 }

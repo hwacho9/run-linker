@@ -15,6 +15,7 @@ final class FirebaseUserRepository: UserRepositoryProtocol {
     func upsertAuthenticatedUser(_ user: AuthenticatedUserProfile) async throws {
         let userRef = db.collection("users").document(user.id)
         let profileRef = db.collection("profiles").document(user.id)
+        let publicProfileRef = db.collection("public_profiles").document(user.id)
         let avatarURL = user.photoURL?.absoluteString ?? ""
         let createdAt: Any = user.createdAt.map { Timestamp(date: $0) } ?? FieldValue.serverTimestamp()
         let projectID = FirebaseApp.app()?.options.projectID ?? "<nil>"
@@ -51,9 +52,24 @@ final class FirebaseUserRepository: UserRepositoryProtocol {
             "updatedAt": FieldValue.serverTimestamp()
         ]
 
+        let publicProfileData: [String: Any] = [
+            "userId": user.id,
+            "nickname": user.displayName,
+            "searchName": user.displayName.folding(
+                options: [.caseInsensitive, .diacriticInsensitive],
+                locale: .current
+            ).lowercased(),
+            "avatarUrl": avatarURL,
+            "level": 1,
+            "discoverable": true,
+            "lastActiveAt": FieldValue.serverTimestamp(),
+            "updatedAt": FieldValue.serverTimestamp()
+        ]
+
         let batch = db.batch()
         batch.setData(userData, forDocument: userRef, merge: true)
         batch.setData(profileData, forDocument: profileRef, merge: true)
+        batch.setData(publicProfileData, forDocument: publicProfileRef, merge: true)
         
         print("🔥 [Firestore] batch commit START — uid=\(user.id) timeout=\(writeTimeoutSeconds)s")
         RunLinkerLogger.info("Firestore batch commit requested. uid=\(user.id) timeoutSeconds=\(writeTimeoutSeconds)")
