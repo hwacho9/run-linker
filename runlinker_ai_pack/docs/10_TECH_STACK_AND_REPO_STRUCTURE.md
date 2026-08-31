@@ -100,24 +100,33 @@ run-linker/                              ← Git 루트
         Repositories/
           SessionRepositoryProtocol.swift
           UserRepositoryProtocol.swift
-          MockSessionService.swift
-          FirebaseSessionService.swift
+          MockSessionRepository.swift
+          FirebaseSessionRepository.swift
           FirebaseUserRepository.swift
       Features/
         Auth/
-          AuthViewModel.swift
-          LoginView.swift
-          SignUpView.swift
-          OnboardingView.swift
+          ViewModels/AuthViewModel.swift
+          Views/
+            LoginView.swift
+            SignUpView.swift
+            OnboardingView.swift
         Home/
-          HomeView.swift
-          HomeViewModel.swift
+          ViewModels/HomeViewModel.swift
+          Views/HomeView.swift
         Activity/
-          ActivityView.swift               ← ViewModel 인라인
+          ViewModels/ActivityViewModel.swift
+          Views/ActivityView.swift
+          Models/ActivityPresentation.swift
+          Components/
+            ActivityStatsComponents.swift
+            ActivityHistoryComponents.swift
         Friends/
-          FriendsView.swift                ← ViewModel 인라인
+          ViewModels/FriendsViewModel.swift
+          Views/FriendsView.swift
+          Components/FriendComponents.swift
         My/
-          MyView.swift                     ← ViewModel 인라인
+          ViewModels/MyViewModel.swift
+          Views/MyView.swift
         RunSession/
           Views/
             SessionFlowView.swift
@@ -156,7 +165,7 @@ run-linker/                              ← Git 루트
 ---
 
 ## 5. 개발 원칙
-- **Mock first**: Firebase 의존성 없이 MockSessionService로 앱 실행 가능
+- **Mock first**: Firebase 의존성 없이 MockSessionRepository로 앱 실행 가능
 - **Strong typing**: 모든 도메인 상태는 enum으로 표현
 - **Service / Repository split**: 인증·외부 SDK 작업은 Service, Firestore 컬렉션 저장은 Repository에 둔다
 - **Localization first**: 사용자 노출 문구는 `Resources/Localizable.xcstrings`에서 ko/en 키로 관리

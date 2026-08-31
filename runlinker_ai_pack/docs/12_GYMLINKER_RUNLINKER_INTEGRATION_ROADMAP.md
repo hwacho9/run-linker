@@ -1,5 +1,7 @@
 # GymLinker x RunLinker 연동 로드맵
 
+> 2026-08-30 결정 변경: 두 앱은 Firebase 프로젝트를 완전히 분리하고 인증 브리지와 최소 요약 API로 연동한다. 아래 내용은 초기 shared-project 검토안이며, 현재 구현·운영 기준은 [`docs/GYMLINKER_RUNLINKER_INTEGRATION_KO.md`](../../docs/GYMLINKER_RUNLINKER_INTEGRATION_KO.md)와 일본어 문서 [`docs/GYMLINKER_RUNLINKER_INTEGRATION_JA.md`](../../docs/GYMLINKER_RUNLINKER_INTEGRATION_JA.md)를 따른다.
+
 ## 목표
 
 RunLinker에서 달린 기록을 GymLinker에서도 확인할 수 있게 한다. 두 앱은 같은 사용자를 식별하고, RunLinker가 저장한 러닝 기록을 GymLinker가 안전하게 조회한다.
@@ -86,7 +88,7 @@ GymLinker 첫 버전에서는 경로 좌표까지 보여주지 말고 요약 정
 
 ## 구현 우선순위
 
-1. RunLinker `FirebaseSessionService.saveSession` 실제 구현
+1. RunLinker `FirebaseSessionRepository.saveSession` 실제 구현
 2. GymLinker `FitnessActivityRepository` 조회 구현
 3. GymLinker UI에 RunLinker 러닝 기록 섹션 추가
 4. linked account 또는 shared uid 정책 확정

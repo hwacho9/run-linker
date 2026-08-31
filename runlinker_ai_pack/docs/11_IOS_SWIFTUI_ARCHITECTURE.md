@@ -36,27 +36,33 @@ run-linker/                          ← Xcode 프로젝트 루트
       Repositories/
         SessionRepositoryProtocol.swift   ← 데이터 계층 인터페이스
         UserRepositoryProtocol.swift      ← 유저/프로필 저장 계약
-        MockSessionService.swift          ← 개발용 Mock 구현체
-        FirebaseSessionService.swift      ← Firebase 실제 구현체 (WIP)
+        MockSessionRepository.swift       ← 개발용 Mock 구현체
+        FirebaseSessionRepository.swift   ← Firebase 실제 구현체 (WIP)
         FirebaseUserRepository.swift      ← Auth 이후 Firestore 유저 저장 구현체
 
     Features/
       Auth/
-        AuthViewModel.swift          ← Google/Apple/Email 인증 상태 + Repository 호출
-        LoginView.swift
-        SignUpView.swift
-        OnboardingView.swift
+        ViewModels/
+          AuthViewModel.swift        ← Google/Apple/Email 인증 상태 + Repository 호출
+        Views/
+          LoginView.swift
+          SignUpView.swift
+          OnboardingView.swift
       Home/
-        HomeView.swift               ← Hero CTA, Quick Actions, 러닝 리포트, Stat Bento
-        HomeViewModel.swift          ← 세션 데이터 fetch
+        ViewModels/HomeViewModel.swift    ← 세션 데이터 fetch
+        Views/HomeView.swift              ← Hero CTA, Quick Actions, 러닝 리포트, Stat Bento
       Activity/
-        ActivityView.swift           ← 세션 히스토리 + ActivityViewModel 인라인
+        ViewModels/ActivityViewModel.swift
+        Views/ActivityView.swift     ← 세션 히스토리 + 통계
+        Models/ActivityPresentation.swift
+        Components/                  ← 통계 카드 + 세션 기록 카드
       Friends/
-        FriendsView.swift            ← 검색·필터·Available카드·RecentPartner·InviteBanner
-                                       + FriendsViewModel 인라인
+        ViewModels/FriendsViewModel.swift
+        Views/FriendsView.swift      ← 검색·필터·Available카드·RecentPartner·InviteBanner
+        Components/FriendComponents.swift
       My/
-        MyView.swift                 ← 프로필·목표·StatChip 그리드·설정 섹션
-                                       + MyViewModel 인라인
+        ViewModels/MyViewModel.swift
+        Views/MyView.swift           ← 프로필·목표·StatChip 그리드·설정 섹션
       RunSession/
         Views/
           SessionFlowView.swift      ← RunSession 전체 라우팅
@@ -203,7 +209,7 @@ PairViewPlaceholder
 | Friends (친구) | ✅ Stitch 완성 | ✅ 인라인 | 실제 친구 데이터 연결 필요 |
 | My (마이) | ✅ Stitch 완성 | ✅ 인라인 | 실제 유저 데이터 연결 필요 |
 | RunSession | ✅ 기본 플로우 구현 | ✅ 분리 | 친구 선택, 랜덤 매칭, 솔로 카운트다운 버퍼, 라이브 지도/결과 |
-| Firebase Repository | ⚠️ Stub | - | MockSessionService로 대체 중 |
+| Firebase Repository | ⚠️ Stub | - | MockSessionRepository로 대체 중 |
 
 ---
 
