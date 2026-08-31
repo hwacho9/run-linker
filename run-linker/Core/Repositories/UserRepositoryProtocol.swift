@@ -4,6 +4,7 @@ enum AuthenticationProvider: String {
     case email
     case apple
     case google
+    case gymLinker = "gymlinker"
 }
 
 struct AuthenticatedUserProfile {

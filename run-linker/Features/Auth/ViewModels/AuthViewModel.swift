@@ -8,7 +8,7 @@ import AuthenticationServices
 import CryptoKit
 
 @MainActor
-class AuthViewModel: ObservableObject {
+final class AuthViewModel: ObservableObject {
     @Published var hasSeenOnboarding: Bool = UserDefaults.standard.bool(forKey: "hasSeenOnboarding") {
         didSet { UserDefaults.standard.set(hasSeenOnboarding, forKey: "hasSeenOnboarding") }
     }
@@ -27,10 +27,16 @@ class AuthViewModel: ObservableObject {
     private var pendingProfileSync: AuthenticatedUserProfile?
     private let authService: AuthServiceProtocol
     private let userRepository: UserRepositoryProtocol
+    private let gymLinkerBridge: GymLinkerAuthBridgeServiceProtocol
 
-    init(authService: AuthServiceProtocol? = nil, userRepository: UserRepositoryProtocol? = nil) {
+    init(
+        authService: AuthServiceProtocol? = nil,
+        userRepository: UserRepositoryProtocol? = nil,
+        gymLinkerBridge: GymLinkerAuthBridgeServiceProtocol? = nil
+    ) {
         self.authService = authService ?? FirebaseAuthService()
         self.userRepository = userRepository ?? FirebaseUserRepository()
+        self.gymLinkerBridge = gymLinkerBridge ?? GymLinkerAuthBridgeService()
         syncCurrentUser()
         RunLinkerLogger.info("AuthViewModel initialized. hasSeenOnboarding=\(hasSeenOnboarding) isAuthenticated=\(isAuthenticated) currentUser=\(self.authService.currentUser?.id ?? "<nil>")")
     }
@@ -65,6 +71,23 @@ class AuthViewModel: ObservableObject {
             errorMessage = userFacingMessage(for: error)
             isLoading = false
         }
+    }
+
+    func resetPassword(email: String) async {
+        let trimmedEmail = email.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard isValidEmail(trimmedEmail) else {
+            errorMessage = String(localized: "auth.error.invalid_email_format")
+            return
+        }
+        isLoading = true
+        errorMessage = nil
+        do {
+            try await authService.sendPasswordReset(email: trimmedEmail)
+            errorMessage = String(localized: "auth.password_reset.sent")
+        } catch {
+            errorMessage = userFacingMessage(for: error)
+        }
+        isLoading = false
     }
     
     // MARK: - Email/Password Sign Up
@@ -154,6 +177,55 @@ class AuthViewModel: ObservableObject {
         } catch {
             failAuthenticationFlow(with: error)
         }
+    }
+
+    // MARK: - GymLinker Account Bridge
+    func signInWithGymLinker() async {
+        isLoading = true
+        errorMessage = nil
+
+        do {
+            let url = try gymLinkerBridge.makeAuthorizationURL()
+            let didOpen = await UIApplication.shared.open(url)
+            guard didOpen else {
+                throw GymLinkerAuthBridgeError.authorizationRejected("gymlinker-not-installed")
+            }
+            // The actual sign-in resumes from handleOpenURL after GymLinker returns.
+            isLoading = false
+        } catch {
+            errorMessage = userFacingMessage(for: error)
+            isLoading = false
+        }
+    }
+
+    @discardableResult
+    func handleOpenURL(_ url: URL) -> Bool {
+        guard gymLinkerBridge.canHandleCallback(url) else { return false }
+
+        isLoading = true
+        errorMessage = nil
+        Task {
+            do {
+                let exchange = try await gymLinkerBridge.exchangeCallback(url)
+                let profile = exchange.profile
+                let user = try await authService.signInWithCustomToken(
+                    exchange.customToken,
+                    email: profile.email,
+                    displayName: profile.displayName,
+                    photoURL: URL(string: profile.photoURL)
+                )
+                await completeAuthenticationAfterProfileSyncAttempt(
+                    makeAuthenticatedUserProfile(
+                        from: user,
+                        authProvider: .gymLinker,
+                        displayNameOverride: profile.displayName
+                    )
+                )
+            } catch {
+                failAuthenticationFlow(with: error)
+            }
+        }
+        return true
     }
     
     // MARK: - Apple Sign-In
@@ -379,6 +451,10 @@ class AuthViewModel: ObservableObject {
     }
     
     private func userFacingMessage(for error: Error) -> String {
+        if let localizedError = error as? GymLinkerAuthBridgeError {
+            return localizedError.errorDescription ?? String(localized: "auth.error.gymlinker_generic")
+        }
+
         if let authorizationError = error as? ASAuthorizationError {
             switch authorizationError.code {
             case .canceled:

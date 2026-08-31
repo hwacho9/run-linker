@@ -45,6 +45,17 @@ struct LoginView: View {
                     
                     // ─── Social Login Buttons ───
                     VStack(spacing: AppTheme.Spacing.md) {
+                        if IntegrationFeatureFlags.isGymLinkerIntegrationEnabled {
+                            GymLinkerSignInButton {
+                                Task { await authVM.signInWithGymLinker() }
+                            }
+
+                            Text("auth.gymlinker.sharing_notice")
+                                .font(AppTheme.Fonts.captionSmall)
+                                .foregroundColor(AppTheme.textTertiary)
+                                .multilineTextAlignment(.center)
+                        }
+
                         GoogleSignInButton {
                             Task { await authVM.signInWithGoogle() }
                         }
@@ -98,7 +109,9 @@ struct LoginView: View {
                             Task { await authVM.login(email: email, password: password) }
                         }
                         
-                        Button("auth.login.forgot_password") {}
+                        Button("auth.login.forgot_password") {
+                            Task { await authVM.resetPassword(email: email) }
+                        }
                             .font(AppTheme.Fonts.caption)
                             .foregroundColor(AppTheme.primary)
                     }

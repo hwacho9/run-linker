@@ -73,6 +73,52 @@ final class FirebaseAuthService: AuthServiceProtocol {
         }
     }
 
+    func signInWithCustomToken(
+        _ customToken: String,
+        email: String,
+        displayName: String,
+        photoURL: URL?
+    ) async throws -> AuthServiceUser {
+        RunLinkerLogger.info("GymLinker custom-token sign-in started.")
+        do {
+            let result = try await Auth.auth().signIn(withCustomToken: customToken)
+            let changeRequest = result.user.createProfileChangeRequest()
+            var shouldCommitProfile = false
+
+            if !displayName.isEmpty, result.user.displayName != displayName {
+                changeRequest.displayName = displayName
+                shouldCommitProfile = true
+            }
+            if let photoURL, result.user.photoURL != photoURL {
+                changeRequest.photoURL = photoURL
+                shouldCommitProfile = true
+            }
+            if shouldCommitProfile {
+                do {
+                    try await changeRequest.commitChanges()
+                } catch {
+                    RunLinkerLogger.error("GymLinker profile metadata update failed after sign-in.", error: error)
+                }
+            }
+
+            RunLinkerLogger.info("GymLinker custom-token sign-in succeeded. uid=\(result.user.uid)")
+            return AuthServiceUser(
+                id: result.user.uid,
+                email: email,
+                displayName: displayName,
+                photoURL: photoURL,
+                createdAt: result.user.metadata.creationDate
+            )
+        } catch {
+            RunLinkerLogger.error("GymLinker custom-token sign-in failed.", error: error)
+            throw error
+        }
+    }
+
+    func sendPasswordReset(email: String) async throws {
+        try await Auth.auth().sendPasswordReset(withEmail: email)
+    }
+
     func signOut() throws {
         try Auth.auth().signOut()
     }

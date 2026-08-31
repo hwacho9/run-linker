@@ -30,7 +30,9 @@ struct RunLinkerApp: App {
                     authVM.restorePreviousSignIn()
                 }
                 .onOpenURL { url in
-                    GIDSignIn.sharedInstance.handle(url)
+                    if !authVM.handleOpenURL(url) {
+                        GIDSignIn.sharedInstance.handle(url)
+                    }
                 }
                 .overlay(alignment: .top) {
                     if let warning = authVM.profileSyncWarningMessage {

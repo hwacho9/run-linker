@@ -15,5 +15,12 @@ protocol AuthServiceProtocol {
     func createUser(email: String, password: String, displayName: String) async throws -> AuthServiceUser
     func signInWithGoogle(idToken: String, accessToken: String) async throws -> AuthServiceUser
     func signInWithApple(idToken: String, rawNonce: String, fullName: PersonNameComponents?) async throws -> AuthServiceUser
+    func signInWithCustomToken(
+        _ customToken: String,
+        email: String,
+        displayName: String,
+        photoURL: URL?
+    ) async throws -> AuthServiceUser
+    func sendPasswordReset(email: String) async throws
     func signOut() throws
 }

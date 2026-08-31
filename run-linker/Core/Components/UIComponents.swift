@@ -40,10 +40,6 @@ public struct TopAppBar: View {
                 .foregroundColor(AppTheme.primary)
                 .tracking(-1)
             Spacer()
-            HStack(spacing: AppTheme.Spacing.xs) {
-                IconButton(icon: "bell", action: {})
-                IconButton(icon: "gearshape", action: {})
-            }
         }
         .padding(.horizontal, AppTheme.Spacing.xxl)
         .frame(height: 64)
@@ -323,9 +319,9 @@ public struct SettingsRow: View {
     public let title: LocalizedStringKey
     public let subtitle: LocalizedStringKey?
     public let showChevron: Bool
-    public let action: () -> Void
+    public let action: (() -> Void)?
     
-    public init(icon: String, title: LocalizedStringKey, subtitle: LocalizedStringKey? = nil, showChevron: Bool = true, action: @escaping () -> Void = {}) {
+    public init(icon: String, title: LocalizedStringKey, subtitle: LocalizedStringKey? = nil, showChevron: Bool = true, action: (() -> Void)? = nil) {
         self.icon = icon
         self.title = title
         self.subtitle = subtitle
@@ -333,35 +329,42 @@ public struct SettingsRow: View {
         self.action = action
     }
     
+    @ViewBuilder
     public var body: some View {
-        Button(action: action) {
-            HStack(spacing: AppTheme.Spacing.lg) {
-                Image(systemName: icon)
-                    .font(.system(size: 18))
-                    .foregroundColor(AppTheme.primary)
-                    .frame(width: 28)
-                
-                VStack(alignment: .leading, spacing: 2) {
-                    Text(title)
-                        .font(AppTheme.Fonts.body)
-                        .foregroundColor(AppTheme.text)
-                    if let subtitle = subtitle {
-                        Text(subtitle)
-                            .font(AppTheme.Fonts.caption)
-                            .foregroundColor(AppTheme.textTertiary)
-                    }
-                }
-                
-                Spacer()
-                
-                if showChevron {
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(AppTheme.outlineVariant)
+        if let action {
+            Button(action: action) { rowContent(showsChevron: showChevron) }
+        } else {
+            rowContent(showsChevron: false)
+        }
+    }
+
+    private func rowContent(showsChevron: Bool) -> some View {
+        HStack(spacing: AppTheme.Spacing.lg) {
+            Image(systemName: icon)
+                .font(.system(size: 18))
+                .foregroundColor(AppTheme.primary)
+                .frame(width: 28)
+
+            VStack(alignment: .leading, spacing: 2) {
+                Text(title)
+                    .font(AppTheme.Fonts.body)
+                    .foregroundColor(AppTheme.text)
+                if let subtitle {
+                    Text(subtitle)
+                        .font(AppTheme.Fonts.caption)
+                        .foregroundColor(AppTheme.textTertiary)
                 }
             }
-            .padding(.vertical, AppTheme.Spacing.md)
+
+            Spacer()
+
+            if showsChevron {
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundColor(AppTheme.outlineVariant)
+            }
         }
+        .padding(.vertical, AppTheme.Spacing.md)
     }
 }
 
@@ -404,6 +407,33 @@ public struct SettingsToggleRow: View {
                 .labelsHidden()
         }
         .padding(.vertical, AppTheme.Spacing.sm)
+    }
+}
+
+// MARK: - Google Sign-In Button
+public struct GymLinkerSignInButton: View {
+    let action: () -> Void
+
+    public init(action: @escaping () -> Void) {
+        self.action = action
+    }
+
+    public var body: some View {
+        Button(action: action) {
+            HStack(spacing: AppTheme.Spacing.md) {
+                Image(systemName: "link.circle.fill")
+                    .font(.system(size: 20))
+                    .foregroundColor(AppTheme.primary)
+
+                Text("auth.gymlinker.continue")
+                    .font(AppTheme.Fonts.subheadline)
+                    .foregroundColor(.white)
+            }
+            .frame(maxWidth: .infinity)
+            .frame(height: 56)
+            .background(AppTheme.primaryGradient)
+            .clipShape(Capsule())
+        }
     }
 }
 
@@ -576,11 +606,21 @@ public struct PartnerAvatar: View {
                 Circle()
                     .fill(AppTheme.primary.opacity(0.12))
                     .frame(width: 56, height: 56)
-                    .overlay(
-                        Text(String(name.prefix(1)))
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(AppTheme.primary)
-                    )
+                    .overlay {
+                        if let imageUrl,
+                           let url = URL(string: imageUrl) {
+                            AsyncImage(url: url) { image in
+                                image
+                                    .resizable()
+                                    .scaledToFill()
+                            } placeholder: {
+                                initials
+                            }
+                            .clipShape(Circle())
+                        } else {
+                            initials
+                        }
+                    }
             }
             Text(name)
                 .font(AppTheme.Fonts.captionSmall)
@@ -588,30 +628,11 @@ public struct PartnerAvatar: View {
         }
         .opacity(isActive ? 1.0 : 0.8)
     }
-}
 
-// MARK: - Pair View Placeholder
-struct PairViewPlaceholder: View {
-    let users: [User]
-    
-    init(users: [User]) {
-        self.users = users
-    }
-    
-    public var body: some View {
-        HStack(spacing: -12) {
-            ForEach(users) { user in
-                Circle()
-                    .fill(AppTheme.primary.opacity(0.15))
-                    .frame(width: 40, height: 40)
-                    .overlay(
-                        Text(String(user.name.prefix(1)))
-                            .font(.system(size: 16, weight: .bold))
-                            .foregroundColor(AppTheme.primary)
-                    )
-                    .overlay(Circle().stroke(AppTheme.surfaceContainerLowest, lineWidth: 2))
-            }
-        }
+    private var initials: some View {
+        Text(String(name.prefix(1)))
+            .font(.system(size: 20, weight: .bold))
+            .foregroundColor(AppTheme.primary)
     }
 }
 
