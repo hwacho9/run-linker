@@ -40,59 +40,23 @@ struct HomeView: View {
                         SectionHeader("home.section.recent_report")
                             .padding(.horizontal, AppTheme.Spacing.xxl)
                         
-                        AppCard {
-                            // Top: date + partner avatars
-                            HStack(alignment: .top) {
-                                VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                                    Text("home.recent.date")
-                                        .font(AppTheme.Fonts.labelSmall)
-                                        .foregroundColor(AppTheme.textTertiary)
-                                    Text("home.recent.title")
-                                        .font(AppTheme.Fonts.headingMedium)
-                                        .foregroundColor(AppTheme.text)
-                                }
-                                Spacer()
-                                // Stitch: overlapping profile pics
-                                HStack(spacing: -12) {
-                                    Circle()
-                                        .fill(AppTheme.primary.opacity(0.2))
-                                        .frame(width: 40, height: 40)
-                                        .overlay(Text("J").font(.system(size: 14, weight: .bold)).foregroundColor(AppTheme.primary))
-                                        .overlay(Circle().stroke(AppTheme.surfaceContainerLow, lineWidth: 2))
-                                    Circle()
-                                        .fill(AppTheme.secondaryContainer.opacity(0.4))
-                                        .frame(width: 40, height: 40)
-                                        .overlay(Text("M").font(.system(size: 14, weight: .bold)).foregroundColor(AppTheme.onSecondaryContainer))
-                                        .overlay(Circle().stroke(AppTheme.surfaceContainerLow, lineWidth: 2))
-                                }
+                        if let session = viewModel.recentSession {
+                            recentRunCard(session)
+                                .padding(.horizontal, AppTheme.Spacing.xxl)
+                        } else if viewModel.isLoading {
+                            ProgressView()
+                                .tint(AppTheme.primary)
+                                .frame(maxWidth: .infinity)
+                                .padding(AppTheme.Spacing.xxxl)
+                        } else {
+                            AppCard {
+                                Text(viewModel.errorMessage ?? String(localized: "activity.empty.title"))
+                                    .font(AppTheme.Fonts.body)
+                                    .foregroundColor(AppTheme.textSecondary)
+                                    .frame(maxWidth: .infinity, alignment: .center)
                             }
-                            
-                            // Stats grid (Stitch: grid-cols-3)
-                            HStack(spacing: AppTheme.Spacing.lg) {
-                                StatCell(label: "run.metric.distance", value: "5.24", unit: "km")
-                                StatCell(label: "run.metric.time", value: "28:12", unit: nil)
-                                StatCell(label: "run.metric.pace", value: "5'22\"", unit: nil)
-                            }
-                            .padding(.top, AppTheme.Spacing.sm)
-                            
-                            // Partner completion (Stitch: border-t + handshake icon)
-                            HStack(spacing: AppTheme.Spacing.sm) {
-                                Image(systemName: "hand.raised.fill")
-                                    .font(.system(size: 14))
-                                    .foregroundColor(AppTheme.secondary)
-                                Text("home.recent.partner_label")
-                                    .font(AppTheme.Fonts.bodyMedium)
-                                
-                                Text(verbatim: "김지수")
-                                    .font(AppTheme.Fonts.bodyMedium)
-                                    .foregroundColor(AppTheme.primary)
-                                
-                                Text("home.recent.completed_suffix")
-                                    .font(AppTheme.Fonts.bodyMedium)
-                            }
-                            .padding(.top, AppTheme.Spacing.lg)
+                            .padding(.horizontal, AppTheme.Spacing.xxl)
                         }
-                        .padding(.horizontal, AppTheme.Spacing.xxl)
                     }
                     
                     // ─── Weekly Stats Bento Grid ───
@@ -103,13 +67,13 @@ struct HomeView: View {
                         HStack(spacing: AppTheme.Spacing.lg) {
                             StatChip(
                                 title: "home.stat.total_distance",
-                                value: String(format: "%.1f km", viewModel.totalDistance > 0 ? viewModel.totalDistance : 18.5),
+                                value: String(format: "%.1f km", viewModel.weeklyDistance),
                                 icon: "point.topleft.down.to.point.bottomright.curvepath",
                                 variant: .neutral
                             )
                             StatChip(
                                 title: "home.stat.average_pace",
-                                value: "5'45\"",
+                                value: viewModel.averagePaceText,
                                 icon: "timer",
                                 variant: .accent
                             )
@@ -124,24 +88,14 @@ struct HomeView: View {
                         
                         ScrollView(.horizontal, showsIndicators: false) {
                             HStack(spacing: AppTheme.Spacing.lg) {
-                                PartnerAvatar(name: "이민호", isActive: true)
-                                PartnerAvatar(name: "최서연")
-                                PartnerAvatar(name: "박준영")
-                                PartnerAvatar(name: "정다은")
-                                
-                                // "더보기" button (Stitch: + icon in circle)
-                                VStack(spacing: AppTheme.Spacing.sm) {
-                                    Circle()
-                                        .fill(AppTheme.surfaceContainer)
-                                        .frame(width: 56, height: 56)
-                                        .overlay(
-                                            Image(systemName: "plus")
-                                                .font(.system(size: 20))
-                                                .foregroundColor(AppTheme.primary)
-                                        )
-                                    Text("common.more")
-                                        .font(AppTheme.Fonts.captionSmall)
-                                        .foregroundColor(AppTheme.text)
+                                if viewModel.recentPartners.isEmpty {
+                                    Text("common.none")
+                                        .font(AppTheme.Fonts.bodySmall)
+                                        .foregroundColor(AppTheme.textSecondary)
+                                } else {
+                                    ForEach(viewModel.recentPartners) { partner in
+                                        PartnerAvatar(name: partner.name, isActive: partner.isAvailable, imageUrl: partner.avatarUrl)
+                                    }
                                 }
                             }
                             .padding(.horizontal, AppTheme.Spacing.xxl)
@@ -151,6 +105,7 @@ struct HomeView: View {
                 }
                 .padding(.top, AppTheme.Spacing.lg)
             }
+            .refreshable { await viewModel.loadData() }
         }
         .background(AppTheme.background.ignoresSafeArea())
         .task {
@@ -159,6 +114,64 @@ struct HomeView: View {
         .fullScreenCover(item: $presentedRunMode) { mode in
             SessionFlowView(initialMode: mode)
         }
+    }
+
+    private func recentRunCard(_ session: RunSession) -> some View {
+        let partners = session.participants.filter { $0.id != session.participants.first?.id }
+        return AppCard {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
+                    Text(session.startTime.formatted(date: .abbreviated, time: .shortened))
+                        .font(AppTheme.Fonts.labelSmall)
+                        .foregroundColor(AppTheme.textTertiary)
+                    Text(session.mode.title)
+                        .font(AppTheme.Fonts.headingMedium)
+                        .foregroundColor(AppTheme.text)
+                }
+                Spacer()
+                HStack(spacing: -12) {
+                    ForEach(session.participants.prefix(3)) { participant in
+                        Circle()
+                            .fill(AppTheme.primary.opacity(0.16))
+                            .frame(width: 40, height: 40)
+                            .overlay(
+                                Text(String(participant.name.prefix(1)))
+                                    .font(.system(size: 14, weight: .bold))
+                                    .foregroundColor(AppTheme.primary)
+                            )
+                            .overlay(Circle().stroke(AppTheme.surfaceContainerLow, lineWidth: 2))
+                    }
+                }
+            }
+
+            HStack(spacing: AppTheme.Spacing.lg) {
+                StatCell(label: "run.metric.distance", value: String(format: "%.2f", session.distance), unit: "km")
+                StatCell(label: "run.metric.time", value: durationText(session), unit: nil)
+                StatCell(label: "run.metric.pace", value: ActivityStatsSnapshot.paceText(session.averagePace), unit: nil)
+            }
+            .padding(.top, AppTheme.Spacing.sm)
+
+            if !partners.isEmpty {
+                HStack(spacing: AppTheme.Spacing.sm) {
+                    Image(systemName: "hand.raised.fill")
+                        .font(.system(size: 14))
+                        .foregroundColor(AppTheme.secondary)
+                    Text("home.recent.partner_label")
+                        .font(AppTheme.Fonts.bodyMedium)
+                    Text(partners.map(\.name).joined(separator: ", "))
+                        .font(AppTheme.Fonts.bodyMedium)
+                        .foregroundColor(AppTheme.primary)
+                    Text("home.recent.completed_suffix")
+                        .font(AppTheme.Fonts.bodyMedium)
+                }
+                .padding(.top, AppTheme.Spacing.lg)
+            }
+        }
+    }
+
+    private func durationText(_ session: RunSession) -> String {
+        let duration = max(0, Int(session.endTime?.timeIntervalSince(session.startTime) ?? 0))
+        return String(format: "%02d:%02d", duration / 60, duration % 60)
     }
 }
 

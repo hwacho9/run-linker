@@ -17,14 +17,34 @@ struct FriendSelectionView: View {
                     }
                     .padding(.top, AppTheme.Spacing.lg)
 
-                    VStack(spacing: AppTheme.Spacing.md) {
-                        ForEach(viewModel.availableFriends) { friend in
-                            FriendSelectionRow(
-                                friend: friend,
-                                isSelected: viewModel.selectedFriendId == friend.id
-                            ) {
-                                withAnimation(.spring(response: 0.32, dampingFraction: 0.86)) {
-                                    viewModel.selectFriend(friend)
+                    if viewModel.isLoadingFriends {
+                        ProgressView()
+                            .tint(AppTheme.primary)
+                            .frame(maxWidth: .infinity)
+                            .padding(AppTheme.Spacing.xxxl)
+                    } else if viewModel.availableFriends.isEmpty {
+                        AppCard {
+                            VStack(spacing: AppTheme.Spacing.md) {
+                                Image(systemName: "person.2.slash")
+                                    .font(.system(size: 32))
+                                    .foregroundColor(AppTheme.textTertiary)
+                                Text(viewModel.flowErrorMessage ?? String(localized: "common.none"))
+                                    .font(AppTheme.Fonts.bodySmall)
+                                    .foregroundColor(AppTheme.textSecondary)
+                                    .multilineTextAlignment(.center)
+                            }
+                            .frame(maxWidth: .infinity)
+                        }
+                    } else {
+                        VStack(spacing: AppTheme.Spacing.md) {
+                            ForEach(viewModel.availableFriends) { friend in
+                                FriendSelectionRow(
+                                    friend: friend,
+                                    isSelected: viewModel.selectedFriendId == friend.id
+                                ) {
+                                    withAnimation(.spring(response: 0.32, dampingFraction: 0.86)) {
+                                        viewModel.selectFriend(friend)
+                                    }
                                 }
                             }
                         }

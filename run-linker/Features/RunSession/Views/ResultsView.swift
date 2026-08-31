@@ -37,7 +37,7 @@ struct ResultsView: View {
                                     Text("sync.score")
                                         .font(AppTheme.Fonts.caption)
                                         .foregroundColor(AppTheme.textTertiary)
-                                    Text("\(viewModel.syncScore)%")
+                                    Text(viewModel.syncScore > 0 ? "\(viewModel.syncScore)%" : "--")
                                         .font(.system(size: 48, weight: .bold, design: .rounded))
                                         .foregroundColor(AppTheme.primary)
                                 }
@@ -63,7 +63,7 @@ struct ResultsView: View {
                             .foregroundColor(AppTheme.text)
                             .padding(.horizontal, AppTheme.Spacing.xxl)
 
-                        if viewModel.selectedMode == .solo, !viewModel.routePoints.isEmpty {
+                        if !viewModel.routePoints.isEmpty {
                             VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
                                 RunRouteMapView(
                                     routePoints: viewModel.routePoints,
@@ -90,6 +90,21 @@ struct ResultsView: View {
                                 .padding(.horizontal, AppTheme.Spacing.xxl)
                             }
                         }
+                    }
+
+                    if viewModel.isSavingResult {
+                        ProgressView()
+                            .tint(AppTheme.primary)
+                    } else if let error = viewModel.saveErrorMessage {
+                        VStack(spacing: AppTheme.Spacing.md) {
+                            Text(error)
+                                .font(AppTheme.Fonts.bodySmall)
+                                .foregroundColor(AppTheme.error)
+                            Button("profile_sync.retry") { viewModel.retrySavingResult() }
+                                .font(AppTheme.Fonts.bodyMedium)
+                                .foregroundColor(AppTheme.primary)
+                        }
+                        .padding(.horizontal, AppTheme.Spacing.xxl)
                     }
                     
                     Spacer().frame(height: 100)

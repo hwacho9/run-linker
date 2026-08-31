@@ -956,6 +956,34 @@
         }
       }
     },
+    "activity.gymlinker.details_format": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "%lld exercises · %lld sets" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "%lld種目・%lldセット" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "%lld종목 · %lld세트" } }
+      }
+    },
+    "activity.gymlinker.duration_format": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "%lld min" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "%lld分" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "%lld분" } }
+      }
+    },
+    "activity.gymlinker.load_failed": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Could not load GymLinker activities." } },
+        "ja": { "stringUnit": { "state": "translated", "value": "GymLinker の運動記録を読み込めませんでした。" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "GymLinker 운동 기록을 불러오지 못했습니다." } }
+      }
+    },
+    "activity.gymlinker.section": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Strength workouts" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "筋力トレーニング" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "근력운동 기록" } }
+      }
+    },
     "auth.error.account_exists_different_credential": {
       "localizations": {
         "en": {
@@ -1836,6 +1864,41 @@
         }
       }
     },
+    "auth.error.gymlinker_authorization_expired": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The GymLinker authorization expired. Please try again." } },
+        "ja": { "stringUnit": { "state": "translated", "value": "GymLinker の認証期限が切れました。もう一度お試しください。" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "GymLinker 인증 시간이 만료되었습니다. 다시 시도해주세요." } }
+      }
+    },
+    "auth.error.gymlinker_authorization_rejected": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "GymLinker did not authorize the connection. (%@)" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "GymLinker が連携を許可しませんでした。（%@）" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "GymLinker에서 연결을 승인하지 않았습니다. (%@)" } }
+      }
+    },
+    "auth.error.gymlinker_exchange_failed": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Could not complete GymLinker sign-in. (%@)" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "GymLinker ログインを完了できませんでした。（%@）" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "GymLinker 로그인을 완료하지 못했습니다. (%@)" } }
+      }
+    },
+    "auth.error.gymlinker_generic": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "An error occurred while connecting GymLinker." } },
+        "ja": { "stringUnit": { "state": "translated", "value": "GymLinker との連携中にエラーが発生しました。" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "GymLinker 연결 중 오류가 발생했습니다." } }
+      }
+    },
+    "auth.error.gymlinker_state_mismatch": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "The GymLinker sign-in response could not be verified." } },
+        "ja": { "stringUnit": { "state": "translated", "value": "GymLinker のログイン応答を検証できませんでした。" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "GymLinker 로그인 응답을 검증하지 못했습니다." } }
+      }
+    },
     "auth.google.continue": {
       "localizations": {
         "en": {
@@ -1856,6 +1919,20 @@
             "value": "Google로 계속하기"
           }
         }
+      }
+    },
+    "auth.gymlinker.continue": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Continue with GymLinker" } },
+        "ja": { "stringUnit": { "state": "translated", "value": "GymLinkerで続ける" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "GymLinker로 계속하기" } }
+      }
+    },
+    "auth.gymlinker.sharing_notice": {
+      "localizations": {
+        "en": { "stringUnit": { "state": "translated", "value": "Only workout summaries are shared. Routes, photos, and private notes stay in their original app." } },
+        "ja": { "stringUnit": { "state": "translated", "value": "共有されるのは運動サマリーのみです。ルート、写真、非公開メモは元のアプリに残ります。" } },
+        "ko": { "stringUnit": { "state": "translated", "value": "운동 요약만 공유됩니다. 경로, 사진, 비공개 메모는 원래 앱에만 보관됩니다." } }
       }
     },
     "auth.login.button": {
@@ -2030,6 +2107,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "현재 계정에서 로그아웃하시겠습니까?"
+          }
+        }
+      }
+    },
+    "auth.password_reset.sent": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "A password reset email has been sent."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パスワード再設定メールを送信しました。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "비밀번호 재설정 이메일을 보냈습니다."
           }
         }
       }
@@ -5192,6 +5291,28 @@
           "stringUnit": {
             "state": "translated",
             "value": "최적의 러너를 찾는 중..."
+          }
+        }
+      }
+    },
+    "session.matching.timeout": {
+      "localizations": {
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "No matching runner was found before the request expired. Please try again."
+          }
+        },
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リクエストの期限内にランナーが見つかりませんでした。もう一度お試しください。"
+          }
+        },
+        "ko": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "요청 시간 안에 러너를 찾지 못했습니다. 다시 시도해주세요."
           }
         }
       }

@@ -1,17 +1,5 @@
 import Foundation
 import SwiftUI
-import Combine
-
-@MainActor
-class MyViewModel: ObservableObject {
-    @Published var locationSharing = true
-    @Published var randomMatchPublic = true
-    @Published var recordsPublic = true
-    @Published var blurStartEnd = true
-    @Published var cheerNotifications = true
-    @Published var runStartNotifications = true
-    @Published var voiceEnabled = true
-}
 
 struct MyView: View {
     @EnvironmentObject private var authVM: AuthViewModel
@@ -53,6 +41,22 @@ struct MyView: View {
             
             ScrollView(showsIndicators: false) {
                 VStack(spacing: AppTheme.Spacing.xxxl) {
+                    if viewModel.isLoading {
+                        ProgressView()
+                            .tint(AppTheme.primary)
+                    }
+
+                    if let error = viewModel.errorMessage {
+                        Text(error)
+                            .font(AppTheme.Fonts.bodySmall)
+                            .foregroundColor(AppTheme.error)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(AppTheme.Spacing.lg)
+                            .background(AppTheme.errorContainer)
+                            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.lg))
+                            .padding(.horizontal, AppTheme.Spacing.xxl)
+                    }
+
                     if let warning = authVM.profileSyncWarningMessage {
                         ProfileSyncWarningCard(message: warning) {
                             Task {
@@ -102,10 +106,10 @@ struct MyView: View {
                             .foregroundColor(AppTheme.text)
                         
                         HStack(alignment: .bottom, spacing: AppTheme.Spacing.lg) {
-                            ProgressRing(progress: 0.62, lineWidth: 10, size: 72)
+                            ProgressRing(progress: viewModel.weeklyProgress, lineWidth: 10, size: 72)
                                 .overlay(
                                     VStack(spacing: 0) {
-                                        Text("12.4")
+                                        Text(String(format: "%.1f", viewModel.weeklyDistance))
                                             .font(AppTheme.Fonts.label)
                                             .foregroundColor(AppTheme.primary)
                                         Text("my.weekly_goal.total_unit")
@@ -114,7 +118,7 @@ struct MyView: View {
                                     }
                                 )
                             
-                            Text("my.weekly_goal.remaining")
+                            Text(String(format: "%.1f / %.1f km", viewModel.weeklyDistance, viewModel.settings.weeklyDistanceGoal))
                                 .font(AppTheme.Fonts.bodySmall)
                                 .foregroundColor(AppTheme.textSecondary)
                         }
@@ -123,10 +127,10 @@ struct MyView: View {
                     
                     // ─── Stats Grid (Stitch: 2x2 grid of stat chips) ───
                     LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: AppTheme.Spacing.lg) {
-                        StatChip(title: "my.stat.total_distance", value: "524.8km", icon: "point.topleft.down.to.point.bottomright.curvepath", variant: .neutral)
-                        StatChip(title: "my.stat.run_count", value: "64회", icon: "figure.run", variant: .neutral)
-                        StatChip(title: "my.stat.average_pace", value: "5'22\"", icon: "timer", variant: .accent)
-                        StatChip(title: "my.stat.average_sync", value: "92%", icon: "link", variant: .accent)
+                        StatChip(title: "my.stat.total_distance", value: String(format: "%.1f km", viewModel.statistics.totalDistance), icon: "point.topleft.down.to.point.bottomright.curvepath", variant: .neutral)
+                        StatChip(title: "my.stat.run_count", value: "\(viewModel.statistics.sessionsCount)", icon: "figure.run", variant: .neutral)
+                        StatChip(title: "my.stat.average_pace", value: viewModel.averagePaceText, icon: "timer", variant: .accent)
+                        StatChip(title: "my.stat.average_sync", value: viewModel.averageSyncText, icon: "link", variant: .accent)
                     }
                     .padding(.horizontal, AppTheme.Spacing.xxl)
                     
@@ -136,34 +140,37 @@ struct MyView: View {
                             icon: "location.fill",
                             title: "my.setting.location_sharing",
                             subtitle: "my.setting.location_sharing.subtitle",
-                            isOn: $viewModel.locationSharing
+                            isOn: $viewModel.settings.locationSharing
                         )
                         SettingsToggleRow(
                             icon: "shuffle",
                             title: "my.setting.random_visibility",
                             subtitle: "my.setting.random_visibility.subtitle",
-                            isOn: $viewModel.randomMatchPublic
+                            isOn: $viewModel.settings.randomMatchPublic
                         )
                         SettingsToggleRow(
                             icon: "doc.text.fill",
                             title: "my.setting.records_visibility",
                             subtitle: "my.setting.records_visibility.subtitle",
-                            isOn: $viewModel.recordsPublic
+                            isOn: $viewModel.settings.recordsPublic
                         )
                         SettingsToggleRow(
                             icon: "eye.slash.fill",
                             title: "my.setting.blur_points",
                             subtitle: "my.setting.blur_points.subtitle",
-                            isOn: $viewModel.blurStartEnd
+                            isOn: $viewModel.settings.blurStartEnd
                         )
                     }
                     
                     // ─── Notifications Section ───
                     SettingsSection(title: "my.section.notifications") {
-                        SettingsRow(icon: "bell.fill", title: "my.setting.notifications")
-                        SettingsToggleRow(icon: "hands.clap.fill", title: "my.setting.cheer_notifications", isOn: $viewModel.cheerNotifications)
-                        SettingsToggleRow(icon: "figure.run", title: "my.setting.run_start_notifications", isOn: $viewModel.runStartNotifications)
-                        SettingsToggleRow(icon: "waveform", title: "my.setting.voice", isOn: $viewModel.voiceEnabled)
+                        SettingsRow(icon: "bell.fill", title: "my.setting.notifications") {
+                            guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
+                            UIApplication.shared.open(url)
+                        }
+                        SettingsToggleRow(icon: "hands.clap.fill", title: "my.setting.cheer_notifications", isOn: $viewModel.settings.cheerNotifications)
+                        SettingsToggleRow(icon: "figure.run", title: "my.setting.run_start_notifications", isOn: $viewModel.settings.runStartNotifications)
+                        SettingsToggleRow(icon: "waveform", title: "my.setting.voice", isOn: $viewModel.settings.voiceEnabled)
                     }
                     
                     // ─── Safety & Account ───
@@ -202,8 +209,13 @@ struct MyView: View {
                 }
                 .padding(.top, AppTheme.Spacing.lg)
             }
+            .refreshable { await viewModel.load() }
         }
         .background(AppTheme.background.ignoresSafeArea())
+        .task { await viewModel.load() }
+        .onChange(of: viewModel.settings) { _, _ in
+            viewModel.settingsDidChange()
+        }
         .alert("auth.logout", isPresented: $showsLogoutConfirmation) {
             Button("common.cancel", role: .cancel) {}
             Button("auth.logout", role: .destructive) {

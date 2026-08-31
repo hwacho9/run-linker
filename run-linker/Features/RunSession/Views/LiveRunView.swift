@@ -30,64 +30,37 @@ struct LiveRunView: View {
             
             // Pair View (Progress Bar)
             if viewModel.selectedMode != .solo {
-                PairViewProgress(myDistance: viewModel.currentDistance, partnerDistance: viewModel.currentDistance * 0.95, targetDistance: viewModel.targetDistance)
+                PairViewProgress(myDistance: viewModel.displayedDistance, partnerDistance: viewModel.partnerDistance, targetDistance: viewModel.targetDistance)
                     .padding(.vertical, AppTheme.Spacing.lg)
                     .background(AppTheme.surfaceContainerLowest)
             }
             
             // Split Maps
             GeometryReader { geo in
-                if viewModel.selectedMode == .solo {
-                    ZStack(alignment: .topLeading) {
-                        RunRouteMapView(
-                            routePoints: viewModel.soloTracker.routePoints,
-                            currentLocation: viewModel.soloTracker.currentLocation
-                        )
-                        .ignoresSafeArea(edges: .horizontal)
+                ZStack(alignment: .topLeading) {
+                    RunRouteMapView(
+                        routePoints: viewModel.soloTracker.routePoints,
+                        currentLocation: viewModel.soloTracker.currentLocation
+                    )
+                    .ignoresSafeArea(edges: .horizontal)
 
-                        VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
-                            FitnessChip("session.live.route_recording", color: AppTheme.surfaceContainerLowest)
-                            if let message = viewModel.soloTracker.locationErrorMessage {
-                                Text(message)
-                                    .font(AppTheme.Fonts.caption)
-                                    .foregroundColor(AppTheme.error)
-                                    .padding(AppTheme.Spacing.md)
-                                    .background(AppTheme.errorContainer)
-                                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
-                            }
+                    VStack(alignment: .leading, spacing: AppTheme.Spacing.sm) {
+                        FitnessChip("session.live.route_recording", color: AppTheme.surfaceContainerLowest)
+                        if viewModel.selectedMode != .solo, viewModel.privacyMode {
+                            FitnessChip("session.location.blurred", color: AppTheme.surfaceContainerHigh)
                         }
-                        .padding(AppTheme.Spacing.lg)
-                    }
-                    .frame(height: geo.size.height)
-                } else {
-                    VStack(spacing: 2) {
-                        ZStack(alignment: .topLeading) {
-                            MapPlaceholderBackground()
-
-                            HStack {
-                                PartnerAvatar(name: viewModel.matchedPartner?.name ?? String(localized: "session.partner"), isActive: true)
-                                    .scaleEffect(0.6)
-                                    .frame(width: 40, height: 40)
-                                Spacer()
-                                if viewModel.privacyMode {
-                                    FitnessChip("session.location.blurred", color: AppTheme.surfaceContainerHigh)
-                                }
-                            }
-                            .padding(AppTheme.Spacing.md)
-                        }
-                        .frame(height: geo.size.height / 2)
-
-                        ZStack(alignment: .topLeading) {
-                            MapPlaceholderBackground(isMe: true)
-
-                            PartnerAvatar(name: String(localized: "session.you"), isActive: true)
-                                .scaleEffect(0.6)
-                                .frame(width: 40, height: 40)
+                        if let message = viewModel.soloTracker.locationErrorMessage {
+                            Text(message)
+                                .font(AppTheme.Fonts.caption)
+                                .foregroundColor(AppTheme.error)
                                 .padding(AppTheme.Spacing.md)
+                                .background(AppTheme.errorContainer)
+                                .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.md))
                         }
-                        .frame(height: geo.size.height / 2)
                     }
+                    .padding(AppTheme.Spacing.lg)
                 }
+                .frame(height: geo.size.height)
             }
             
             // Stats Panel
@@ -102,9 +75,7 @@ struct LiveRunView: View {
                 HStack(spacing: AppTheme.Spacing.xl) {
                     if viewModel.selectedMode != .solo {
                         // Quick Cheer
-                        Button(action: {
-                            // Send cheer
-                        }) {
+                        Button(action: viewModel.sendCheer) {
                             VStack(spacing: 8) {
                                 Image(systemName: "hand.thumbsup.fill")
                                     .font(.system(size: 28))
@@ -215,38 +186,5 @@ struct PairViewProgress: View {
         }
         .frame(height: 24)
         .padding(.horizontal, AppTheme.Spacing.xxl)
-    }
-}
-
-struct MapPlaceholderBackground: View {
-    var isMe: Bool = false
-    
-    var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(isMe ? AppTheme.surfaceContainerHigh : AppTheme.surfaceContainerHighest)
-            
-            // Grid lines
-            GeometryReader { geo in
-                Path { path in
-                    let step: CGFloat = 40
-                    for x in stride(from: 0, through: geo.size.width, by: step) {
-                        path.move(to: CGPoint(x: x, y: 0))
-                        path.addLine(to: CGPoint(x: x, y: geo.size.height))
-                    }
-                    for y in stride(from: 0, through: geo.size.height, by: step) {
-                        path.move(to: CGPoint(x: 0, y: y))
-                        path.addLine(to: CGPoint(x: geo.size.width, y: y))
-                    }
-                }
-                .stroke(AppTheme.outlineVariant.opacity(0.3), lineWidth: 1)
-            }
-            
-            // Map icon
-            Image(systemName: isMe ? "location.fill" : "map.fill")
-                .font(.system(size: 48))
-                .foregroundColor((isMe ? AppTheme.primary : AppTheme.outlineVariant).opacity(isMe ? 0.2 : 0.5))
-        }
-        .clipped()
     }
 }

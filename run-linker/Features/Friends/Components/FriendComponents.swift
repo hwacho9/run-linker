@@ -1,170 +1,14 @@
 import Foundation
 import SwiftUI
-import Combine
-
-@MainActor
-class FriendsViewModel: ObservableObject {
-    @Published var query = ""
-    @Published var selectedFilter = 0
-    @Published var friends: [User] = [
-        User(id: "1", name: "지혜", level: 7),
-        User(id: "2", name: "민호", level: 5),
-        User(id: "3", name: "소연", level: 6),
-        User(id: "4", name: "준수", level: 4),
-        User(id: "5", name: "유진", level: 3),
-        User(id: "6", name: "도윤", level: 9)
-    ]
-    
-    let filters: [LocalizedStringKey] = [
-        "friends.filter.all",
-        "friends.filter.available",
-        "friends.filter.favorite",
-        "friends.filter.recent"
-    ]
-}
-
-struct FriendsView: View {
-    @StateObject private var viewModel = FriendsViewModel()
-    
-    var body: some View {
-        VStack(spacing: 0) {
-            // ─── Header (Stitch: icon + title + Add Friend button) ───
-            HStack {
-                HStack(spacing: AppTheme.Spacing.md) {
-                    Image(systemName: "person.2.fill")
-                        .foregroundColor(AppTheme.primary)
-                    Text("tab.friends")
-                        .font(AppTheme.Fonts.heading)
-                        .foregroundColor(AppTheme.text)
-                }
-                Spacer()
-                Button("friends.add") {}
-                    .font(AppTheme.Fonts.bodyMedium)
-                    .foregroundColor(.white)
-                    .padding(.horizontal, AppTheme.Spacing.xl)
-                    .padding(.vertical, AppTheme.Spacing.sm + 2)
-                    .background(AppTheme.primary)
-                    .clipShape(Capsule())
-            }
-            .padding(.horizontal, AppTheme.Spacing.xxl)
-            .frame(height: 80)
-            
-            ScrollView(showsIndicators: false) {
-                VStack(spacing: AppTheme.Spacing.xxxl) {
-                    
-                    // ─── Search + Filters ───
-                    VStack(spacing: AppTheme.Spacing.lg) {
-                        // Search (Stitch: bg-surface-container, rounded-xl, icon left)
-                        HStack(spacing: AppTheme.Spacing.md) {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(AppTheme.outline)
-                            TextField("friends.search.placeholder", text: $viewModel.query)
-                                .font(AppTheme.Fonts.body)
-                        }
-                        .padding(AppTheme.Spacing.lg)
-                        .background(AppTheme.surfaceContainer)
-                        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.xl))
-                        
-                        // Filter chips (Stitch: horizontal scroll, pill shape)
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: AppTheme.Spacing.sm) {
-                                ForEach(viewModel.filters.indices, id: \.self) { i in
-                                    FilterChip(viewModel.filters[i], isSelected: viewModel.selectedFilter == i) {
-                                        viewModel.selectedFilter = i
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    .padding(.horizontal, AppTheme.Spacing.xxl)
-                    
-                    // ─── Available Now (Stitch: horizontal scroll cards) ───
-                    VStack(spacing: AppTheme.Spacing.lg) {
-                        HStack {
-                            HStack(spacing: AppTheme.Spacing.sm) {
-                                Text("friends.section.available")
-                                    .font(AppTheme.Fonts.headingSmall)
-                                Circle()
-                                    .fill(AppTheme.secondaryFixed)
-                                    .frame(width: 8, height: 8)
-                            }
-                            Spacer()
-                            Button("common.view_all") {}
-                                .font(AppTheme.Fonts.bodyMedium)
-                                .foregroundColor(AppTheme.primary)
-                        }
-                        .padding(.horizontal, AppTheme.Spacing.xxl)
-                        
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: AppTheme.Spacing.lg) {
-                                AvailableFriendCard(
-                                    name: "지혜 (Ji-Hye)",
-                                    avgPace: "4'45\"",
-                                    todayInfo: "8.2km"
-                                )
-                                AvailableFriendCard(
-                                    name: "민호 (Min-Ho)",
-                                    avgPace: "5'12\"",
-                                    todayInfo: String(localized: "friends.status.readying")
-                                )
-                            }
-                            .padding(.horizontal, AppTheme.Spacing.xxl)
-                        }
-                    }
-                    
-                    // ─── Recent Partners (Stitch: bg-surface-container-low cards) ───
-                    VStack(spacing: AppTheme.Spacing.lg) {
-                        Text("friends.section.recent")
-                            .font(AppTheme.Fonts.headingSmall)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, AppTheme.Spacing.xxl)
-                        
-                        VStack(spacing: AppTheme.Spacing.lg) {
-                            RecentPartnerRow(
-                                name: "소연 (So-Yeon)",
-                                detail: "어제 오후 6:30 • 5.0km",
-                                syncScore: 98
-                            )
-                            RecentPartnerRow(
-                                name: "준수 (Jun-Su)",
-                                detail: "3일 전 • 12.4km",
-                                syncScore: 85
-                            )
-                        }
-                        .padding(.horizontal, AppTheme.Spacing.xxl)
-                    }
-                    
-                    // ─── All Friends ───
-                    VStack(spacing: AppTheme.Spacing.lg) {
-                        Text("friends.section.all")
-                            .font(AppTheme.Fonts.headingSmall)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, AppTheme.Spacing.xxl)
-                        
-                        VStack(spacing: AppTheme.Spacing.md) {
-                            AllFriendRow(name: "유진 (Yu-Jin)", detail: "이번 주 2회 러닝 • 4'55\" 페이스", isOnline: false, statusText: "friends.status.offline")
-                            AllFriendRow(name: "도윤 (Do-Yoon)", detail: "이번 주 5회 러닝 • 4'10\" 페이스", isOnline: true, statusText: "friends.status.running_now")
-                        }
-                        .padding(.horizontal, AppTheme.Spacing.xxl)
-                    }
-                    
-                    // ─── Invite Banner (Stitch: inverse-surface bg, Lime button) ───
-                    InviteBanner()
-                        .padding(.horizontal, AppTheme.Spacing.xxl)
-                        .padding(.bottom, AppTheme.Spacing.xxxxl)
-                }
-                .padding(.top, AppTheme.Spacing.lg)
-            }
-        }
-        .background(AppTheme.background.ignoresSafeArea())
-    }
-}
 
 // MARK: - Available Friend Card (Stitch: min-w-280, bg-surface-container-lowest, rounded-xl, p-6)
-private struct AvailableFriendCard: View {
+struct AvailableFriendCard: View {
     let name: String
     let avgPace: String
     let todayInfo: String
+    var isFavorite = false
+    var onRun: () -> Void = {}
+    var onFavorite: () -> Void = {}
     
     var body: some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xxl) {
@@ -200,7 +44,7 @@ private struct AvailableFriendCard: View {
             
             // Action buttons
             HStack(spacing: AppTheme.Spacing.sm) {
-                Button("friends.run_together") {}
+                Button("friends.run_together", action: onRun)
                     .font(AppTheme.Fonts.bodyMedium)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
@@ -208,9 +52,9 @@ private struct AvailableFriendCard: View {
                     .background(AppTheme.primary)
                     .clipShape(Capsule())
                 
-                Button(action: {}) {
-                    Image(systemName: "person.fill")
-                        .foregroundColor(AppTheme.textSecondary)
+                Button(action: onFavorite) {
+                    Image(systemName: isFavorite ? "star.fill" : "star")
+                        .foregroundColor(isFavorite ? AppTheme.secondary : AppTheme.textSecondary)
                         .frame(width: 44, height: 44)
                         .background(AppTheme.surfaceContainerHigh)
                         .clipShape(Circle())
@@ -252,10 +96,11 @@ private struct MiniStatBox: View {
 }
 
 // MARK: - Recent Partner Row (Stitch: bg-surface-container-low, rounded-xl, p-5)
-private struct RecentPartnerRow: View {
+struct RecentPartnerRow: View {
     let name: String
     let detail: String
     let syncScore: Int
+    var onRunAgain: () -> Void = {}
     
     var body: some View {
         HStack {
@@ -290,7 +135,7 @@ private struct RecentPartnerRow: View {
                         .font(AppTheme.Fonts.label)
                         .foregroundColor(AppTheme.primary)
                 }
-                Button("friends.run_again") {}
+                Button("friends.run_again", action: onRunAgain)
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(AppTheme.onPrimaryFixedVariant)
                     .padding(.horizontal, AppTheme.Spacing.lg)
@@ -306,11 +151,14 @@ private struct RecentPartnerRow: View {
 }
 
 // MARK: - All Friend Row (Stitch: flex items-center, w-12 h-12 avatar, status dot)
-private struct AllFriendRow: View {
+struct AllFriendRow: View {
     let name: String
     let detail: String
     let isOnline: Bool
     let statusText: LocalizedStringKey
+    var isFavorite = false
+    var onRun: () -> Void = {}
+    var onFavorite: () -> Void = {}
     
     var body: some View {
         HStack(spacing: AppTheme.Spacing.lg) {
@@ -345,7 +193,7 @@ private struct AllFriendRow: View {
             Spacer()
             
             if isOnline {
-                Button("friends.join") {}
+                Button("friends.join", action: onRun)
                     .font(.system(size: 12, weight: .bold))
                     .foregroundColor(.white)
                     .padding(.horizontal, AppTheme.Spacing.lg)
@@ -353,9 +201,9 @@ private struct AllFriendRow: View {
                     .background(AppTheme.primary)
                     .clipShape(Capsule())
             } else {
-                Button(action: {}) {
-                    Image(systemName: "ellipsis")
-                        .foregroundColor(AppTheme.outline)
+                Button(action: onFavorite) {
+                    Image(systemName: isFavorite ? "star.fill" : "star")
+                        .foregroundColor(isFavorite ? AppTheme.secondary : AppTheme.outline)
                         .frame(width: 40, height: 40)
                 }
             }
@@ -365,7 +213,9 @@ private struct AllFriendRow: View {
 }
 
 // MARK: - Invite Banner (Stitch: bg-inverse-surface, Lime button, decorative)
-private struct InviteBanner: View {
+struct InviteBanner: View {
+    var inviteText: String = "RunLinker"
+
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             VStack(alignment: .leading, spacing: AppTheme.Spacing.lg) {
@@ -378,7 +228,7 @@ private struct InviteBanner: View {
                         .foregroundColor(AppTheme.inverseOnSurface.opacity(0.7))
                 }
                 
-                Button(action: {}) {
+                ShareLink(item: inviteText) {
                     HStack(spacing: AppTheme.Spacing.sm) {
                         Image(systemName: "square.and.arrow.up")
                             .font(.system(size: 12))

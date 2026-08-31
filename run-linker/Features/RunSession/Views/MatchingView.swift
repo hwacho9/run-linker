@@ -4,10 +4,6 @@ struct MatchingView: View {
     @ObservedObject var viewModel: SessionFlowViewModel
     @State private var pulse = false
 
-    private var currentPartner: User {
-        viewModel.matchedPartner ?? viewModel.selectedCandidate
-    }
-
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: AppTheme.Spacing.xxxl) {
@@ -26,7 +22,41 @@ struct MatchingView: View {
                         .lineSpacing(4)
                 }
 
-                recommendedMatchCard
+                if let partner = viewModel.matchedPartner {
+                    recommendedMatchCard(partner)
+                } else if viewModel.isSearching {
+                    AppCard {
+                        HStack(spacing: AppTheme.Spacing.md) {
+                            ProgressView()
+                                .tint(AppTheme.primary)
+                            Text(viewModel.waitingRunnerSummary)
+                                .font(AppTheme.Fonts.body)
+                                .foregroundColor(AppTheme.textSecondary)
+                        }
+                    }
+                } else {
+                    AppCard {
+                        VStack(spacing: AppTheme.Spacing.md) {
+                            Image(systemName: "exclamationmark.arrow.triangle.2.circlepath")
+                                .font(.system(size: 30))
+                                .foregroundColor(AppTheme.textTertiary)
+                            Button("profile_sync.retry") { viewModel.retryMatching() }
+                                .font(AppTheme.Fonts.bodyMedium)
+                                .foregroundColor(AppTheme.primary)
+                        }
+                        .frame(maxWidth: .infinity)
+                    }
+                }
+
+                if let error = viewModel.flowErrorMessage {
+                    Text(error)
+                        .font(AppTheme.Fonts.bodySmall)
+                        .foregroundColor(AppTheme.error)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(AppTheme.Spacing.lg)
+                        .background(AppTheme.errorContainer)
+                        .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.lg))
+                }
 
                 VStack(spacing: AppTheme.Spacing.md) {
                     PrimaryButton(title: "session.start_together", icon: "bolt.fill") {
@@ -35,21 +65,23 @@ struct MatchingView: View {
                     .disabled(viewModel.matchedPartner == nil)
                     .opacity(viewModel.matchedPartner == nil ? 0.55 : 1)
 
-                    Button {
-                        viewModel.findAnotherRunner()
-                    } label: {
-                        HStack(spacing: AppTheme.Spacing.sm) {
-                            Text("session.matching.find_another")
-                                .font(AppTheme.Fonts.subheadline)
-                            Image(systemName: "arrow.clockwise")
-                                .font(.system(size: 14, weight: .bold))
+                    if viewModel.selectedMode == .random {
+                        Button {
+                            viewModel.findAnotherRunner()
+                        } label: {
+                            HStack(spacing: AppTheme.Spacing.sm) {
+                                Text("session.matching.find_another")
+                                    .font(AppTheme.Fonts.subheadline)
+                                Image(systemName: "arrow.clockwise")
+                                    .font(.system(size: 14, weight: .bold))
+                            }
+                            .foregroundColor(AppTheme.textSecondary)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 56)
+                            .background(AppTheme.surfaceContainerLowest)
+                            .clipShape(Capsule())
+                            .overlay(Capsule().stroke(AppTheme.outlineVariant.opacity(0.7), lineWidth: 1))
                         }
-                        .foregroundColor(AppTheme.textSecondary)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 56)
-                        .background(AppTheme.surfaceContainerLowest)
-                        .clipShape(Capsule())
-                        .overlay(Capsule().stroke(AppTheme.outlineVariant.opacity(0.7), lineWidth: 1))
                     }
                 }
             }
@@ -87,11 +119,11 @@ struct MatchingView: View {
         .frame(height: 250)
     }
 
-    private var recommendedMatchCard: some View {
+    private func recommendedMatchCard(_ partner: User) -> some View {
         VStack(alignment: .leading, spacing: AppTheme.Spacing.xxl) {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: AppTheme.Spacing.md) {
-                    Text("RECOMMENDED MATCH")
+                    Text("session.matching.found_title")
                         .font(AppTheme.Fonts.captionSmall)
                         .foregroundColor(AppTheme.onSecondaryContainer)
                         .tracking(1.2)
@@ -100,19 +132,15 @@ struct MatchingView: View {
                         .background(AppTheme.secondaryContainer)
                         .clipShape(Capsule())
 
-                    Text("\(currentPartner.name) (\(romanizedName(for: currentPartner.name)))")
+                    Text(verbatim: partner.name)
                         .font(AppTheme.Fonts.heading)
                         .foregroundColor(AppTheme.text)
                         .lineLimit(2)
                         .minimumScaleFactor(0.82)
 
-                    HStack(spacing: AppTheme.Spacing.sm) {
-                        Image(systemName: "mappin.circle.fill")
-                            .foregroundColor(AppTheme.textSecondary)
-                    Text("session.matching.location.banpo")
-                            .font(AppTheme.Fonts.bodyMedium)
-                            .foregroundColor(AppTheme.textSecondary)
-                    }
+                    Text("session.location.blurred")
+                        .font(AppTheme.Fonts.bodyMedium)
+                        .foregroundColor(AppTheme.textSecondary)
                 }
 
                 Spacer()
@@ -133,28 +161,13 @@ struct MatchingView: View {
             }
 
             HStack(spacing: AppTheme.Spacing.lg) {
-                MatchStatBox(title: "session.average_pace", value: pace(for: currentPartner), unit: "/km")
+                MatchStatBox(
+                    title: "session.average_pace",
+                    value: partner.averagePace.map(ActivityStatsSnapshot.paceText) ?? "--'--\"",
+                    unit: "/km"
+                )
                 MatchStatBox(title: "session.target_distance", value: viewModel.targetDistanceText, unit: nil)
             }
-
-            HStack(spacing: AppTheme.Spacing.md) {
-                VStack(alignment: .leading, spacing: AppTheme.Spacing.xs) {
-                    Text("session.recent_activity")
-                        .font(AppTheme.Fonts.caption)
-                        .foregroundColor(AppTheme.primary)
-                    Text("session.matching.recent_activity")
-                        .font(AppTheme.Fonts.subheadline)
-                        .foregroundColor(AppTheme.text)
-                }
-                Spacer()
-                HStack(spacing: -8) {
-                    MatchingSmallAvatar(color: AppTheme.secondaryContainer)
-                    MatchingSmallAvatar(color: AppTheme.primaryFixedDim)
-                }
-            }
-            .padding(AppTheme.Spacing.lg)
-            .background(AppTheme.primaryFixed.opacity(0.72))
-            .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.xl))
 
             Text("session.matching.quote \(Int(viewModel.targetDistance))")
                 .font(AppTheme.Fonts.body)
@@ -175,29 +188,6 @@ struct MatchingView: View {
         )
     }
 
-    private func romanizedName(for name: String) -> String {
-        switch name {
-        case "지훈":
-            return "Ji-Hun"
-        case "민수":
-            return "Min-Su"
-        case "서연":
-            return "Seo-Yeon"
-        default:
-            return "Runner"
-        }
-    }
-
-    private func pace(for user: User) -> String {
-        switch user.id {
-        case "candidate-1":
-            return "4'45\""
-        case "candidate-2":
-            return "5'12\""
-        default:
-            return "5'28\""
-        }
-    }
 }
 
 private struct MatchStatBox: View {
@@ -225,16 +215,5 @@ private struct MatchStatBox: View {
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(AppTheme.surfaceContainerLowest)
         .clipShape(RoundedRectangle(cornerRadius: AppTheme.Radius.xl))
-    }
-}
-
-private struct MatchingSmallAvatar: View {
-    let color: Color
-
-    var body: some View {
-        Circle()
-            .fill(color)
-            .frame(width: 34, height: 34)
-            .overlay(Circle().stroke(AppTheme.primaryFixed, lineWidth: 2))
     }
 }

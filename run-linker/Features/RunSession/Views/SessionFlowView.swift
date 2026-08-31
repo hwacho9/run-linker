@@ -72,8 +72,18 @@ struct SessionFlowView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var viewModel: SessionFlowViewModel
 
-    init(initialMode: RunMode = .friend) {
-        _viewModel = StateObject(wrappedValue: SessionFlowViewModel(initialMode: initialMode))
+    init(
+        initialMode: RunMode = .friend,
+        initialFriend: User? = nil,
+        initialMatchRequest: MatchRequest? = nil
+    ) {
+        _viewModel = StateObject(
+            wrappedValue: SessionFlowViewModel(
+                initialMode: initialMode,
+                initialFriend: initialFriend,
+                initialMatchRequest: initialMatchRequest
+            )
+        )
     }
 
     var body: some View {
@@ -114,6 +124,7 @@ struct SessionFlowView: View {
         }
         .background(AppTheme.background.ignoresSafeArea())
         .onAppear {
+            viewModel.activateInitialContextIfNeeded()
             viewModel.onDismiss = {
                 dismiss()
             }
